@@ -19,6 +19,7 @@ alias ts-en="trans -shell -brief en:ru"
 alias jira="/Users/norflin/main/code/quick-jira/main"
 alias py="python3"
 alias pip="pip3"
+alias repoavg="~/.config/repoavg.sh"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

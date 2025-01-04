@@ -46,6 +46,7 @@ set number
 set signcolumn=number
 set updatetime=100
 set guicursor=a:block
+set colorcolumn=120
 
 call plug#begin("~/.vim/plugged")
   Plug 'nvim-lua/plenary.nvim'
@@ -244,8 +245,8 @@ nmap <silent> <C-d> <Plug>(coc-diagnostic-next-error)
 nnoremap <silent> <c-m> :CtrlPMRUFiles<CR>
 nnoremap <silent> <c-n> :NvimTreeFindFileToggle<CR>
 nmap <silent> <c-t> :AerialToggle<CR>
-nmap sp <plug>(esearch)
-vmap sp <plug>(operator-esearch-prefill)
+nmap <c-f> <plug>(esearch)
+vmap <c-f> <plug>(operator-esearch-prefill)
 
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"

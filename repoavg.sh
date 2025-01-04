@@ -26,7 +26,7 @@ else
 	fi
 fi
 
-lines_raw=$(git --git-dir=$repo_dir log --author="$author" --since="$days_since days ago" --pretty=tformat: --numstat | awk '{added+=$1; deleted+=$2} END {print added, deleted}')
+lines_raw=$(git --git-dir=$repo_dir log --author="$author" --since="$days_since days ago" --pretty=tformat: --numstat | grep '\.ts$' | awk '{added+=$1; deleted+=$2} END {print added, deleted}')
 
 commits_count=$(git --git-dir=$repo_dir log --author="$author" --since="$days_since days ago" --oneline | wc -l | awk '{$1=$1;print}')
 lines_added=$(echo "$lines_raw" | awk '{print $1}')
