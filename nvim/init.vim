@@ -46,7 +46,8 @@ set number
 set signcolumn=number
 set updatetime=100
 set guicursor=a:block
-set colorcolumn=120
+set cursorline
+" set colorcolumn=120
 
 call plug#begin("~/.vim/plugged")
   Plug 'nvim-lua/plenary.nvim'
@@ -277,6 +278,12 @@ augroup SourceConfigAfterWrite
 augroup END
 
 autocmd BufWritePre *.go :call CocAction('organizeImport')
+
+augroup CursorLineOnlyInActiveWindow
+	autocmd!
+	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+	autocmd WinLeave * if &filetype != 'nerdtree' | setlocal nocursorline | endif
+augroup END
 
 func! NvimGps() abort
 	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
