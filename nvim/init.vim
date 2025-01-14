@@ -71,7 +71,6 @@ call plug#begin("~/.vim/plugged")
 	Plug 'chrisgrieser/nvim-rip-substitute'
 	Plug 'chrisgrieser/nvim-chainsaw'
 	Plug 'ThePrimeagen/refactoring.nvim'
-	Plug 'Wansmer/treesj'
 call plug#end()
 
 map q: :q
@@ -472,12 +471,9 @@ require("chainsaw").setup({
 })
 vim.keymap.set({ "n", "x" }, "fp", function() require("chainsaw").variableLog() end, { desc = "chainsaw" })
 
-require('refactoring').setup({})
+require("refactoring").setup({})
 vim.keymap.set({ "x" }, "fe", ":Refactor extract_var ")
 vim.keymap.set({ "x", "n" }, "fi", ":Refactor inline_var<CR>")
-
-require('treesj').setup({})
-vim.keymap.set({ "n" }, "fj", require("treesj").toggle)
 EOF
 
 colors dogrun

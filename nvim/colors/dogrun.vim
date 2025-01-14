@@ -1,13 +1,13 @@
 let g:colors_name = "dogrun"
 
-hi Normal guifg=#9ea3c0 ctermfg=146 guibg=#252737 ctermbg=235
+hi Normal guifg=#9ea3c0 guibg=#252737
 hi Delimiter guifg=#8085a6 ctermfg=103
 hi NonText guifg=#363859 ctermfg=60 guibg=NONE ctermbg=NONE
 hi EndOfBuffer guifg=#363859 ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Comment guifg=#586193 ctermfg=60 gui=NONE cterm=NONE
 hi Cursor guifg=#252737 ctermfg=235 guibg=#9ea3c0 ctermbg=146
 hi CursorIM guifg=#252737 ctermfg=235 guibg=#9ea3c0 ctermbg=146
-hi SignColumn guifg=#2a2c3f guibg=#34354c
+hi SignColumn guifg=#2a2c3f guibg=#252737
 hi ColorColumn guibg=#2a2c3f ctermbg=236 gui=NONE cterm=NONE
 hi CursorColumn guibg=#2a2c3f ctermbg=236 gui=NONE cterm=NONE
 hi CursorLine guibg=#2a2c3f ctermbg=236 gui=NONE cterm=NONE
