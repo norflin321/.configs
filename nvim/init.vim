@@ -7,6 +7,7 @@ set tabstop=2 softtabstop=2 shiftwidth=2 noet
 autocmd Filetype rust setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
+autocmd Filetype swift setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 
 set autoindent
 set smartindent
@@ -335,7 +336,7 @@ require("nvim-tree").setup({
 	view = {
 		float = {
 			enable = true,
-			open_win_config = floatWinConfig(0.5, 0.95)
+			open_win_config = floatWinConfig(0.5, 0.9)
 		},
 		width = function()
 			return math.floor(vim.opt.columns:get() * 0.5)
