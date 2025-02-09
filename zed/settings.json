@@ -2,7 +2,7 @@
   "vim_mode": true,
   "vim": { "use_system_clipboard": "always" },
 
-  "theme": "Catpuccin Custom",
+  "theme": "Kanagawa",
   "experimental.theme_overrides": {
 	  // "players": [{ "cursor": "#ccc" }],
 	  // "players": [{ "cursor": "#9499b8" }],
@@ -54,16 +54,16 @@
 		}
   },
 
-  "buffer_font_family": "SF Mono",
-  "buffer_font_size": 11,
-  "ui_font_family": "SF Mono",
-  "ui_font_size": 13,
-  "buffer_line_height": { "custom": 1.60 },
+  "buffer_font_family": "Fira Code",
+  "buffer_font_size": 10.0,
+  "ui_font_family": "Zed Plex Mono",
+  "ui_font_size": 12,
+  "buffer_line_height": { "custom": 1.50 },
   "buffer_font_features": { "calt": false },
 
   "tab_size": 2,
   "cursor_blink": false,
-  "current_line_highlight": "line",
+  "current_line_highlight": "none",
   "show_whitespaces": "selection",
   "indent_guides": { "enabled": false },
   "hard_tabs": true,
@@ -71,7 +71,7 @@
   "vertical_scroll_margin": 5,
   "scroll_beyond_last_line": "off",
   "inlay_hints": { "enabled": false },
-  "show_completions_on_input": false,
+  "show_completions_on_input": true,
   "auto_signature_help": false,
   "scroll_sensitivity": 1,
   "expand_excerpt_lines": 15,
@@ -84,8 +84,8 @@
   "remove_trailing_whitespace_on_save": true,
 
   "unstable.ui_density": "compact",
-  "toolbar": { "breadcrumbs": true, "quick_actions": false, "selections_menu": false },
-  "gutter": { "line_numbers": true, "code_actions": false, "folds": false, "runnables": false },
+  "toolbar": { "breadcrumbs": false, "quick_actions": false, "selections_menu": false },
+  "gutter": { "line_numbers": false, "code_actions": false, "folds": false, "runnables": false },
   "collaboration_panel": { "button": false, "dock": "left", "default_width": 240 },
   "chat_panel": { "button": "never", "dock": "right", "default_width": 240 },
   "tab_bar": { "show_nav_history_buttons": false, "show": true },
@@ -104,14 +104,14 @@
   },
   "show_call_status_icon": false,
   "tabs": { "git_status": true, "close_position": "right", "file_icons": true, "activate_on_close": "history" },
-  "outline_panel": { "dock": "left", "git_status": false, "indent_size": 15, "indent_guides": { "show": "never" } },
+  "outline_panel": { "dock": "right", "git_status": false, "indent_size": 15, "indent_guides": { "show": "never" } },
 
   "terminal": {
-	  "font_family": "SF Mono",
+	  "font_family": "Zed Plex Mono",
 		"font_size": 11,
 		"cursor_shape": "bar",
 		"blinking": "off",
-		"dock": "right"
+		"dock": "bottom"
   },
 
   "session": { "restore_unsaved_buffers": false },

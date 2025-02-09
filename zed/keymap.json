@@ -21,7 +21,7 @@
    	  "cmd-j": "menu::SelectNext",
       "cmd-k": "menu::SelectPrev",
       "ctrl-p": "file_finder::Toggle",
-      "shift-cmd-t": "project_symbols::Toggle"
+      "shift-cmd-t": "project_symbols::Toggle",
     }
 	},
 	{
@@ -86,6 +86,13 @@
      "bindings": {
 	     "tab": "editor::ShowCompletions"
      }
+  },
+  {
+	  "context": "Editor && !VimWaiting && !menu && vim_mode != insert",
+	  "bindings": {
+			"ctrl-r": "vim::Redo",
+			"u": "vim::Undo"
+  	}
   },
   {
      "context": "Terminal",
