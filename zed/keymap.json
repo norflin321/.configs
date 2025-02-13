@@ -3,6 +3,7 @@
     "bindings": {
   	  "cmd-1": null,
       "cmd-2": null,
+      "ctrl-n": null,
    	  "ctrl-j": null,
       "ctrl-k": null,
       "ctrl-l": null,
@@ -13,7 +14,6 @@
 	{
     "bindings": {
 	    "cmd-n": "workspace::ToggleLeftDock",
-	    "ctrl-n": "workspace::ToggleLeftDock",
       "cmd-1": "pane::ActivatePrevItem",
       "cmd-2": "pane::ActivateNextItem",
    	  "ctrl-j": "menu::SelectNext",
@@ -21,7 +21,7 @@
    	  "cmd-j": "menu::SelectNext",
       "cmd-k": "menu::SelectPrev",
       "ctrl-p": "file_finder::Toggle",
-      "shift-cmd-t": "project_symbols::Toggle",
+      "shift-cmd-t": "project_symbols::Toggle"
     }
 	},
 	{
@@ -88,7 +88,7 @@
      }
   },
   {
-	  "context": "Editor && !VimWaiting && !menu && vim_mode != insert",
+	  "context": "Editor && !VimWaiting && !menu && (vim_mode == normal && vim_mode == visual)",
 	  "bindings": {
 			"ctrl-r": "vim::Redo",
 			"u": "vim::Undo"

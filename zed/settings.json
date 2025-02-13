@@ -6,7 +6,7 @@
   "experimental.theme_overrides": {
 	  // "players": [{ "cursor": "#ccc" }],
 	  // "players": [{ "cursor": "#9499b8" }],
-		// "terminal.background": "#15161e",
+		"terminal.background": "#0f0f14",
 	  "syntax": {
 			"attribute": { "font_style": "normal" },
 			"boolean": { "font_style": "normal" },
@@ -71,7 +71,7 @@
   "vertical_scroll_margin": 5,
   "scroll_beyond_last_line": "off",
   "inlay_hints": { "enabled": false },
-  "show_completions_on_input": true,
+  "show_completions_on_input": false,
   "auto_signature_help": false,
   "scroll_sensitivity": 1,
   "expand_excerpt_lines": 15,
@@ -84,12 +84,12 @@
   "remove_trailing_whitespace_on_save": true,
 
   "unstable.ui_density": "compact",
-  "toolbar": { "breadcrumbs": false, "quick_actions": false, "selections_menu": false },
+  "toolbar": { "breadcrumbs": true, "quick_actions": false, "selections_menu": false },
   "gutter": { "line_numbers": false, "code_actions": false, "folds": false, "runnables": false },
-  "collaboration_panel": { "button": false, "dock": "left", "default_width": 240 },
-  "chat_panel": { "button": "never", "dock": "right", "default_width": 240 },
-  "tab_bar": { "show_nav_history_buttons": false, "show": true },
-  "scrollbar": { "show": "always", "git_diff": true, "selections": true, "symbols_selections": true, "diagnostics": true, "axes": { "horizontal": false } },
+  "collaboration_panel": { "button": false, "dock": "bottom", "default_width": 240 },
+  "chat_panel": { "button": "never", "dock": "bottom", "default_width": 240 },
+  "tab_bar": { "show_nav_history_buttons": true, "show": false },
+  "scrollbar": { "show": "always", "git_diff": true, "selections": true, "symbols_selections": true, "diagnostics": "all", "axes": { "horizontal": false } },
   "project_panel": {
     "default_width": 200,
     "dock": "left",
@@ -104,7 +104,7 @@
   },
   "show_call_status_icon": false,
   "tabs": { "git_status": true, "close_position": "right", "file_icons": true, "activate_on_close": "history" },
-  "outline_panel": { "dock": "right", "git_status": false, "indent_size": 15, "indent_guides": { "show": "never" } },
+  "outline_panel": { "dock": "left", "git_status": false, "indent_size": 15, "indent_guides": { "show": "never" } },
 
   "terminal": {
 	  "font_family": "Zed Plex Mono",
@@ -115,7 +115,7 @@
   },
 
   "session": { "restore_unsaved_buffers": false },
-  "features": { "inline_completion_provider": "none", "copilot": false },
+  "features": { "edit_prediction_provider": "none", "copilot": false },
   "preview": {
 	  "restore_on_startup": "last_workspace",
 		"ensure_final_newline_on_save": false
@@ -131,8 +131,9 @@
     "default_model": { "provider": "zed.dev", "model": "claude-3-5-sonnet-latest" },
     "version": "2",
     "button": false,
-    "dock": null
+    "dock": "bottom"
   },
+  "notification_panel": { "dock": "left" },
 
   "git": {
  	 "inline_blame": { "enabled": false },

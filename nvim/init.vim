@@ -47,7 +47,7 @@ set number
 set signcolumn=number
 set updatetime=100
 set guicursor=a:block
-set cursorline
+" set cursorline
 " set colorcolumn=120
 
 call plug#begin("~/.vim/plugged")
@@ -279,17 +279,17 @@ augroup END
 
 autocmd BufWritePre *.go :call CocAction('organizeImport')
 
-augroup CursorLineOnlyInActiveWindow
-	autocmd!
-	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-	autocmd WinLeave * if &filetype != 'nerdtree' | setlocal nocursorline | endif
-augroup END
+" augroup CursorLineOnlyInActiveWindow
+" 	autocmd!
+" 	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+" 	autocmd WinLeave * if &filetype != 'nerdtree' | setlocal nocursorline | endif
+" augroup END
 
 func! NvimGps() abort
 	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
 endf
 
-set statusline=%{&modified?'\[+]\ ':''}%f%r\ %{NvimGps()}
+set statusline=%{&modified?'\[+]\ ':''}%f%r\ %{NvimGps()}%=%-5.(%l,%c%)\ %L
 
 lua << EOF
 require("nvim-treesitter.configs").setup({
