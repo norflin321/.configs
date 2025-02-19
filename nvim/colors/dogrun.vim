@@ -20,9 +20,8 @@ hi MatchParen guibg=#3d415c ctermbg=236
 hi Directory guifg=#a8a384 ctermfg=144
 hi Underlined gui=underline cterm=underline
 hi String guifg=#7cbe8c ctermfg=108
-hi Statement guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
-hi Label guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
-hi Function guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
+hi Statement guifg=#9ea3c0 ctermfg=104 gui=NONE cterm=NONE
+hi Label guifg=#9ea3c0 ctermfg=104 gui=NONE cterm=NONE
 hi Constant guifg=#73c1a9 ctermfg=79
 hi Boolean guifg=#73c1a9 ctermfg=79
 hi Number guifg=#73c1a9 ctermfg=79
@@ -33,7 +32,7 @@ hi Identifier guifg=#ac8b83 ctermfg=138
 hi Exception guifg=#a8a384 ctermfg=144
 hi Type guifg=#a8a384 ctermfg=144 gui=NONE cterm=NONE
 hi TypeDef guifg=#a8a384 ctermfg=144 gui=NONE cterm=NONE
-hi PreProc guifg=#929be5 ctermfg=104
+hi PreProc guifg=#9ea3c0 ctermfg=104
 hi Special guifg=#b871b8 ctermfg=133
 hi SpecialKey guifg=#b871b8 ctermfg=133
 hi SpecialChar guifg=#b871b8 ctermfg=133
@@ -52,7 +51,7 @@ hi Search guifg=#252737 guibg=#6f749f
 hi IncSearch guifg=#252737 guibg=#6f749f
 hi CurSearch guifg=#252737 guibg=#b3b5cc
 hi Question guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
-hi WildMenu guifg=#252737 ctermfg=235 guibg=#929be5 ctermbg=104
+hi WildMenu guifg=#252737 ctermfg=235 guibg=#9ea3c0 ctermbg=104
 hi SpellBad guifg=#b18181 ctermfg=167 gui=underline cterm=underline
 hi SpellCap gui=underline cterm=underline
 hi SpellLocal guifg=#b18181 ctermfg=167 gui=underline cterm=underline
@@ -81,7 +80,7 @@ hi htmlEndTag guifg=#8085a6 ctermfg=103
 hi htmlSpecialTagName guifg=#ac8b83 ctermfg=138
 hi htmlArg guifg=#8085a6 ctermfg=103
 hi jsonQuote guifg=#8085a6 ctermfg=103
-hi yamlBlockMappingKey guifg=#929be5 ctermfg=104
+hi yamlBlockMappingKey guifg=#9ea3c0 ctermfg=104
 hi yamlAnchor guifg=#b871b8 ctermfg=133
 hi pythonStatement guifg=#ac8b83 ctermfg=138
 hi pythonBuiltin guifg=#59b6b6 ctermfg=73
@@ -89,16 +88,16 @@ hi pythonRepeat guifg=#ac8b83 ctermfg=138
 hi pythonOperator guifg=#ac8b83 ctermfg=138
 hi pythonDecorator guifg=#b871b8 ctermfg=133
 hi pythonDecoratorName guifg=#b871b8 ctermfg=133
-hi typescriptImport guifg=#929be5 ctermfg=104
+hi typescriptImport guifg=#9ea3c0 ctermfg=104
 hi typescriptDocRef guifg=#545c8c ctermfg=60 gui=underline cterm=underline
 hi NvimTreeSymlink guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
 hi NvimTreeSymlinkFolderName guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
-hi NvimTreeFolderName guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
+hi NvimTreeFolderName guifg=#9ea3c0 ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeRootFolder guifg=#464c79 ctermfg=60 gui=bold cterm=bold
 hi NvimTreeFolderIcon guifg=#6f78be ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeFileIcon guifg=#6f78be ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeEmptyFolderName guifg=#545c8c ctermfg=60 gui=NONE cterm=NONE
-hi NvimTreeOpenedFolderName guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
+hi NvimTreeOpenedFolderName guifg=#9ea3c0 ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeExecFile guifg=#8085a6 ctermfg=103 gui=NONE cterm=NONE
 hi NvimTreeOpenedFile guifg=#8085a6 ctermfg=103 gui=NONE cterm=NONE
 hi NvimTreeSpecialFile guifg=#8085a6 ctermfg=103 gui=bold cterm=bold
@@ -111,7 +110,7 @@ hi NvimTreeGitMerge guifg=#a8a384 ctermfg=144 gui=NONE cterm=NONE
 hi NvimTreeGitRenamed guifg=#a8a384 ctermfg=144 gui=NONE cterm=NONE
 hi NvimTreeGitNew guifg=#73c1a9 ctermfg=79 gui=NONE cterm=NONE
 hi NvimTreeGitDeleted guifg=#28795c ctermfg=29 gui=NONE cterm=NONE
-hi NvimTreeWindowPicker guifg=#252737 ctermfg=235 guibg=#929be5 ctermbg=104 gui=bold cterm=bold
+hi NvimTreeWindowPicker guifg=#252737 ctermfg=235 guibg=#9ea3c0 ctermbg=104 gui=bold cterm=bold
 hi NvimTreeNormal guifg=#8085a6 ctermfg=103 gui=NONE cterm=NONE
 hi NvimTreeLiveFilterPrefix guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
 hi NvimTreeLiveFilterValue guifg=#73c1a9 ctermfg=79 gui=NONE cterm=NONE
@@ -126,7 +125,7 @@ hi CocListFgRed guifg=#b18181
 hi CocWarningSign guifg=#ac8b83 ctermfg=138 gui=bold cterm=bold
 hi CocInfoSign guifg=#82dabf ctermfg=115 gui=bold cterm=bold
 hi CocHintSign guifg=#82dabf ctermfg=115 gui=bold cterm=bold
-hi FloatTitle guifg=#929be5 ctermfg=104 guibg=#252737 ctermbg=235 gui=NONE cterm=NONE
+hi FloatTitle guifg=#9ea3c0 ctermfg=104 guibg=#252737 ctermbg=235 gui=NONE cterm=NONE
 hi AerialLine guifg=NONE guibg=#2a2c3f
 hi link CocCodeLens Comment
 hi CocFadeOut guifg=NONE guibg=#545c8c
@@ -152,24 +151,32 @@ hi @number guifg=#73c1a9
 hi @string.regex guifg=#73c1a9
 hi @string.escape guifg=#b871b8
 hi @text.title guifg=#a8a384 gui=bold cterm=bold
-hi @text.reference guifg=#929be5
+hi @text.reference guifg=#9ea3c0
 hi @text.uri guifg=#545c8c
 hi @text.strong gui=bold cterm=bold
 hi @text.literal guifg=#73c1a9
-hi @parameter guifg=#929be5
-hi @property guifg=#929be5
+hi @parameter guifg=#9ea3c0
+hi @property guifg=#9ea3c0
 hi @keyword guifg=#b871b8
 hi @type guifg=#ac8b83
 hi @type.builtin guifg=#ac8b83
-hi @include guifg=#929be5
+hi @include guifg=#9ea3c0
 hi @variable guifg=#9ea3c0
-hi @variable.member guifg=#929be5
+hi @variable.member guifg=#9ea3c0
 hi @operator guifg=#9ea3c0
 hi @variable.builtin guifg=#ac8b83
 hi @constant.builtin guifg=#73c1a9
 hi @constant guifg=#9ea3c0
-hi @constructor guifg=#929be5
-hi @function guifg=#929be5
+
 hi @tag guifg=#9ea3c0
-hi @tag.delimiter guifg=#929be5
-hi @tag.attribute guifg=#929be5
+hi @tag.delimiter guifg=#9ea3c0
+hi @tag.attribute guifg=#9ea3c0
+
+hi @constructor guifg=#929be5 gui=NONE
+hi @function guifg=#929be5 gui=bold
+hi @function.method guifg=#929be5 gui=bold
+hi @function.call guifg=#929be5 gui=NONE
+hi @function.method.call guifg=#929be5 gui=NONE
+hi @function.builtin guifg=#929be5 gui=NONE
+hi Function guifg=#929be5 gui=bold
+hi TSFunction guifg=#929be5 gui=bold
