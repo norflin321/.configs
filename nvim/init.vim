@@ -41,7 +41,7 @@ set mousescroll=ver:1,hor:0
 set smoothscroll
 set number
 set signcolumn=number
-set updatetime=100
+set updatetime=50
 set guicursor=a:block
 
 call plug#begin("~/.vim/plugged")

@@ -3,44 +3,39 @@
 	"list.maxPreviewHeight": 50,
 	"list.floatPreview": true,
 	"list.alignColumns": true,
-	"suggest.labelMaxLength": 50,
+
 	"outline.previewBorder": true,
 	"outline.previewBorderRounded": true,
+
 	"notification.border": true,
+	"notification.timeout": 1000,
 
 	"coc.preferences.enableMessageDialog": true,
 	"coc.preferences.renameFillCurrent": false,
 	"coc.preferences.maxFileSize": "100MB",
-	"diagnostic.refreshOnInsertMode": true,
-	"diagnostic.floatConfig": {
-		"border": false,
-		"rounded": true,
-	},
-	"diagnostic.checkCurrentLine": true,
+
+	"diagnostic.refreshOnInsertMode": false,
+	"diagnostic.floatConfig": { "border": false, "rounded": false },
+	"diagnostic.checkCurrentLine": false,
 	"diagnostic.errorSign": "",
 	"diagnostic.warningSign": "",
 	"diagnostic.infoSign": "",
 	"diagnostic.hintSign": "",
 	"diagnostic.virtualText": false,
-	"suggest.floatConfig": {
-		"border": false,
-		"rounded": true,
-	},
-	"hover.floatConfig": {
-		"border": false,
-		"rounded": true,
-	},
-	"notification.timeout": 1000,
 
+	"suggest.floatConfig": { "border": false, "rounded": false },
+	"hover.floatConfig": { "border": false, "rounded": false },
+
+	"suggest.autoTrigger": "always",
 	"suggest.noselect": false,
 	"suggest.defaultSortMethod": "alphabetical",
-	"suggest.autoTrigger": "none",
 	"suggest.snippetsSupport": false,
+	"suggest.labelMaxLength": 50,
+
 	"signature.preferShownAbove": true,
 
 	"javascript.suggestionActions.enabled": false,
-	"tsserver.trace.server": "off",
-	"typescript.suggest.completeFunctionCalls": false,
+	"typescript.suggest.completeFunctionCalls": true,
 	"typescript.preferences.quoteStyle": "double",
 	"typescript.format.placeOpenBraceOnNewLineForFunctions": true,
 	"typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
@@ -50,27 +45,28 @@
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
 	"typescript.updateImportsOnFileMove.enabled": "prompt",
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"tsserver.trace.server": "off",
 
 	"pyright.inlayHints.functionReturnTypes": false,
 	"pyright.inlayHints.variableTypes": false,
 	"python.analysis.typeCheckingMode": "off",
 	"python.pythonPath": "/Users/norflin/code/miniforge3/bin/python3",
 
-	"dialog.floatBorderHighlight": "CocFloatingBorder",
-	"typescript.preferences.importModuleSpecifier": "non-relative",
 	"prettier.printWidth": 180,
 
 	"codeLens.enable": false,
+	"codeLens.position": "eol",
 	"typescript.referencesCodeLens.enabled": true,
 	"javascript.referencesCodeLens.enabled": true,
 	"typescript.implementationsCodeLens.enabled": true,
 	"javascript.implementationsCodeLens.enabled": true,
-	"codeLens.position": "eol",
 
 	"Lua.diagnostics.globals": ["vim"],
+
 	"inlayHint.enable": false,
 
-	"eslint.autoFixOnSave": true,
+	"eslint.autoFixOnSave": false,
 
 	"languageserver": {
 		"go": {
@@ -82,6 +78,7 @@
 			}
 		}
 	},
+
 	"[go]": {
 		"coc.preferences.formatOnSave": true
 	}
