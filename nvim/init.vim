@@ -269,10 +269,8 @@ set statusline=%{&modified?'\[+]\ ':''}%f%r\ %{NvimGps()}%=%-5.(%l,%c%)\ %L
 
 lua << EOF
 require("nvim-treesitter.configs").setup({
-	auto_install = true,
-	highlight = {
-		enable = true
-	}
+	auto_install = false,
+	highlight = { enable = true }
 })
 
 local function floatWinConfig(width_ration, height_ration)
