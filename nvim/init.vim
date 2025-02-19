@@ -47,8 +47,6 @@ set number
 set signcolumn=number
 set updatetime=100
 set guicursor=a:block
-" set cursorline
-" set colorcolumn=120
 
 call plug#begin("~/.vim/plugged")
   Plug 'nvim-lua/plenary.nvim'
@@ -58,8 +56,8 @@ call plug#begin("~/.vim/plugged")
   Plug 'jiangmiao/auto-pairs'
   Plug 'axkirillov/hbac.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'nvim-treesitter/nvim-treesitter'
-  Plug 'nvim-treesitter/playground'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'nvim-treesitter/playground'
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'eugen0329/vim-esearch'
@@ -72,6 +70,8 @@ call plug#begin("~/.vim/plugged")
 	Plug 'chrisgrieser/nvim-rip-substitute'
 	Plug 'chrisgrieser/nvim-chainsaw'
 	Plug 'ThePrimeagen/refactoring.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'fannheyward/telescope-coc.nvim'
 call plug#end()
 
 map q: :q
@@ -197,7 +197,7 @@ let g:ctrlp_prompt_mappings = { 'AcceptSelection("h")': ['<c-h>'], 'AcceptSelect
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {'dir': '\android$\|\ios$\|\.git$'}
 
-let g:AutoPairsMultilineClose=0
+let g:AutoPairsMultilineClose = 0
 let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue'
 
 let g:esearch = {}
@@ -208,19 +208,6 @@ let g:esearch.case = 'smart'
 let g:esearch.default_mappings = 0
 let g:esearch.name = ' [esearch]'
 let g:esearch.win_map = [ ['n', 'o', '<plug>(esearch-win-open)'] ]
-
-func! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    exe 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunc
-
-func! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunc
 
 let g:coc_global_extensions = [
 	\"coc-tsserver",
@@ -233,15 +220,23 @@ let g:coc_global_extensions = [
 	\"coc-eslint",
 \]
 
+func! s:show_documentation()
+	if (index(['vim','help'], &filetype) >= 0)
+		exe 'h '.expand('<cword>')
+	else
+		call CocAction('doHover')
+	endif
+endfunc
+
 nmap <silent> K :call <SID>show_documentation()<CR>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gn <Plug>(coc-rename)
-nmap <silent> gf <Plug>(coc-fix-current)
-vmap <silent> ga <Plug>(coc-codeaction-selected)
 nmap <silent> <C-d> <Plug>(coc-diagnostic-next-error)
+
+" use Telescope for coc lookups
+nmap <silent> gd :Telescope coc definitions<CR>
+nmap <silent> gi :Telescope coc implementations<CR>
+nmap <silent> gr :Telescope coc references<CR>
+nmap <silent> gy :Telescope coc type_definitions<CR>
 
 nnoremap <silent> <c-m> :CtrlPMRUFiles<CR>
 nnoremap <silent> <c-n> :NvimTreeFindFileToggle<CR>
@@ -249,18 +244,15 @@ nmap <silent> <c-t> :AerialToggle<CR>
 nmap <c-f> <plug>(esearch)
 vmap <c-f> <plug>(operator-esearch-prefill)
 
+func! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunc
+
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 inoremap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-function! RepoEdit(url) abort
-	let l:basename = system("basename " . a:url . " .git")
-	let l:repo_path = fnamemodify(tempname(),':h') . "/" . l:basename
-	execute "!git clone --depth=1 " . a:url . " " . l:repo_path
-	execute "lcd ". l:repo_path
-	edit .
-endfunction
 
 command H exe ":TSHighlightCapturesUnderCursor"
 command CF exe ":e $MYVIMRC"
@@ -270,7 +262,6 @@ command PC exe ":PlugClean"
 command PU exe ":PlugUpdate"
 command CC exe ":!rm -rf ~/.cache/ctrlp"
 command GG exe ":CellularAutomaton make_it_rain"
-command! -nargs=1 RR call RepoEdit(<q-args>)
 
 augroup SourceConfigAfterWrite
   autocmd!
@@ -278,12 +269,6 @@ augroup SourceConfigAfterWrite
 augroup END
 
 autocmd BufWritePre *.go :call CocAction('organizeImport')
-
-" augroup CursorLineOnlyInActiveWindow
-" 	autocmd!
-" 	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-" 	autocmd WinLeave * if &filetype != 'nerdtree' | setlocal nocursorline | endif
-" augroup END
 
 func! NvimGps() abort
 	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
@@ -456,7 +441,7 @@ require("rip-substitute").setup({})
 vim.keymap.set({ "n", "x" }, "sr", function() require("rip-substitute").sub() end, { desc = "rip-substitute" })
 
 require("chainsaw").setup({
-	marker = "-->",
+	marker = "--",
 	visuals = {
 		icon = "",
 		lineHlgroup = false,
@@ -466,7 +451,7 @@ require("chainsaw").setup({
 	},
 	logStatements = {
 		variableLog = {
-			go = 'spew.Dump("{{marker}} {{var}}:", {{var}});'
+			go = "spew.Dump({{var}})"
 		},
 	},
 })
@@ -475,6 +460,28 @@ vim.keymap.set({ "n", "x" }, "fp", function() require("chainsaw").variableLog() 
 require("refactoring").setup({})
 vim.keymap.set({ "x" }, "fe", ":Refactor extract_var ")
 vim.keymap.set({ "x", "n" }, "fi", ":Refactor inline_var<CR>")
+
+require("telescope").setup({
+	extensions = {
+		coc = {
+			prefer_locations = false,
+			push_cursor_on_edit = true,
+		}
+	},
+	defaults = {
+		initial_mode = "normal",
+		show_line = false,
+		layout_strategy = "horizontal",
+		layout_config = {
+			horizontal = {
+				preview_width = 0.775,
+			},
+			width = 0.95,
+			height = 0.95,
+		},
+	}
+})
+require("telescope").load_extension("coc")
 EOF
 
 colors dogrun

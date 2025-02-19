@@ -51,7 +51,7 @@ hi Search guifg=#252737 guibg=#6f749f
 hi IncSearch guifg=#252737 guibg=#6f749f
 hi CurSearch guifg=#252737 guibg=#b3b5cc
 hi Question guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
-hi WildMenu guifg=#252737 ctermfg=235 guibg=#9ea3c0 ctermbg=104
+hi WildMenu guifg=#252737 ctermfg=235 guibg=#929be5 ctermbg=104
 hi SpellBad guifg=#b18181 ctermfg=167 gui=underline cterm=underline
 hi SpellCap gui=underline cterm=underline
 hi SpellLocal guifg=#b18181 ctermfg=167 gui=underline cterm=underline
@@ -92,12 +92,12 @@ hi typescriptImport guifg=#9ea3c0 ctermfg=104
 hi typescriptDocRef guifg=#545c8c ctermfg=60 gui=underline cterm=underline
 hi NvimTreeSymlink guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
 hi NvimTreeSymlinkFolderName guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
-hi NvimTreeFolderName guifg=#9ea3c0 ctermfg=104 gui=NONE cterm=NONE
+hi NvimTreeFolderName guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeRootFolder guifg=#464c79 ctermfg=60 gui=bold cterm=bold
 hi NvimTreeFolderIcon guifg=#6f78be ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeFileIcon guifg=#6f78be ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeEmptyFolderName guifg=#545c8c ctermfg=60 gui=NONE cterm=NONE
-hi NvimTreeOpenedFolderName guifg=#9ea3c0 ctermfg=104 gui=NONE cterm=NONE
+hi NvimTreeOpenedFolderName guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeExecFile guifg=#8085a6 ctermfg=103 gui=NONE cterm=NONE
 hi NvimTreeOpenedFile guifg=#8085a6 ctermfg=103 gui=NONE cterm=NONE
 hi NvimTreeSpecialFile guifg=#8085a6 ctermfg=103 gui=bold cterm=bold
@@ -110,7 +110,7 @@ hi NvimTreeGitMerge guifg=#a8a384 ctermfg=144 gui=NONE cterm=NONE
 hi NvimTreeGitRenamed guifg=#a8a384 ctermfg=144 gui=NONE cterm=NONE
 hi NvimTreeGitNew guifg=#73c1a9 ctermfg=79 gui=NONE cterm=NONE
 hi NvimTreeGitDeleted guifg=#28795c ctermfg=29 gui=NONE cterm=NONE
-hi NvimTreeWindowPicker guifg=#252737 ctermfg=235 guibg=#9ea3c0 ctermbg=104 gui=bold cterm=bold
+hi NvimTreeWindowPicker guifg=#929be5 ctermfg=235 guibg=#9ea3c0 ctermbg=104 gui=bold cterm=bold
 hi NvimTreeNormal guifg=#8085a6 ctermfg=103 gui=NONE cterm=NONE
 hi NvimTreeLiveFilterPrefix guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
 hi NvimTreeLiveFilterValue guifg=#73c1a9 ctermfg=79 gui=NONE cterm=NONE
@@ -125,8 +125,7 @@ hi CocListFgRed guifg=#b18181
 hi CocWarningSign guifg=#ac8b83 ctermfg=138 gui=bold cterm=bold
 hi CocInfoSign guifg=#82dabf ctermfg=115 gui=bold cterm=bold
 hi CocHintSign guifg=#82dabf ctermfg=115 gui=bold cterm=bold
-hi FloatTitle guifg=#9ea3c0 ctermfg=104 guibg=#252737 ctermbg=235 gui=NONE cterm=NONE
-hi AerialLine guifg=NONE guibg=#2a2c3f
+hi FloatTitle guifg=#929be5 ctermfg=104 guibg=#252737 ctermbg=235 gui=NONE cterm=NONE
 hi link CocCodeLens Comment
 hi CocFadeOut guifg=NONE guibg=#545c8c
 hi TreesitterContext guibg=#33364d
@@ -145,6 +144,9 @@ hi VertSplit guifg=#1f202e guibg=#1f202e gui=NONE
 hi WinSeparator guifg=#1f202e guibg=NONE gui=NONE
 
 hi SignColumn guifg=#2a2c3f guibg=#2a2c3f
+
+hi AerialLine guifg=NONE guibg=#2a2c3f
+hi AerialNormal guifg=#929be5 gui=bold
 
 hi @string guifg=#73c1a9
 hi @number guifg=#73c1a9
@@ -172,11 +174,12 @@ hi @tag guifg=#9ea3c0
 hi @tag.delimiter guifg=#9ea3c0
 hi @tag.attribute guifg=#9ea3c0
 
+" hi Function guifg=#929be5 gui=bold
+" hi TSFunction guifg=#929be5 gui=bold
+
 hi @constructor guifg=#929be5 gui=NONE
 hi @function guifg=#929be5 gui=bold
 hi @function.method guifg=#929be5 gui=bold
 hi @function.call guifg=#929be5 gui=NONE
 hi @function.method.call guifg=#929be5 gui=NONE
 hi @function.builtin guifg=#929be5 gui=NONE
-hi Function guifg=#929be5 gui=bold
-hi TSFunction guifg=#929be5 gui=bold

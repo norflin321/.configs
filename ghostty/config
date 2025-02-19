@@ -35,6 +35,7 @@ keybind = super+two=next_tab
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
+font-thicken = false
 
 theme = light:SleepyHollow,dark:SleepyHollow
 cursor-color = #a3a8c2
