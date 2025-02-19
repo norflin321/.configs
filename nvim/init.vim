@@ -52,14 +52,13 @@ call plug#begin("~/.vim/plugged")
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'axkirillov/hbac.nvim'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'nvim-treesitter/nvim-treesitter'
 	Plug 'nvim-treesitter/playground'
 	Plug 'kyazdani42/nvim-tree.lua'
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'eugen0329/vim-esearch'
 	Plug 'stevearc/aerial.nvim'
 	Plug 'lewis6991/satellite.nvim'
-	Plug 'zivyangll/git-blame.vim'
 	Plug 'norflin321/nvim-gps'
 	Plug 'chrisgrieser/nvim-chainsaw'
 call plug#end()
@@ -181,39 +180,25 @@ map P pV=
 nnoremap z <NOP>
 nnoremap z zz
 
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:50'
-let g:ctrlp_working_path_mode = ''
-let g:ctrlp_prompt_mappings = { 'AcceptSelection("h")': ['<c-h>'], 'AcceptSelection("v")': ['<c-v>'], 'AcceptSelection("e")': ['<c-o>', '<cr>'] }
+let g:ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
+let g:ctrlp_working_path_mode = ""
+let g:ctrlp_prompt_mappings = { "AcceptSelection('h')": ["<c-h>"], "AcceptSelection('v')": ["<c-v>"], "AcceptSelection('e')": ["<c-o>", "<cr>"] }
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = {'dir': '\android$\|\ios$\|\.git$'}
-
-let g:AutoPairsMultilineClose=0
-let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue'
+let g:ctrlp_custom_ignore = {"dir": "\android$\|\ios$\|\.git$"}
 
 let g:esearch = {}
-let g:esearch.prefill = ['last']
+let g:esearch.prefill = ["last"]
 let g:esearch.regex = 1
 let g:esearch.textobj = 0
-let g:esearch.case = 'smart'
+let g:esearch.case = "smart"
 let g:esearch.default_mappings = 0
-let g:esearch.name = ' [esearch]'
-let g:esearch.win_map = [ ['n', 'o', '<plug>(esearch-win-open)'] ]
+let g:esearch.name = " [esearch]"
+let g:esearch.win_map = [ ["n", "o", "<plug>(esearch-win-open)"] ]
+
+let g:AutoPairsMultilineClose=0
+let g:closetag_filenames = "*.html,*.tsx,*.jsx,*.vue"
 
 let g:coc_list_preview_filetype = 1
-
-func! s:show_documentation()
-	if (index(['vim','help'], &filetype) >= 0)
-		exe 'h '.expand('<cword>')
-	else
-		call CocAction('doHover')
-	endif
-endfunc
-
-func! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunc
-
 let g:coc_global_extensions = [
 	\"coc-tsserver",
 	\"coc-json",
@@ -225,6 +210,20 @@ let g:coc_global_extensions = [
 	\"coc-eslint",
 \]
 
+func! s:show_documentation()
+	if (index(["vim", "help"], &filetype) >= 0)
+		exe "h ".expand("<cword>")
+	else
+		call CocAction("doHover")
+	endif
+endfunc
+
+func! s:check_back_space() abort
+	let col = col(".") - 1
+	return !col || getline(".")[col - 1]  =~# "\s"
+endfunc
+
+" coc keymaps
 nmap <silent> K :call <SID>show_documentation()<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -234,28 +233,27 @@ nmap <silent> gn <Plug>(coc-rename)
 nmap <silent> gf <Plug>(coc-fix-current)
 vmap <silent> ga <Plug>(coc-codeaction-selected)
 nmap <silent> <C-d> <Plug>(coc-diagnostic-next-error)
+imap <silent><expr> <TAB> coc#pum#visible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+imap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+imap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 
-nnoremap <silent> <c-m> :CtrlPMRUFiles<CR>
-nnoremap <silent> <c-n> :NvimTreeFindFileToggle<CR>
+" other plugins keymaps
+nmap <silent> <c-m> :CtrlPMRUFiles<CR>
+nmap <silent> <c-n> :NvimTreeFindFileToggle<CR>
 nmap <silent> <c-t> :AerialToggle<CR>
 nmap <c-f> <plug>(esearch)
 vmap <c-f> <plug>(operator-esearch-prefill)
 
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
-inoremap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-command H exe ":TSHighlightCapturesUnderCursor"
 command CF exe ":e $MYVIMRC"
-command BL exe ":call gitblame#echo()"
+command H exe ":TSHighlightCapturesUnderCursor"
 command PI exe ":PlugInstall"
 command PC exe ":PlugClean"
 command PU exe ":PlugUpdate"
 command CC exe ":!rm -rf ~/.cache/ctrlp"
 
+autocmd CursorHold * silent call CocActionAsync("highlight")
 autocmd BufWritePost init.vim source %
-autocmd BufWritePre *.go :call CocAction('organizeImport')
+autocmd BufWritePre *.go :call CocAction("organizeImport")
 autocmd Filetype rust setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
