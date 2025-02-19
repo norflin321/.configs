@@ -42,13 +42,13 @@ set smoothscroll
 set number
 set signcolumn=number
 set updatetime=50
-set guicursor=a:block
+set pumheight=15
+" set guicursor=a:block
 
 call plug#begin("~/.vim/plugged")
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-tree/nvim-web-devicons'
 	Plug 'tpope/vim-commentary'
-	Plug 'alvan/vim-closetag'
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'axkirillov/hbac.nvim'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -251,9 +251,10 @@ command PC exe ":PlugClean"
 command PU exe ":PlugUpdate"
 command CC exe ":!rm -rf ~/.cache/ctrlp"
 
-autocmd CursorHold * silent call CocActionAsync("highlight")
 autocmd BufWritePost init.vim source %
+autocmd CursorHold * silent call CocActionAsync("highlight")
 autocmd BufWritePre *.go :call CocAction("organizeImport")
+
 autocmd Filetype rust setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
