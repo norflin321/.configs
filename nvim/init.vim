@@ -43,21 +43,22 @@ set number
 set signcolumn=number
 set updatetime=50
 set pumheight=15
-" set guicursor=a:block
+set guicursor+=c:ver25
 
 call plug#begin("~/.vim/plugged")
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-tree/nvim-web-devicons'
 	Plug 'tpope/vim-commentary'
 	Plug 'jiangmiao/auto-pairs'
-	Plug 'axkirillov/hbac.nvim'
+	Plug 'ku1ik/vim-pasta'
+	Plug 'ctrlpvim/ctrlp.vim'
+	Plug 'eugen0329/vim-esearch'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nvim-treesitter/nvim-treesitter'
 	Plug 'nvim-treesitter/playground'
 	Plug 'kyazdani42/nvim-tree.lua'
-	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'eugen0329/vim-esearch'
 	Plug 'stevearc/aerial.nvim'
+	Plug 'axkirillov/hbac.nvim'
 	Plug 'lewis6991/satellite.nvim'
 	Plug 'norflin321/nvim-gps'
 	Plug 'chrisgrieser/nvim-chainsaw'
@@ -179,6 +180,20 @@ map p ]p
 map P pV=
 nnoremap z <NOP>
 nnoremap z zz
+
+function! ScrollDown()
+	if line("w$") < line("$")
+		execute ":" + line("w$")-4
+	endif
+endfunction
+nmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
+
+function! ScrollUp()
+  if line("w0") > 1
+    execute ":" + (line("w0") + 4)
+  endif
+endfunction
+nmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
 
 let g:ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
 let g:ctrlp_working_path_mode = ""
