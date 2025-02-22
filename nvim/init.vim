@@ -43,7 +43,7 @@ set number
 set signcolumn=number
 set updatetime=50
 set pumheight=15
-set guicursor+=c:ver25
+set guicursor=a:block
 
 call plug#begin("~/.vim/plugged")
 	Plug 'nvim-lua/plenary.nvim'
@@ -62,6 +62,8 @@ call plug#begin("~/.vim/plugged")
 	Plug 'lewis6991/satellite.nvim'
 	Plug 'norflin321/nvim-gps'
 	Plug 'chrisgrieser/nvim-chainsaw'
+	Plug 'ThePrimeagen/refactoring.nvim'
+	Plug 'norflin321/tsc.nvim'
 call plug#end()
 
 map q: :q
@@ -258,6 +260,7 @@ nmap <silent> <c-n> :NvimTreeFindFileToggle<CR>
 nmap <silent> <c-t> :AerialToggle<CR>
 nmap <c-f> <plug>(esearch)
 vmap <c-f> <plug>(operator-esearch-prefill)
+nmap <silent> <c-e> :TSC<CR>
 
 command CF exe ":e $MYVIMRC"
 command H exe ":TSHighlightCapturesUnderCursor"
@@ -269,6 +272,11 @@ command CC exe ":!rm -rf ~/.cache/ctrlp"
 autocmd BufWritePost init.vim source %
 autocmd CursorHold * silent call CocActionAsync("highlight")
 autocmd BufWritePre *.go :call CocAction("organizeImport")
+
+autocmd FileType qf nmap <buffer> <CR> <CR>
+autocmd FileType qf nmap <buffer> <c-o> <CR>
+autocmd FileType qf nmap <buffer> o <CR>
+autocmd FileType qf execute "resize 5"
 
 autocmd Filetype rust setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
@@ -456,6 +464,14 @@ require("chainsaw").setup({
 	},
 })
 vim.keymap.set({ "n", "x" }, "fp", function() require("chainsaw").variableLog() end, { desc = "chainsaw" })
+
+require("refactoring").setup({})
+vim.keymap.set("x", "fe", function() require("refactoring").refactor("Extract Function") end)
+vim.keymap.set({ "n", "x" }, "fi", function() require("refactoring").refactor("Inline Variable") end)
+
+require("tsc").setup({
+	pretty_error = false
+})
 EOF
 
 colors dogrun
