@@ -17,8 +17,8 @@ alias nvim="~/main/nvim-macos-arm64/bin/nvim"
 alias vi="nvim"
 alias studio="open -a /Applications/Android\ Studio.app"
 alias clang_cpp="/opt/homebrew/Cellar/llvm/19.1.1/bin/clang++"
-alias ts-ru="trans -shell -brief ru:en"
-alias ts-en="trans -shell -brief en:ru"
+alias ts-ru="trans -brief ru:en"
+alias ts-en="trans -brief en:ru"
 alias jira="/Users/norflin/main/code/quick-jira/main"
 alias py="python3"
 alias pip="pip3"
@@ -36,6 +36,17 @@ zstyle ':vcs_info:git:*' formats ' %b'
 setopt prompt_subst
 PROMPT='%n %~${vcs_info_msg_0_} ❯ '
 
-gitcommits() {
-	git --no-pager log --pretty=format:'%h %ad %s' --date=short --since='2 month ago' --author='Anton Kurtin' --grep="$1"
+mycommits() {
+	local keyword="$1"
+	local days_ago="${2:-30}"
+	local last_date=""
+
+	git --no-pager log --pretty=format:'%h %ad %s' --date=short --since="${days_ago} days ago" --author='Anton Kurtin' --grep="$keyword" | while read -r hash date rest; do
+		if [[ "$date" != "$last_date" ]]; then
+			echo -e "\n$date"
+			echo "-------------------"
+			last_date="$date"
+		fi
+		echo "$hash $rest"
+	done
 }
