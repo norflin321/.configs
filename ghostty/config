@@ -1,25 +1,13 @@
-#font-family = Fira Code
+#font-family = JetBrains Mono Regular
 #font-size = 11
-#adjust-cell-height = 21%
-
-font-family = JetBrains Mono Regular
-font-family-bold = JetBrains Mono ExtraBold
-font-size = 11
-adjust-cell-height = 13%
-
-#font-family = Iosevka
-#font-size = 13
 #adjust-cell-height = 13%
+#font-family-bold = JetBrains Mono ExtraBold
 
-#font-family = SF Mono
-#font-size = 11
-#adjust-cell-height = 25%
+font-family = Fira Code
+font-size = 11
+adjust-cell-height = 21%
 
-#font-family = Cascadia Code
-#font-size = 12
-#adjust-cell-height = 23%
-
-#font-family = MonoLisa
+#font-family = 0xProto
 #font-size = 11
 #adjust-cell-height = 25%
 

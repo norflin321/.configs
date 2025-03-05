@@ -174,12 +174,10 @@ hi @tag guifg=#9ea3c0
 hi @tag.delimiter guifg=#9ea3c0
 hi @tag.attribute guifg=#9ea3c0
 
-" hi Function guifg=#929be5 gui=bold
-" hi TSFunction guifg=#929be5 gui=bold
-
 hi @constructor guifg=#929be5 gui=NONE
-hi @function guifg=#929be5 gui=bold
-hi @function.method guifg=#929be5 gui=bold
 hi @function.call guifg=#929be5 gui=NONE
 hi @function.method.call guifg=#929be5 gui=NONE
 hi @function.builtin guifg=#929be5 gui=NONE
+
+hi @function guifg=#929be5 gui=bold
+hi @function.method guifg=#929be5 gui=bold

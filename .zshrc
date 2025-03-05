@@ -35,3 +35,7 @@ precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' %b'
 setopt prompt_subst
 PROMPT='%n %~${vcs_info_msg_0_} ❯ '
+
+gitcommits() {
+	git --no-pager log --pretty=format:'%h %ad %s' --date=short --since='2 month ago' --author='Anton Kurtin' --grep="$1"
+}

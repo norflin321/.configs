@@ -182,6 +182,7 @@ map p ]p
 map P pV=
 nnoremap z <NOP>
 nnoremap z zz
+nnoremap sr :%s///g<Left><Left><Left>
 
 function! ScrollDown()
 	if line("w$") < line("$")
@@ -250,9 +251,10 @@ nmap <silent> gn <Plug>(coc-rename)
 nmap <silent> gf <Plug>(coc-fix-current)
 vmap <silent> ga <Plug>(coc-codeaction-selected)
 nmap <silent> <C-d> <Plug>(coc-diagnostic-next-error)
-imap <silent><expr> <TAB> coc#pum#visible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+
 imap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 imap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#insert() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 
 " other plugins keymaps
 nmap <silent> <c-m> :CtrlPMRUFiles<CR>
