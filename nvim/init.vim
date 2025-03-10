@@ -29,7 +29,7 @@ set showtabline=0
 set hidden
 set shortmess+=c
 set completeopt=menuone,noinsert,noselect
-set wildignore+=**/node_modules/**,*.swp,*.zip,*.exe,**/dist/**,.DS_Store
+set wildignore+=**/.git/**,**/node_modules/**,*.swp,*.zip,*.exe,**/dist/**,.DS_Store
 set laststatus=2
 set showmode
 set splitbelow
@@ -182,7 +182,8 @@ map p ]p
 map P pV=
 nnoremap z <NOP>
 nnoremap z zz
-nnoremap sr :%s///g<Left><Left><Left>
+nmap sr :%s///g<Left><Left><Left>
+vnoremap sr :<C-u>'<,'>s///g<Left><Left><Left>
 
 function! ScrollDown()
 	if line("w$") < line("$")
@@ -202,7 +203,7 @@ let g:ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
 let g:ctrlp_working_path_mode = ""
 let g:ctrlp_prompt_mappings = { "AcceptSelection('h')": ["<c-h>"], "AcceptSelection('v')": ["<c-v>"], "AcceptSelection('e')": ["<c-o>", "<cr>"] }
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = {"dir": "\android$\|\ios$\|\.git$"}
+let g:ctrlp_custom_ignore = "\android$\|\ios$\|\.git$"
 
 let g:esearch = {}
 let g:esearch.prefill = ["last"]

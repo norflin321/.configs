@@ -11,7 +11,7 @@
 	"notification.timeout": 1000,
 
 	"coc.preferences.enableMessageDialog": true,
-	"coc.preferences.renameFillCurrent": false,
+	"coc.preferences.renameFillCurrent": true,
 	"coc.preferences.maxFileSize": "100MB",
 
 	"diagnostic.refreshOnInsertMode": false,
@@ -87,6 +87,6 @@
 	},
 
 	"[go]": {
-		"coc.preferences.formatOnSave": true
+		"coc.preferences.formatOnSave": false
 	},
 }
