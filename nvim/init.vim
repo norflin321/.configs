@@ -21,7 +21,7 @@ set ignorecase
 set hlsearch
 set clipboard=unnamedplus
 set shellslash
-set scrolloff=5
+set scrolloff=2
 set sidescrolloff=10
 set mouse=a
 set autoread
@@ -187,14 +187,14 @@ vnoremap sr :<C-u>'<,'>s///g<Left><Left><Left>
 
 function! ScrollDown()
 	if line("w$") < line("$")
-		execute ":" + line("w$")-4
+		execute ":" + line("w$")-1
 	endif
 endfunction
 nmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
 
 function! ScrollUp()
   if line("w0") > 1
-    execute ":" + (line("w0") + 4)
+    execute ":" + (line("w0") + 1)
   endif
 endfunction
 nmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
