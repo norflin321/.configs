@@ -39,7 +39,7 @@ set termguicolors
 set cmdheight=1
 set mousescroll=ver:1,hor:0
 set smoothscroll
-set number
+set nonumber
 set signcolumn=number
 set updatetime=50
 set pumheight=15
@@ -290,7 +290,26 @@ func! NvimGps() abort
 	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
 endf
 
-set statusline=%{&modified?'\[+]\ ':''}%f%r\ %{NvimGps()}%=%-5.(%l,%c%)\ %L
+function! ErrorsCount() abort
+  if !get(g:, "coc_service_initialized", 0) || !exists("*coc#rpc#ready")
+    return ""
+  endif
+
+  let l:info = get(b:, "coc_diagnostic_info", {})
+  if empty(l:info)
+    return ""
+  endif
+
+  let l:errors = get(l:info, "error", 0)
+
+  if l:errors == 0
+    return ""
+  endif
+
+  return "E:" . l:errors . " "
+endfunction
+
+set statusline=%{&modified?'\[+]\ ':''}%f%r\ %{NvimGps()}%=%#StatusLineErrors#%{ErrorsCount()}%#StatusLine#\ %-5.(%l,%c%)\ %L
 
 lua << EOF
 require("nvim-treesitter.configs").setup({

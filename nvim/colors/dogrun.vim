@@ -139,6 +139,7 @@ hi LineNr guifg=#454b68 guibg=NONE
 
 hi StatusLine guifg=#52597a guibg=#1f202e gui=NONE
 hi StatusLineNC guifg=#52597a guibg=#1f202e gui=NONE
+hi StatusLineErrors guifg=#b18181 guibg=#1f202e gui=NONE
 
 hi VertSplit guifg=#1f202e guibg=#1f202e gui=NONE
 hi WinSeparator guifg=#1f202e guibg=NONE gui=NONE
