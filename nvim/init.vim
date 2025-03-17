@@ -496,4 +496,4 @@ require("tsc").setup({
 })
 EOF
 
-colors dogrun
+colors norflin_1
