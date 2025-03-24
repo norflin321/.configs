@@ -11,6 +11,7 @@ set nowrap
 set smartcase
 set noswapfile
 set nobackup
+set nowritebackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
@@ -40,6 +41,7 @@ set cmdheight=1
 set mousescroll=ver:1,hor:0
 set smoothscroll
 set nonumber
+set nocursorline
 set signcolumn=number
 set updatetime=50
 set pumheight=15
@@ -286,6 +288,12 @@ autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype swift setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 
+" augroup CursorLineOnlyInActiveWindow
+" 	autocmd!
+" 	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+" 	autocmd WinLeave * if &filetype != 'nerdtree' | setlocal nocursorline | endif
+" augroup END
+
 func! NvimGps() abort
 	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
 endf
@@ -339,7 +347,7 @@ local function floatWinConfig(width_ration, height_ration)
 	end
 end
 
-local function my_on_attach(bufnr)
+local function nvimtree_on_attach(bufnr)
 	local api = require "nvim-tree.api"
 	local function opts(desc)
 		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -349,7 +357,7 @@ local function my_on_attach(bufnr)
 end
 
 require("nvim-tree").setup({
-	on_attach = my_on_attach,
+	on_attach = nvimtree_on_attach,
 	git = { enable = false },
 	view = {
 		float = {
@@ -497,3 +505,7 @@ require("tsc").setup({
 EOF
 
 colors norflin_1
+hi @function gui=bold
+hi @function.call gui=NONE
+hi @function.method gui=bold
+hi @function.method.call gui=NONE

@@ -67,7 +67,7 @@ exec "hi PmenuThumb guibg=".s:function
 exec "hi Visual guibg=".s:bg_highlight_1." gui=NONE"
 exec "hi Search guifg=".s:bg_normal." guibg=".s:bg_highlight_2
 exec "hi IncSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2
-exec "hi CurSearch guifg=".s:bg_normal." guibg=".s:fg_normal
+exec "hi CurSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2
 exec "hi Question guifg=".s:primitive." gui=bold"
 exec "hi WildMenu guifg=".s:bg_normal." guibg=".s:function
 exec "hi SpellBad guifg=".s:error." gui=underline"
@@ -78,7 +78,7 @@ exec "hi DiffAdd guibg=".s:primitive." gui=bold"
 exec "hi DiffChange guibg=".s:function." gui=bold"
 exec "hi DiffDelete guifg=".s:fg_normal." guibg=".s:keyword." gui=bold"
 exec "hi DiffText guibg=".s:primitive." gui=NONE"
-exec "hi QuickFixLine guifg=".s:fg_normal." guibg=".s:function
+exec "hi QuickFixLine guifg=NONE"." guibg=".s:bg_light
 exec "hi StatusLineTerm guifg=".s:bg_highlight_2." guibg=".s:bg_highlight_1." gui=bold"
 exec "hi StatusLineTermNC guifg=".s:comment." guibg=".s:bg_dark." gui=bold"
 exec "hi DiagnosticError guifg=".s:error
@@ -199,5 +199,5 @@ exec "hi @function.call guifg=".s:function." gui=NONE"
 exec "hi @function.method.call guifg=".s:function." gui=NONE"
 exec "hi @function.builtin guifg=".s:function." gui=NONE"
 
-exec "hi @function guifg=".s:function." gui=bold"
-exec "hi @function.method guifg=".s:function." gui=bold"
+exec "hi @function guifg=".s:function
+exec "hi @function.method guifg=".s:function
