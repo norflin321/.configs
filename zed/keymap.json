@@ -1,0 +1,110 @@
+[
+	{
+    "bindings": {
+  	  "cmd-1": null,
+      "cmd-2": null,
+      "ctrl-n": null,
+   	  "ctrl-j": null,
+      "ctrl-k": null,
+      "ctrl-l": null,
+      "shift-l": null,
+      "cmd-t": null
+    }
+	},
+	{
+    "bindings": {
+	    "cmd-n": "workspace::ToggleLeftDock",
+      "cmd-1": "pane::ActivatePreviousItem",
+      "cmd-2": "pane::ActivateNextItem",
+   	  "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious",
+   	  "cmd-j": "menu::SelectNext",
+      "cmd-k": "menu::SelectPrevious",
+      "ctrl-p": "file_finder::Toggle",
+      "shift-cmd-t": "project_symbols::Toggle"
+    }
+	},
+	{
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "up": "editor::ContextMenuPrevious",
+      "down": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrevious",
+      "ctrl-j": "editor::ContextMenuNext"
+    }
+  },
+	{
+    "context": "Editor && !VimWaiting && !menu && vim_mode == normal",
+    "bindings": {
+      "ctrl-d": "editor::GoToDiagnostic",
+      "ctrl-c": "editor::ToggleComments",
+
+      "shift-k": "editor::Hover",
+      "shift-d": "editor::DeleteLine",
+
+      "g n": "editor::Rename",
+      "g f": "editor::ToggleCodeActions",
+      "g r": "editor::FindAllReferences",
+      "d d": "editor::DeleteLine",
+      "g y": "editor::GoToTypeDefinition",
+
+      "9": "editor::MoveToEndOfLine",
+      "8": "vim::Matching",
+      "x": "editor::Delete",
+
+      "(": ["workspace::SendKeystrokes", "up up up up up up up up up up up up up up up"],
+      ")": ["workspace::SendKeystrokes", "down down down down down down down down down down down down down down down"],
+      "<": "editor::Outdent",
+	    ">": "editor::Indent",
+
+			"cmd-t": ["workspace::SendKeystrokes", "g s"]
+    }
+  },
+  {
+     "context": "Editor && !VimWaiting && !menu && vim_mode == visual",
+     "bindings": {
+       "8": "vim::Matching"
+     }
+   },
+  {
+     "context": "Editor && !VimWaiting && !menu && vim_mode == visual",
+     "bindings": {
+	     "ctrl-c": "editor::ToggleComments",
+
+	     "d": "editor::Delete",
+	     "x": "editor::Delete",
+
+	     "9": "editor::SelectToEndOfLine",
+			 "(": ["workspace::SendKeystrokes", "up up up up up up up up up up up up up up up"],
+       ")": ["workspace::SendKeystrokes", "down down down down down down down down down down down down down down down"],
+	     "<": "editor::Outdent",
+	     ">": "editor::Indent"
+     }
+  },
+  {
+     "context": "Editor && !VimWaiting && !menu && vim_mode == insert",
+     "bindings": {
+	     "tab": "editor::ShowCompletions"
+     }
+  },
+  {
+	  "context": "Editor && !VimWaiting && !menu && (vim_mode == normal && vim_mode == visual)",
+	  "bindings": {
+			"ctrl-r": "vim::Redo",
+			"u": "vim::Undo"
+  	}
+  },
+  {
+     "context": "Terminal",
+     "bindings": {
+       "cmd-t": "workspace::NewTerminal",
+       "cmd-r": "workspace::ToggleRightDock"
+     }
+  },
+  {
+	  "context": "ProjectPanel",
+		"bindings": {
+			// "o": ["workspace::SendKeystroke", "enter q q"]
+		}
+  }
+]

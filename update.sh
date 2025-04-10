@@ -14,6 +14,7 @@ cp ~/.gitconfig ./
 cp -R ~/.config/nvim ./
 cp -R ~/.config/ghostty ./
 cp ~/.config/repoavg.sh ./
+mkdir zed
 cp -R ~/.config/zed/settings.json ./zed/
 cp -R ~/.config/zed/keymap.json ./zed/
 cp -R ~/.config/zed/themes ./zed/themes
