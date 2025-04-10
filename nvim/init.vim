@@ -62,7 +62,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'stevearc/aerial.nvim'
 	Plug 'axkirillov/hbac.nvim'
 	Plug 'lewis6991/satellite.nvim'
-	Plug 'norflin321/nvim-gps'
+	" Plug 'norflin321/nvim-gps'
 	Plug 'chrisgrieser/nvim-chainsaw'
 	Plug 'ThePrimeagen/refactoring.nvim'
 	Plug 'norflin321/tsc.nvim'
@@ -294,9 +294,9 @@ autocmd Filetype swift setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 " 	autocmd WinLeave * if &filetype != 'nerdtree' | setlocal nocursorline | endif
 " augroup END
 
-func! NvimGps() abort
-	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
-endf
+" func! NvimGps() abort
+" 	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
+" endf
 
 function! ErrorsCount() abort
   if !get(g:, "coc_service_initialized", 0) || !exists("*coc#rpc#ready")
@@ -317,7 +317,7 @@ function! ErrorsCount() abort
   return "E:" . l:errors . " "
 endfunction
 
-set statusline=%{&modified?'\[+]\ ':''}%f%r\ %{NvimGps()}%=%#StatusLineErrors#%{ErrorsCount()}%#StatusLine#\ %-5.(%l,%c%)\ %L
+set statusline=%{&modified?'\[+]\ ':''}%f%r%=%#StatusLineErrors#%{ErrorsCount()}%#StatusLine#\ %-5.(%l,%c%)\ %L
 
 lua << EOF
 require("nvim-treesitter.configs").setup({
@@ -475,8 +475,6 @@ require("hbac").setup({
 	end,
 	close_buffers_with_windows = false, -- hbac will close buffers with associated windows if this option is `true`
 })
-
-require("nvim-gps").setup({})
 
 require("chainsaw").setup({
 	marker = "--",
