@@ -60,6 +60,7 @@
   "ui_font_size": 13,
   "buffer_line_height": { "custom": 1.50 },
   "buffer_font_features": { "calt": false },
+  "edit_predictions": { "mode": "subtle" },
 
   "tab_size": 2,
   "cursor_blink": false,
@@ -67,11 +68,11 @@
   "show_whitespaces": "selection",
   "indent_guides": { "enabled": false },
   "hard_tabs": true,
-  "search_wrap": false,
+  "search_wrap": true,
   "vertical_scroll_margin": 5,
   "scroll_beyond_last_line": "off",
   "inlay_hints": { "enabled": false },
-  "show_completions_on_input": false,
+  "show_completions_on_input": true,
   "auto_signature_help": false,
   "scroll_sensitivity": 1,
   "expand_excerpt_lines": 15,
@@ -89,7 +90,7 @@
   "collaboration_panel": { "button": false, "dock": "bottom", "default_width": 240 },
   "chat_panel": { "button": "never", "dock": "bottom", "default_width": 240 },
   "tab_bar": { "show_nav_history_buttons": false, "show": true },
-  "scrollbar": { "show": "always", "git_diff": true, "selections": true, "symbols_selections": true, "diagnostics": "all", "axes": { "horizontal": false } },
+  "scrollbar": { "show": "system", "git_diff": true, "selections": true, "symbols_selections": true, "diagnostics": "all", "axes": { "horizontal": false } },
   "project_panel": {
     "default_width": 200,
     "dock": "left",
@@ -103,7 +104,7 @@
     "indent_guides": { "show": "never" }
   },
   "show_call_status_icon": false,
-  "tabs": { "git_status": true, "close_position": "right", "file_icons": true, "activate_on_close": "history" },
+  "tabs": { "git_status": true, "close_position": "right", "file_icons": true, "activate_on_close": "left_neighbour" },
   "outline_panel": { "dock": "right", "git_status": false, "indent_size": 15, "indent_guides": { "show": "never" } },
 
   "terminal": {
@@ -115,7 +116,7 @@
   },
 
   "session": { "restore_unsaved_buffers": false },
-  "features": { "edit_prediction_provider": "none", "copilot": false },
+  "features": { "edit_prediction_provider": "zed", "copilot": false },
   "preview": {
 	  "restore_on_startup": "last_workspace",
 		"ensure_final_newline_on_save": false
@@ -127,12 +128,13 @@
   },
 
   "assistant": {
-	  "enabled": false,
-    "default_model": { "provider": "zed.dev", "model": "claude-3-5-sonnet-latest" },
-    "version": "2",
-    "button": false,
-    "dock": "bottom"
+		"enabled": false,
+		// "default_model": { "provider": "deepseek", "model": "deepseek-chat" },
+		"version": "2",
+		"button": false,
+		"dock": null
   },
+
   "notification_panel": { "dock": "left" },
 
   "git": {
