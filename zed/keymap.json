@@ -8,7 +8,8 @@
       "ctrl-k": null,
       "ctrl-l": null,
       "shift-l": null,
-      "cmd-t": null
+      "cmd-t": null,
+      "cmd-j": null
     }
 	},
 	{
@@ -96,10 +97,7 @@
   },
   {
      "context": "Terminal",
-     "bindings": {
-       "cmd-t": "workspace::NewTerminal",
-       "cmd-r": "workspace::ToggleRightDock"
-     }
+     "bindings": { }
   },
   {
 	  "context": "ProjectPanel",

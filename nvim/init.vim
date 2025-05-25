@@ -62,10 +62,9 @@ call plug#begin("~/.vim/plugged")
 	Plug 'stevearc/aerial.nvim'
 	Plug 'axkirillov/hbac.nvim'
 	Plug 'lewis6991/satellite.nvim'
-	" Plug 'norflin321/nvim-gps'
-	Plug 'chrisgrieser/nvim-chainsaw'
 	Plug 'ThePrimeagen/refactoring.nvim'
 	Plug 'norflin321/tsc.nvim'
+	Plug 'catppuccin/nvim'
 call plug#end()
 
 map q: :q
@@ -476,23 +475,6 @@ require("hbac").setup({
 	close_buffers_with_windows = false, -- hbac will close buffers with associated windows if this option is `true`
 })
 
-require("chainsaw").setup({
-	marker = "--",
-	visuals = {
-		icon = "",
-		lineHlgroup = false,
-		nvimSatelliteIntegration = {
-			enabled = false,
-		},
-	},
-	logStatements = {
-		variableLog = {
-			go = "{{var}})"
-		},
-	},
-})
-vim.keymap.set({ "n", "x" }, "fp", function() require("chainsaw").variableLog() end, { desc = "chainsaw" })
-
 require("refactoring").setup({})
 vim.keymap.set("x", "fe", function() require("refactoring").refactor("Extract Function") end)
 vim.keymap.set({ "n", "x" }, "fi", function() require("refactoring").refactor("Inline Variable") end)
@@ -503,7 +485,8 @@ require("tsc").setup({
 EOF
 
 colors norflin_1
-hi @function gui=bold
-hi @function.call gui=NONE
-hi @function.method gui=bold
-hi @function.method.call gui=NONE
+" colors catppuccin-macchiato
+" hi @function gui=bold
+" hi @function.call gui=NONE
+" hi @function.method gui=bold
+" hi @function.method.call gui=NONE

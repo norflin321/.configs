@@ -1,9 +1,12 @@
 export PATH=$PATH:/opt/homebrew/opt/llvm/bin
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/go/bin
+export PATH=$PATH:~/Library/Android/sdk
 export PATH=$PATH:~/Library/Android/sdk/tools
 export PATH=$PATH:~/Library/Android/sdk/tools/bin
 export PATH=$PATH:~/Library/Android/sdk/platform-tools
+
+export ANDROID_HOME=~/Library/Android/sdk
 
 # cd
 alias ls="ls -la"
