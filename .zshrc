@@ -1,12 +1,13 @@
-export PATH=$PATH:/opt/homebrew/opt/llvm/bin
-export PATH=$PATH:~/.cargo/bin
-export PATH=$PATH:~/go/bin
-export PATH=$PATH:~/Library/Android/sdk
-export PATH=$PATH:~/Library/Android/sdk/tools
-export PATH=$PATH:~/Library/Android/sdk/tools/bin
-export PATH=$PATH:~/Library/Android/sdk/platform-tools
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+export PATH="$HOME/Library/Android/sdk/tools/bin:$PATH"
+export PATH="$HOME/Library/Android/sdk/tools:$PATH"
+export PATH="$HOME/Library/Android/sdk:$PATH"
 
 export ANDROID_HOME=~/Library/Android/sdk
+export SDKROOT=$(xcrun --show-sdk-path)
 
 # cd
 alias ls="ls -la"
@@ -14,6 +15,8 @@ alias rm="rm -rf"
 alias cp="cp -R"
 alias code="cd /Users/norflin/main/code"
 alias pets="cd /Users/norflin/main/code/rockstone/mergicpets_client"
+alias clear1="clear"
+alias clear="clear && printf '\e[3J'"
 
 # apps (chmod +x <...>)
 alias nvim="~/main/nvim-macos-arm64/bin/nvim"

@@ -87,6 +87,7 @@
   "unstable.ui_density": "compact",
   "toolbar": { "breadcrumbs": true, "quick_actions": false, "selections_menu": false },
   "gutter": { "line_numbers": false, "code_actions": false, "folds": false, "runnables": false, "breakpoints": false },
+  "debugger": { "button": false },
   "collaboration_panel": { "button": false, "dock": "bottom", "default_width": 240 },
   "chat_panel": { "button": "never", "dock": "bottom", "default_width": 240 },
   "tab_bar": { "show_nav_history_buttons": false, "show": true },
@@ -149,11 +150,7 @@
   "format_on_save": "off",
   "lsp": {
     "clangd": {
-      "binary": { "path": "/opt/homebrew/Cellar/llvm/19.1.1/bin/clangd", "args": [] }
-    },
-    "rust-analyzer": {
-	    // remove after issue with updating rust-analyzer will be fixed
-      "binary": { "ignore_system_version": true, "path": "/Users/norflin/.rustup/toolchains/beta-aarch64-apple-darwin/bin/rust-analyzer", "args": [] }
+	    "binary": { "args": ["--background-index", "--pch-storage=memory", "--log=verbose", "--index=.clangd/index"] }
     }
   },
   "languages": {
@@ -163,10 +160,11 @@
   },
 
 	"ssh_connections": [
-	  { "host": "88.212.207.7", "username": "kurtin", "port": 37, "projects": [ {"paths": ["~/mergicpets_server"]} ] }
+	  { "host": "88.212.207.7", "username": "kurtin", "port": 37, "projects": [ {"paths": ["~/mergicpets_server"]} ], "upload_binary_over_ssh": true }
 	],
 
 	"minimap": { "show": "never", "current_line_highlight": "all", "thumb_border": "full" },
 	"search": { "button": false },
-	"debugger": { "button": false }
+
+	"title_bar": { "show_user_picture": false, "show_sign_in": false }
 }
