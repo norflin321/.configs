@@ -87,6 +87,7 @@
   "unstable.ui_density": "compact",
   "toolbar": { "breadcrumbs": true, "quick_actions": false, "selections_menu": false },
   "gutter": { "line_numbers": false, "code_actions": false, "folds": false, "runnables": false, "breakpoints": false },
+  "inline_code_actions": false,
   "debugger": { "button": false },
   "collaboration_panel": { "button": false, "dock": "bottom", "default_width": 240 },
   "chat_panel": { "button": "never", "dock": "bottom", "default_width": 240 },
@@ -163,8 +164,8 @@
 	  { "host": "88.212.207.7", "username": "kurtin", "port": 37, "projects": [ {"paths": ["~/mergicpets_server"]} ], "upload_binary_over_ssh": true }
 	],
 
-	"minimap": { "show": "never", "current_line_highlight": "all", "thumb_border": "full" },
+	"minimap": { "show": "always", "current_line_highlight": "all", "thumb_border": "full" },
 	"search": { "button": false },
 
-	"title_bar": { "show_user_picture": false, "show_sign_in": false }
+	"title_bar": { "show_user_picture": true, "show_sign_in": true }
 }

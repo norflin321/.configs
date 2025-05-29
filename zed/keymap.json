@@ -53,8 +53,8 @@
       "8": "vim::Matching",
       "x": "editor::Delete",
 
-      "(": ["workspace::SendKeystrokes", "up up up up up up up up up up up up up up up"],
-      ")": ["workspace::SendKeystrokes", "down down down down down down down down down down down down down down down"],
+      "(": ["editor::MoveUpByLines", { "lines": 15 }],
+      ")": ["editor::MoveDownByLines", { "lines": 15 }],
       "<": "editor::Outdent",
 	    ">": "editor::Indent",
 
@@ -76,8 +76,8 @@
 	     "x": "editor::Delete",
 
 	     "9": "editor::SelectToEndOfLine",
-			 "(": ["workspace::SendKeystrokes", "up up up up up up up up up up up up up up up"],
-       ")": ["workspace::SendKeystrokes", "down down down down down down down down down down down down down down down"],
+			"(": ["editor::MoveUpByLines", { "lines": 15 }],
+      ")": ["editor::MoveDownByLines", { "lines": 15 }],
 	     "<": "editor::Outdent",
 	     ">": "editor::Indent"
      }
