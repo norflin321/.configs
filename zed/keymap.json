@@ -89,20 +89,10 @@
      }
   },
   {
-	  "context": "Editor && !VimWaiting && !menu && (vim_mode == normal && vim_mode == visual)",
+	  "context": "Editor && (vim_mode == normal || vim_mode == visual)",
 	  "bindings": {
 			"ctrl-r": "vim::Redo",
 			"u": "vim::Undo"
   	}
-  },
-  {
-     "context": "Terminal",
-     "bindings": { }
-  },
-  {
-	  "context": "ProjectPanel",
-		"bindings": {
-			// "o": ["workspace::SendKeystroke", "enter q q"]
-		}
   }
 ]

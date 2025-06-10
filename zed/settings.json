@@ -4,9 +4,7 @@
 
   "theme": "Catpuccin Custom",
   "experimental.theme_overrides": {
-	  // "players": [{ "cursor": "#ccc" }],
-	  // "players": [{ "cursor": "#9499b8" }],
-		// "terminal.background": "#0f0f14",
+
 	  "syntax": {
 			"attribute": { "font_style": "normal" },
 			"boolean": { "font_style": "normal" },
@@ -78,7 +76,6 @@
   "expand_excerpt_lines": 15,
   "soft_wrap": "none",
   "always_treat_brackets_as_autoclosed": true,
-  // "wrap_guides": [140],
 
   "extend_comment_on_newline": true,
   "ensure_final_newline_on_save": false,
@@ -118,7 +115,7 @@
 		"blinking": "off",
 		"dock": "bottom"
   },
-  "agent_font_size": 13,
+  "agent_font_size": 14,
 
   "session": { "restore_unsaved_buffers": false },
   "features": { "edit_prediction_provider": "zed", "copilot": false },
@@ -133,12 +130,22 @@
   },
 
   "agent": {
-		"default_profile": "write",
+	  "default_model": { "provider": "openrouter", "model": "deepseek/deepseek-chat-v3-0324:free" },
+	  "always_allow_tool_actions": true,
+	  "default_profile": "write",
 	  "enabled": true,
-		// "default_model": { "provider": "deepseek", "model": "deepseek-chat" },
-		"version": "2",
-		"button": false,
-		"dock": "left"
+	  "version": "2",
+	  "button": true,
+	  "dock": "left"
+  },
+
+  "language_models": {
+		"ollama": {
+			"api_url": "",
+			"available_models": [
+				{ "name": "local_test_1", "max_tokens": 100, "provider": "ollama", "display_name": "local_test_1" }
+			]
+		}
   },
 
   "notification_panel": { "dock": "left", "button": false },
@@ -155,8 +162,8 @@
     }
   },
   "languages": {
-	  "Go": { "format_on_save": "language_server" },
-	  // "Rust": { "format_on_save": "language_server" },
+	  "Go": { "format_on_save": "off" },
+	  // "Rust": { "tab_size": 4 },
 		"Python": { "enable_language_server": false }
   },
 
@@ -164,7 +171,7 @@
 	  { "host": "88.212.207.7", "username": "kurtin", "port": 37, "projects": [ {"paths": ["~/mergicpets_server"]} ], "upload_binary_over_ssh": true }
 	],
 
-	"minimap": { "show": "always", "current_line_highlight": "all", "thumb_border": "full" },
+	"minimap": { "show": "never", "current_line_highlight": "all", "thumb_border": "full" },
 	"search": { "button": false },
 
 	"title_bar": { "show_user_picture": true, "show_sign_in": true }
