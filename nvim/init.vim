@@ -40,7 +40,7 @@ set termguicolors
 set cmdheight=1
 set mousescroll=ver:1,hor:0
 set smoothscroll
-set nonumber
+set number
 set nocursorline
 set signcolumn=number
 set updatetime=50
@@ -486,7 +486,7 @@ EOF
 
 colors norflin_1
 " colors catppuccin-macchiato
-" hi @function gui=bold
-" hi @function.call gui=NONE
-" hi @function.method gui=bold
-" hi @function.method.call gui=NONE
+hi @function gui=bold
+hi @function.call gui=NONE
+hi @function.method gui=bold
+hi @function.method.call gui=NONE

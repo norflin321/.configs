@@ -83,19 +83,19 @@
 
   "unstable.ui_density": "compact",
   "toolbar": { "breadcrumbs": true, "quick_actions": false, "selections_menu": false },
-  "gutter": { "line_numbers": false, "code_actions": false, "folds": false, "runnables": false, "breakpoints": false },
+  "gutter": { "line_numbers": true, "code_actions": false, "folds": false, "runnables": false, "breakpoints": false },
   "inline_code_actions": false,
   "debugger": { "button": false },
   "collaboration_panel": { "button": false, "dock": "bottom", "default_width": 240 },
   "chat_panel": { "button": "never", "dock": "bottom", "default_width": 240 },
   "tab_bar": { "show_nav_history_buttons": false, "show": true },
-  "scrollbar": { "show": "always", "git_diff": true, "selections": true, "symbols_selections": true, "diagnostics": "all", "axes": { "horizontal": false } },
+  "scrollbar": { "show": "always", "git_diff": false, "selections": true, "symbols_selections": true, "diagnostics": "all", "axes": { "horizontal": false } },
   "project_panel": {
     "default_width": 200,
     "dock": "left",
     "file_icons": true,
     "folder_icons": true,
-    "git_status": true,
+    "git_status": false,
     "indent_size": 20,
     "auto_reveal_entries": true,
     "button": true,
@@ -104,9 +104,9 @@
     "scrollbar": { "show": "never" }
   },
   "show_call_status_icon": false,
-  "tabs": { "git_status": true, "close_position": "right", "file_icons": true, "activate_on_close": "left_neighbour", "show_close_button": "hover" },
+  "tabs": { "git_status": false, "close_position": "right", "file_icons": true, "activate_on_close": "left_neighbour", "show_close_button": "hover" },
   "outline_panel": { "dock": "right", "git_status": false, "indent_size": 15, "indent_guides": { "show": "never" }, "button": false },
-  "git_panel": { "button": false },
+  "git_panel": { "button": true },
 
   "terminal": {
 	  "font_family": "JetBrains Mono",
@@ -152,7 +152,7 @@
 
   "git": {
  	 "inline_blame": { "enabled": false },
-   "git_gutter": "tracked_files"
+   "git_gutter": "hide"
   },
 
   "format_on_save": "off",
@@ -174,5 +174,6 @@
 	"minimap": { "show": "never", "current_line_highlight": "all", "thumb_border": "full" },
 	"search": { "button": false },
 
-	"title_bar": { "show_user_picture": true, "show_sign_in": true }
+	"title_bar": { "show_user_picture": true, "show_sign_in": true },
+	"drag_and_drop_selection": false
 }

@@ -1,7 +1,7 @@
 font-family = JetBrains Mono Regular
 font-size = 11
 adjust-cell-height = 13%
-font-family-bold = JetBrains Mono ExtraBold
+font-family-bold = JetBrains Mono Bold
 
 #font-family = Fira Code
 #font-size = 11
@@ -23,7 +23,7 @@ keybind = super+two=next_tab
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
-font-thicken = false
+font-thicken = true
 
 theme = light:SleepyHollow,dark:SleepyHollow
 cursor-color = #a3a8c2
