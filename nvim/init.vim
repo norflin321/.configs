@@ -64,7 +64,6 @@ call plug#begin("~/.vim/plugged")
 	Plug 'lewis6991/satellite.nvim'
 	Plug 'ThePrimeagen/refactoring.nvim'
 	Plug 'norflin321/tsc.nvim'
-	Plug 'catppuccin/nvim'
 call plug#end()
 
 map q: :q
@@ -219,16 +218,7 @@ let g:AutoPairsMultilineClose=0
 let g:closetag_filenames = "*.html,*.tsx,*.jsx,*.vue"
 
 let g:coc_list_preview_filetype = 1
-let g:coc_global_extensions = [
-	\"coc-tsserver",
-	\"coc-json",
-	\"coc-go",
-	\"coc-prettier",
-	\"coc-css",
-	\"coc-pyright",
-	\"coc-lua",
-	\"coc-eslint",
-\]
+let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint"]
 
 func! s:show_documentation()
 	if (index(["vim", "help"], &filetype) >= 0)
@@ -247,6 +237,7 @@ endfunc
 nmap <silent> K :call <SID>show_documentation()<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
+" speed regression after: https://github.com/neovim/neovim/compare/v0.10.4...v0.11.0
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gn <Plug>(coc-rename)
@@ -265,6 +256,8 @@ nmap <silent> <c-t> :AerialToggle<CR>
 nmap <c-f> <plug>(esearch)
 vmap <c-f> <plug>(operator-esearch-prefill)
 nmap <silent> <c-e> :TSC<CR>
+nmap <silent> fi :Refactor inline_var<CR>
+nmap <silent> fi :Refactor inline_var<CR>
 
 command CF exe ":e $MYVIMRC"
 command H exe ":TSHighlightCapturesUnderCursor"
@@ -292,10 +285,6 @@ autocmd Filetype swift setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 " 	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 " 	autocmd WinLeave * if &filetype != 'nerdtree' | setlocal nocursorline | endif
 " augroup END
-
-" func! NvimGps() abort
-" 	return luaeval("require'nvim-gps'.is_available()") ? luaeval("require'nvim-gps'.get_location()") : ""
-" endf
 
 function! ErrorsCount() abort
   if !get(g:, "coc_service_initialized", 0) || !exists("*coc#rpc#ready")
@@ -476,8 +465,6 @@ require("hbac").setup({
 })
 
 require("refactoring").setup({})
-vim.keymap.set("x", "fe", function() require("refactoring").refactor("Extract Function") end)
-vim.keymap.set({ "n", "x" }, "fi", function() require("refactoring").refactor("Inline Variable") end)
 
 require("tsc").setup({
 	pretty_error = false
@@ -485,7 +472,6 @@ require("tsc").setup({
 EOF
 
 colors norflin_1
-" colors catppuccin-macchiato
 hi @function gui=bold
 hi @function.call gui=NONE
 hi @function.method gui=bold

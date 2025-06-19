@@ -26,5 +26,7 @@ font-feature = -dlig
 font-thicken = true
 
 theme = light:SleepyHollow,dark:SleepyHollow
+shell-integration-features = no-cursor
+cursor-style = block
 cursor-color = #a3a8c2
 cursor-text = #000000
