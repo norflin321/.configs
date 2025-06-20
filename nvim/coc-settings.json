@@ -55,13 +55,6 @@
 	"javascript.suggest.objectLiteralMethodSnippets.enabled": false,
 	"typescript.suggest.objectLiteralMethodSnippets.enabled": false,
 
-	"pyright.inlayHints.functionReturnTypes": false,
-	"pyright.inlayHints.variableTypes": false,
-	"python.analysis.typeCheckingMode": "off",
-	"python.pythonPath": "/Users/norflin/code/miniforge3/bin/python3",
-
-	"prettier.printWidth": 180,
-
 	"codeLens.enable": false,
 	"codeLens.position": "eol",
 	"typescript.referencesCodeLens.enabled": true,
@@ -89,4 +82,6 @@
 	"[go]": {
 		"coc.preferences.formatOnSave": false
 	},
+
+	"clangd.arguments": ["--compile-commands-dir=build", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never"]
 }

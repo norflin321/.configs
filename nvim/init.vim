@@ -64,6 +64,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'lewis6991/satellite.nvim'
 	Plug 'ThePrimeagen/refactoring.nvim'
 	Plug 'norflin321/tsc.nvim'
+	Plug 'ojroques/vim-oscyank'
 call plug#end()
 
 map q: :q
@@ -218,7 +219,12 @@ let g:AutoPairsMultilineClose=0
 let g:closetag_filenames = "*.html,*.tsx,*.jsx,*.vue"
 
 let g:coc_list_preview_filetype = 1
-let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint"]
+let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint", "coc-clangd", "coc-json"]
+
+if !empty($SSH_CONNECTION)
+  let g:oscyank_max_length = 100000
+  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
+endif
 
 func! s:show_documentation()
 	if (index(["vim", "help"], &filetype) >= 0)
@@ -309,7 +315,7 @@ set statusline=%{&modified?'\[+]\ ':''}%f%r%=%#StatusLineErrors#%{ErrorsCount()}
 
 lua << EOF
 require("nvim-treesitter.configs").setup({
-	auto_install = false,
+	auto_install = true,
 	highlight = { enable = true }
 })
 
