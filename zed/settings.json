@@ -82,7 +82,7 @@
   "remove_trailing_whitespace_on_save": true,
 
   "unstable.ui_density": "compact",
-  "toolbar": { "breadcrumbs": true, "quick_actions": false, "selections_menu": false },
+  "toolbar": { "breadcrumbs": false, "quick_actions": false, "selections_menu": false },
   "gutter": { "line_numbers": true, "code_actions": false, "folds": false, "runnables": false, "breakpoints": false },
   "inline_code_actions": false,
   "debugger": { "button": false },

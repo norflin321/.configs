@@ -37,6 +37,7 @@ set splitbelow
 set splitright
 set background=dark
 set termguicolors
+set showcmd
 set cmdheight=1
 set mousescroll=ver:1,hor:0
 set smoothscroll
@@ -61,10 +62,10 @@ call plug#begin("~/.vim/plugged")
 	Plug 'kyazdani42/nvim-tree.lua'
 	Plug 'stevearc/aerial.nvim'
 	Plug 'axkirillov/hbac.nvim'
-	Plug 'lewis6991/satellite.nvim'
-	Plug 'ThePrimeagen/refactoring.nvim'
-	Plug 'norflin321/tsc.nvim'
-	Plug 'ojroques/vim-oscyank'
+  Plug 'lewis6991/satellite.nvim'
+  Plug 'ThePrimeagen/refactoring.nvim'
+  Plug 'norflin321/tsc.nvim'
+  Plug 'ojroques/vim-oscyank'
 call plug#end()
 
 map q: :q
@@ -219,18 +220,13 @@ let g:AutoPairsMultilineClose=0
 let g:closetag_filenames = "*.html,*.tsx,*.jsx,*.vue"
 
 let g:coc_list_preview_filetype = 1
-let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint", "coc-clangd", "coc-json"]
-
-if !empty($SSH_CONNECTION)
-  let g:oscyank_max_length = 100000
-  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
-endif
+let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint"]
 
 func! s:show_documentation()
 	if (index(["vim", "help"], &filetype) >= 0)
 		exe "h ".expand("<cword>")
 	else
-		call CocAction("doHover")
+		call CocActionAsync("doHover")
 	endif
 endfunc
 
@@ -241,11 +237,11 @@ endfunc
 
 " coc keymaps
 nmap <silent> K :call <SID>show_documentation()<CR>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-" speed regression after: https://github.com/neovim/neovim/compare/v0.10.4...v0.11.0
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
+nmap <silent> <C-LeftMouse> :call CocActionAsync('jumpDefinition')<CR>
+nmap <silent> gi :call CocActionAsync('jumpImplementation')<CR>
+nmap <silent> gr :call CocActionAsync('jumpReferences')<CR>
+nmap <silent> gy :call CocActionAsync('jumpTypeDefinition')<CR>
 nmap <silent> gn <Plug>(coc-rename)
 nmap <silent> gf <Plug>(coc-fix-current)
 vmap <silent> ga <Plug>(coc-codeaction-selected)
@@ -253,7 +249,7 @@ nmap <silent> <C-d> <Plug>(coc-diagnostic-next-error)
 
 imap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 imap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#insert() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 
 " other plugins keymaps
 nmap <silent> <c-m> :CtrlPMRUFiles<CR>
@@ -286,6 +282,12 @@ autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype swift setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 
+" better clipboard support for ssh
+if !empty($SSH_CONNECTION)
+	let g:oscyank_max_length = 100000
+	autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
+endif
+
 " augroup CursorLineOnlyInActiveWindow
 " 	autocmd!
 " 	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -314,8 +316,24 @@ endfunction
 set statusline=%{&modified?'\[+]\ ':''}%f%r%=%#StatusLineErrors#%{ErrorsCount()}%#StatusLine#\ %-5.(%l,%c%)\ %L
 
 lua << EOF
+function mapping_exists(mode, lhs)
+  local maps = vim.api.nvim_get_keymap(mode)
+  for _, map in ipairs(maps) do
+    if map.lhs == lhs then return true end
+  end
+  return false
+end
+
+-- Try to disable built-in LSP
+vim.lsp.start_client = function() return {} end
+if mapping_exists("n", "gri") then vim.keymap.del("n", "gri") end
+if mapping_exists("n", "grr") then vim.keymap.del("n", "grr") end
+if mapping_exists("n", "gra") then vim.keymap.del("n", "gra") end
+if mapping_exists("x", "gra") then vim.keymap.del("x", "gra") end
+if mapping_exists("n", "grn") then vim.keymap.del("n", "grn") end
+
 require("nvim-treesitter.configs").setup({
-	auto_install = true,
+	auto_install = false,
 	highlight = { enable = true }
 })
 
