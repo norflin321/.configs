@@ -41,8 +41,8 @@ set showcmd
 set cmdheight=1
 set mousescroll=ver:1,hor:0
 set smoothscroll
-set number
 set nocursorline
+set number
 set signcolumn=number
 set updatetime=50
 set pumheight=15
@@ -193,6 +193,7 @@ function! ScrollDown()
 	endif
 endfunction
 nmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
+vmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
 
 function! ScrollUp()
   if line("w0") > 1
@@ -200,6 +201,7 @@ function! ScrollUp()
   endif
 endfunction
 nmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
+vmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
 
 let g:ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
 let g:ctrlp_working_path_mode = ""
@@ -236,12 +238,12 @@ func! s:check_back_space() abort
 endfunc
 
 " coc keymaps
+nmap <C-LeftMouse> <Plug>(coc-definition)
 nmap <silent> K :call <SID>show_documentation()<CR>
-nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
-nmap <silent> <C-LeftMouse> :call CocActionAsync('jumpDefinition')<CR>
-nmap <silent> gi :call CocActionAsync('jumpImplementation')<CR>
-nmap <silent> gr :call CocActionAsync('jumpReferences')<CR>
-nmap <silent> gy :call CocActionAsync('jumpTypeDefinition')<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gn <Plug>(coc-rename)
 nmap <silent> gf <Plug>(coc-fix-current)
 vmap <silent> ga <Plug>(coc-codeaction-selected)
@@ -271,6 +273,7 @@ command CC exe ":!rm -rf ~/.cache/ctrlp"
 autocmd BufWritePost init.vim source %
 autocmd CursorHold * silent call CocActionAsync("highlight")
 autocmd BufWritePre *.go :call CocAction("organizeImport")
+autocmd BufEnter,BufWinEnter,WinEnter * setlocal number
 
 autocmd FileType qf nmap <buffer> <CR> <CR>
 autocmd FileType qf nmap <buffer> <c-o> <CR>
@@ -333,7 +336,7 @@ if mapping_exists("x", "gra") then vim.keymap.del("x", "gra") end
 if mapping_exists("n", "grn") then vim.keymap.del("n", "grn") end
 
 require("nvim-treesitter.configs").setup({
-	auto_install = false,
+	auto_install = true,
 	highlight = { enable = true }
 })
 
