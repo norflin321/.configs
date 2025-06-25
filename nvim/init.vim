@@ -187,21 +187,21 @@ nnoremap z zz
 nmap sr :%s///g<Left><Left><Left>
 vnoremap sr :<C-u>'<,'>s///g<Left><Left><Left>
 
-function! ScrollDown()
-	if line("w$") < line("$")
-		execute ":" + line("w$")-1
-	endif
-endfunction
-nmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
-vmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
+" function! ScrollDown()
+" 	if line("w$") < line("$")
+" 		execute ":" + line("w$")-1
+" 	endif
+" endfunction
+" nmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
+" vmap <silent> <ScrollWheelDown> 0:call ScrollDown()<CR>
 
-function! ScrollUp()
-  if line("w0") > 1
-    execute ":" + (line("w0") + 1)
-  endif
-endfunction
-nmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
-vmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
+" function! ScrollUp()
+"   if line("w0") > 1
+"     execute ":" + (line("w0") + 1)
+"   endif
+" endfunction
+" nmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
+" vmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
 
 let g:ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
 let g:ctrlp_working_path_mode = ""
@@ -222,7 +222,7 @@ let g:AutoPairsMultilineClose=0
 let g:closetag_filenames = "*.html,*.tsx,*.jsx,*.vue"
 
 let g:coc_list_preview_filetype = 1
-let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint"]
+let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint", "coc-rust-analyzer"]
 
 func! s:show_documentation()
 	if (index(["vim", "help"], &filetype) >= 0)
