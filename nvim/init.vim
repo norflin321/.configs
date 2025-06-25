@@ -37,7 +37,7 @@ set splitbelow
 set splitright
 set background=dark
 set termguicolors
-set showcmd
+set noshowcmd
 set cmdheight=1
 set mousescroll=ver:1,hor:0
 set smoothscroll
