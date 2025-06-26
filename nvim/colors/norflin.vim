@@ -1,21 +1,21 @@
-let g:colors_name = "norflin_2"
+let g:colors_name = "norflin_1"
 
 " Base colors
-let s:bg_normal      = "#0a0a0a"
-let s:fg_normal      = "#726e69"
-let s:bg_dark        = "#726e69"
-let s:bg_light       = "#726e69"
-let s:bg_highlight_1 = "#726e69"
-let s:bg_highlight_2 = "#726e69"
-let s:bg_highlight_3 = "#726e69"
+let s:fg_normal      = "#9ea3c0"
+let s:bg_normal      = "#252737"
+let s:bg_dark        = "#1f202e"
+let s:bg_light       = "#2a2c3f"
+let s:bg_highlight_1 = "#33364d"
+let s:bg_highlight_2 = "#8085a6"
+let s:bg_highlight_3 = "#3d405c"
 
-" Syntax colors #aa8f4b
-let s:type           = "#726e69" 
-let s:function       = "#726e69"
-let s:keyword        = "#726e69"
-let s:primitive      = "#726e69"
-let s:comment        = "#726e69"
-let s:error          = "#726e69"
+" Syntax colors
+let s:type           = "#ac8b83"
+let s:function       = "#929be5"
+let s:keyword        = "#b871b8"
+let s:primitive      = "#73c1a9"
+let s:comment        = "#545c8c"
+let s:error          = "#b18181"
 
 " Highlight groups
 exec "hi Normal guifg=".s:fg_normal." guibg=".s:bg_normal
@@ -67,7 +67,7 @@ exec "hi PmenuThumb guibg=".s:function
 exec "hi Visual guibg=".s:bg_highlight_1." gui=NONE"
 exec "hi Search guifg=".s:bg_normal." guibg=".s:bg_highlight_2
 exec "hi IncSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2
-exec "hi CurSearch guifg=".s:bg_normal." guibg=".s:fg_normal
+exec "hi CurSearch guifg=".s:bg_normal." guibg="."#ffff00"
 exec "hi Question guifg=".s:primitive." gui=bold"
 exec "hi WildMenu guifg=".s:bg_normal." guibg=".s:function
 exec "hi SpellBad guifg=".s:error." gui=underline"
@@ -78,7 +78,7 @@ exec "hi DiffAdd guibg=".s:primitive." gui=bold"
 exec "hi DiffChange guibg=".s:function." gui=bold"
 exec "hi DiffDelete guifg=".s:fg_normal." guibg=".s:keyword." gui=bold"
 exec "hi DiffText guibg=".s:primitive." gui=NONE"
-exec "hi QuickFixLine guifg=".s:fg_normal." guibg=".s:function
+exec "hi QuickFixLine guifg=NONE"." guibg=".s:bg_light
 exec "hi StatusLineTerm guifg=".s:bg_highlight_2." guibg=".s:bg_highlight_1." gui=bold"
 exec "hi StatusLineTermNC guifg=".s:comment." guibg=".s:bg_dark." gui=bold"
 exec "hi DiagnosticError guifg=".s:error
@@ -199,5 +199,5 @@ exec "hi @function.call guifg=".s:function." gui=NONE"
 exec "hi @function.method.call guifg=".s:function." gui=NONE"
 exec "hi @function.builtin guifg=".s:function." gui=NONE"
 
-exec "hi @function guifg=".s:function." gui=bold"
-exec "hi @function.method guifg=".s:function." gui=bold"
+exec "hi @function guifg=".s:function
+exec "hi @function.method guifg=".s:function

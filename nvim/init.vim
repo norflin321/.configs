@@ -30,7 +30,6 @@ set showtabline=0
 set hidden
 set shortmess+=c
 set completeopt=menuone,noinsert,noselect
-set wildignore+=**/.git/**,**/node_modules/**,*.swp,*.zip,*.exe,**/dist/**,.DS_Store
 set laststatus=2
 set showmode
 set splitbelow
@@ -47,6 +46,10 @@ set signcolumn=number
 set updatetime=50
 set pumheight=15
 set guicursor=a:block
+
+" Learning Lately:
+" cl - Deletes line under cursor and enters insert mode
+" cw - Deletes word under cursor and enters insert mode
 
 call plug#begin("~/.vim/plugged")
 	Plug 'nvim-lua/plenary.nvim'
@@ -83,7 +86,6 @@ vmap <c-b> <NOP>
 nmap <c-e> <NOP>
 vmap <c-e> <NOP>
 nmap <c-t> <NOP>
-vmap <c-t> <NOP>
 nmap <c-u> <NOP>
 vmap <c-u> <NOP>
 nmap <c-]> <NOP>
@@ -95,10 +97,7 @@ vmap <c-v> <NOP>
 nmap q <NOP>
 vmap q <NOP>
 nmap s <NOP>
-nmap s <NOP>
 nmap S <NOP>
-nmap . <NOP>
-vmap . <NOP>
 nmap , <NOP>
 vmap , <NOP>
 nmap - <NOP>
@@ -143,7 +142,8 @@ nnoremap x "_x
 nnoremap dd "_dd
 nnoremap dw "_diw
 nnoremap D "_D
-nnoremap cw ciw
+nnoremap cw "_ciw
+nnoremap cl "_ddO
 vnoremap d "_d
 nnoremap yw yiw
 nnoremap <S-Enter> O<Esc>
@@ -203,11 +203,11 @@ vnoremap sr :<C-u>'<,'>s///g<Left><Left><Left>
 " nmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
 " vmap <silent> <ScrollWheelUp> 0:call ScrollUp()<CR>
 
+set wildignore+=**/.git/**,**/node_modules/**,*.swp,*.zip,*.exe,**/dist/**,.DS_Store,**/build/**,**/android/**,**/ios/**,**/target/**
 let g:ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
 let g:ctrlp_working_path_mode = ""
 let g:ctrlp_prompt_mappings = { "AcceptSelection('h')": ["<c-h>"], "AcceptSelection('v')": ["<c-v>"], "AcceptSelection('e')": ["<c-o>", "<cr>"] }
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = "\android$\|\ios$\|\.git$"
 
 let g:esearch = {}
 let g:esearch.prefill = ["last"]
@@ -316,7 +316,7 @@ function! ErrorsCount() abort
   return "E:" . l:errors . " "
 endfunction
 
-set statusline=%{&modified?'\[+]\ ':''}%f%r%=%#StatusLineErrors#%{ErrorsCount()}%#StatusLine#\ %-5.(%l,%c%)\ %L
+set statusline=%f%{&modified?'\ [+]\ ':''}%r%=%#StatusLineErrors#%{ErrorsCount()}%#StatusLine#\ %-5.(%l,%c%)\ %L
 
 lua << EOF
 function mapping_exists(mode, lhs)
@@ -492,13 +492,10 @@ require("hbac").setup({
 })
 
 require("refactoring").setup({})
-
-require("tsc").setup({
-	pretty_error = false
-})
+require("tsc").setup({ pretty_error = false })
 EOF
 
-colors norflin_1
+colors norflin
 hi @function gui=bold
 hi @function.call gui=NONE
 hi @function.method gui=bold
