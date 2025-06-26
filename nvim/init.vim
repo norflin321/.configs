@@ -69,8 +69,13 @@ call plug#begin("~/.vim/plugged")
   Plug 'ThePrimeagen/refactoring.nvim'
   Plug 'norflin321/tsc.nvim'
   Plug 'ojroques/vim-oscyank'
+	Plug 'f-person/git-blame.nvim'
 call plug#end()
 
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 map q: :q
 nnoremap <Space> <NOP>
 nnoremap <silent> <Esc> :noh<CR>
@@ -262,6 +267,7 @@ vmap <c-f> <plug>(operator-esearch-prefill)
 nmap <silent> <c-e> :TSC<CR>
 nmap <silent> fi :Refactor inline_var<CR>
 nmap <silent> fi :Refactor inline_var<CR>
+nmap <silent> gb :GitBlameToggle<CR>
 
 command CF exe ":e $MYVIMRC"
 command H exe ":TSHighlightCapturesUnderCursor"
@@ -270,7 +276,6 @@ command PC exe ":PlugClean"
 command PU exe ":PlugUpdate"
 command CC exe ":!rm -rf ~/.cache/ctrlp"
 
-autocmd BufWritePost init.vim source %
 autocmd CursorHold * silent call CocActionAsync("highlight")
 autocmd BufWritePre *.go :call CocAction("organizeImport")
 autocmd BufEnter,BufWinEnter,WinEnter * setlocal number
@@ -493,7 +498,9 @@ require("hbac").setup({
 
 require("refactoring").setup({})
 require("tsc").setup({ pretty_error = false })
+require("gitblame").setup({ enabled = false })
 EOF
+
 
 colors norflin
 hi @function gui=bold
