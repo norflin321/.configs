@@ -50,6 +50,7 @@ set guicursor=a:block
 " Learning Lately:
 " cl - Deletes line under cursor and enters insert mode
 " cw - Deletes word under cursor and enters insert mode
+" vw - Selected word under cursor (can pair with "p" to replace the word)
 
 call plug#begin("~/.vim/plugged")
 	Plug 'nvim-lua/plenary.nvim'
@@ -68,7 +69,6 @@ call plug#begin("~/.vim/plugged")
   Plug 'lewis6991/satellite.nvim'
   Plug 'ThePrimeagen/refactoring.nvim'
   Plug 'norflin321/tsc.nvim'
-  Plug 'ojroques/vim-oscyank'
 	Plug 'f-person/git-blame.nvim'
 call plug#end()
 
@@ -151,6 +151,7 @@ nnoremap cw "_ciw
 nnoremap cl "_ddO
 vnoremap d "_d
 nnoremap yw yiw
+nnoremap vw viw
 nnoremap <S-Enter> O<Esc>
 nnoremap <C-z> <Nop>
 nnoremap ) 15j
@@ -185,8 +186,8 @@ map ga <Nop>
 nnoremap D "_dd
 nnoremap <silent> * :let @/= '\<' . expand('<cword>') . '\>' <bar> set hls <cr>
 vmap K <Nop>
-map p ]p
-map P pV=
+" nnoremap p ]p
+nnoremap p pV=
 nnoremap z <NOP>
 nnoremap z zz
 nmap sr :%s///g<Left><Left><Left>
@@ -289,12 +290,6 @@ autocmd Filetype rust setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype swift setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
-
-" better clipboard support for ssh
-if !empty($SSH_CONNECTION)
-	let g:oscyank_max_length = 100000
-	autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
-endif
 
 " augroup CursorLineOnlyInActiveWindow
 " 	autocmd!
