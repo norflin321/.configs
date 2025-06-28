@@ -51,6 +51,8 @@ set guicursor=a:block
 " cl - Deletes line under cursor and enters insert mode
 " cw - Deletes word under cursor and enters insert mode
 " vw - Selected word under cursor (can pair with "p" to replace the word)
+" Vy - yank whole line
+" J/K - to move selected lines
 
 call plug#begin("~/.vim/plugged")
 	Plug 'nvim-lua/plenary.nvim'
@@ -59,7 +61,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'ku1ik/vim-pasta'
 	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'eugen0329/vim-esearch'
+	" Plug 'eugen0329/vim-esearch'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nvim-treesitter/nvim-treesitter'
 	Plug 'nvim-treesitter/playground'
@@ -192,6 +194,8 @@ nnoremap z <NOP>
 nnoremap z zz
 nmap sr :%s///g<Left><Left><Left>
 vnoremap sr :<C-u>'<,'>s///g<Left><Left><Left>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " function! ScrollDown()
 " 	if line("w$") < line("$")
@@ -278,7 +282,6 @@ command PU exe ":PlugUpdate"
 command CC exe ":!rm -rf ~/.cache/ctrlp"
 
 autocmd CursorHold * silent call CocActionAsync("highlight")
-autocmd BufWritePre *.go :call CocAction("organizeImport")
 autocmd BufEnter,BufWinEnter,WinEnter * setlocal number
 
 autocmd FileType qf nmap <buffer> <CR> <CR>
@@ -290,6 +293,8 @@ autocmd Filetype rust setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
 autocmd Filetype swift setlocal tabstop=2 shiftwidth=2 softtabstop=2 noet
+
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " augroup CursorLineOnlyInActiveWindow
 " 	autocmd!

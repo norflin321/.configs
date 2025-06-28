@@ -89,7 +89,7 @@ exec "hi DiagnosticVirtualTextWarn guifg=".s:type." gui=bold"
 exec "hi DiagnosticUnderlineWarn guifg=".s:type." gui=underline"
 exec "hi DiagnosticInfo guifg=".s:fg_normal
 exec "hi DiagnosticVirtualTextInfo guifg=".s:comment." gui=bold"
-exec "hi DiagnosticUnderlineInfo gui=underline"
+exec "hi DiagnosticUnderlineInfo gui=NONE"
 exec "hi DiagnosticHint guifg=".s:fg_normal
 exec "hi DiagnosticVirtualTextHint guifg=".s:comment." gui=bold"
 exec "hi DiagnosticUnderlineHint gui=underline"

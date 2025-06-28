@@ -14,6 +14,7 @@
 	"coc.preferences.renameFillCurrent": true,
 	"coc.preferences.maxFileSize": "100MB",
 
+	"diagnostic.level": "warning",
 	"diagnostic.refreshOnInsertMode": false,
 	"diagnostic.floatConfig": { "border": false, "rounded": false },
 	"diagnostic.checkCurrentLine": false,
@@ -73,15 +74,22 @@
 			"command": "gopls",
 			"rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
 			"filetypes": ["go"],
-			"initializationOptions": {
-				"usePlaceholders": true
-			}
+			"initializationOptions": { "usePlaceholders": false },
+			"disableSnippetCompletion": true,
+		},
+		"rust": {
+			"command": "rust-analyzer",
+			"filetypes": ["rust"],
+			"disableSnippetCompletion": true,
+			"initializationOptions": { "usePlaceholders": false },
 		}
 	},
 
 	"[go]": {
-		"coc.preferences.formatOnSave": false
+		"coc.preferences.formatOnSave": false,
 	},
+
+	"rust-analyzer.completion.callable.snippets": "none",
 
 	"clangd.arguments": ["--compile-commands-dir=build", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never"]
 }
