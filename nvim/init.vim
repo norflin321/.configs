@@ -232,7 +232,7 @@ let g:AutoPairsMultilineClose=0
 let g:closetag_filenames = "*.html,*.tsx,*.jsx,*.vue"
 
 let g:coc_list_preview_filetype = 1
-let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint", "coc-rust-analyzer"]
+let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint", "coc-rust-analyzer", "coc-phpls"]
 
 func! s:show_documentation()
 	if (index(["vim", "help"], &filetype) >= 0)
@@ -272,7 +272,6 @@ vmap <c-f> <plug>(operator-esearch-prefill)
 nmap <silent> <c-e> :TSC<CR>
 nmap <silent> fi :Refactor inline_var<CR>
 nmap <silent> fi :Refactor inline_var<CR>
-nmap <silent> gb :GitBlameToggle<CR>
 
 command CF exe ":e $MYVIMRC"
 command H exe ":TSHighlightCapturesUnderCursor"
@@ -280,6 +279,7 @@ command PI exe ":PlugInstall"
 command PC exe ":PlugClean"
 command PU exe ":PlugUpdate"
 command CC exe ":!rm -rf ~/.cache/ctrlp"
+command BL exe ":GitBlameToggle"
 
 autocmd CursorHold * silent call CocActionAsync("highlight")
 autocmd BufEnter,BufWinEnter,WinEnter * setlocal number
@@ -341,7 +341,7 @@ if mapping_exists("x", "gra") then vim.keymap.del("x", "gra") end
 if mapping_exists("n", "grn") then vim.keymap.del("n", "grn") end
 
 require("nvim-treesitter.configs").setup({
-	auto_install = true,
+	auto_install = false,
 	highlight = { enable = true }
 })
 

@@ -30,6 +30,9 @@ alias py="python3"
 alias pip="pip3"
 alias repoavg="~/.config/repoavg.sh"
 
+# git
+alias gc="git add . && git commit -am '...'"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
