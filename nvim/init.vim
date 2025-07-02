@@ -2,6 +2,7 @@ syntax enable
 filetype indent plugin on
 scriptencoding utf-8
 
+set nofixeol
 set encoding=UTF-8
 set fileencoding=utf-8
 set tabstop=2 softtabstop=2 shiftwidth=2 noet
@@ -61,7 +62,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'ku1ik/vim-pasta'
 	Plug 'ctrlpvim/ctrlp.vim'
-	" Plug 'eugen0329/vim-esearch'
+	Plug 'eugen0329/vim-esearch'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nvim-treesitter/nvim-treesitter'
 	Plug 'nvim-treesitter/playground'
@@ -232,7 +233,7 @@ let g:AutoPairsMultilineClose=0
 let g:closetag_filenames = "*.html,*.tsx,*.jsx,*.vue"
 
 let g:coc_list_preview_filetype = 1
-let g:coc_global_extensions = ["coc-tsserver", "coc-go", "coc-lua", "coc-eslint", "coc-rust-analyzer", "coc-phpls"]
+let g:coc_global_extensions = ["coc-json", "coc-tsserver", "coc-go", "coc-lua", "coc-eslint", "coc-rust-analyzer", "coc-phpls", "coc-zig"]
 
 func! s:show_documentation()
 	if (index(["vim", "help"], &filetype) >= 0)

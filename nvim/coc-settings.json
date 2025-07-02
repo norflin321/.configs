@@ -91,5 +91,6 @@
 
 	"rust-analyzer.completion.callable.snippets": "none",
 
-	"clangd.arguments": ["--compile-commands-dir=build", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never"]
+	"clangd.arguments": ["--compile-commands-dir=build", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never"],
+	"zig.path": "~/main/zls"
 }

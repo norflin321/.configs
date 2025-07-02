@@ -29,6 +29,7 @@ alias jira="/Users/norflin/main/code/quick-jira/bin/quick-jira"
 alias py="python3"
 alias pip="pip3"
 alias repoavg="~/.config/repoavg.sh"
+alias zls="~/main/zls"
 
 # git
 alias gc="git add . && git commit -am '...'"
