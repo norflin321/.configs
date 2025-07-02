@@ -1,4 +1,4 @@
-let g:colors_name = "norflin_1"
+let g:colors_name = "colors"
 
 " Base colors
 let s:fg_normal      = "#9ea3c0"
@@ -194,10 +194,9 @@ exec "hi @tag guifg=".s:fg_normal
 exec "hi @tag.delimiter guifg=".s:fg_normal
 exec "hi @tag.attribute guifg=".s:fg_normal
 
-exec "hi @constructor guifg=".s:function." gui=NONE"
+exec "hi @function guifg=".s:function." gui=bold"
+exec "hi @function.method guifg=".s:function." gui=bold"
 exec "hi @function.call guifg=".s:function." gui=NONE"
 exec "hi @function.method.call guifg=".s:function." gui=NONE"
 exec "hi @function.builtin guifg=".s:function." gui=NONE"
-
-exec "hi @function guifg=".s:function
-exec "hi @function.method guifg=".s:function
+exec "hi @constructor guifg=".s:function." gui=NONE"

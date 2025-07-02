@@ -1,0 +1,367 @@
+-- settings
+vim.cmd("syntax enable")
+vim.cmd("filetype indent plugin on")
+vim.cmd("scriptencoding utf-8")
+vim.opt.fixeol = false
+vim.opt.encoding = "UTF-8"
+vim.opt.fileencoding = "utf-8"
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = false
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.wrap = false
+vim.opt.scrolloff = 2
+vim.opt.sidescrolloff = 10
+vim.opt.number = true
+vim.opt.signcolumn = "number"
+vim.opt.cursorline = false
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.undodir = vim.fn.expand("~/.vim/undodir")
+vim.opt.undofile = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.mouse = "a"
+vim.opt.mousescroll = "ver:1,hor:0"
+vim.opt.autoread = true
+vim.opt.hidden = true
+vim.opt.shortmess:append("c")
+vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
+vim.opt.laststatus = 2
+vim.opt.showmode = false
+vim.opt.showcmd = false
+vim.opt.showtabline = 0
+vim.opt.cmdheight = 1
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+vim.opt.updatetime = 50
+vim.opt.pumheight = 15
+vim.opt.smoothscroll = true
+vim.opt.guicursor = "a:block"
+vim.opt.wildignore:append({
+	".DS_Store",
+  "*.swp",
+  "*.zip",
+  "*.exe",
+  "**/.git/**",
+  "**/node_modules/**",
+  "**/dist/**",
+  "**/build/**",
+	"**/target/**",
+  "**/android/**",
+  "**/ios/**",
+})
+
+-- this default mappings we want to disable forever
+vim.keymap.set("n", "<Space>", "<NOP>", { noremap = true })
+vim.keymap.set("", "<CR>", "<NOP>", { noremap = true })
+vim.keymap.set("", "<Up>", "<NOP>", { noremap = true })
+vim.keymap.set("", "<Down>", "<NOP>", { noremap = true })
+vim.keymap.set("", "<Left>", "<NOP>", { noremap = true })
+vim.keymap.set("", "<Right>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "Q", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "#", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-;>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-.>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-b>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-e>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-u>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-]>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-'>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-v>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "q", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, ",", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "-", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-->", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-1>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-2>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-3>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-4>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-5>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-6>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-7>", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-8>", "<NOP>", { noremap = true })
+vim.keymap.set("", "8", "<NOP>", { noremap = true })
+vim.keymap.set("", "7", "<NOP>", { noremap = true })
+vim.keymap.set("", "6", "<NOP>", { noremap = true })
+vim.keymap.set("", "5", "<NOP>", { noremap = true })
+vim.keymap.set("", "4", "<NOP>", { noremap = true })
+vim.keymap.set("", "3", "<NOP>", { noremap = true })
+vim.keymap.set("", "2", "<NOP>", { noremap = true })
+vim.keymap.set("", "1", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "m", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "M", "<NOP>", { noremap = true })
+vim.keymap.set("", "ga", "<NOP>", { noremap = true })
+vim.keymap.set("v", "K", "<NOP>", { noremap = true })
+vim.keymap.set("n", "<C-z>", "<NOP>", { noremap = true })
+vim.keymap.set("n", "<C-t>", "<NOP>", { noremap = true })
+vim.keymap.set("n", "s", "<NOP>", { noremap = true })
+vim.keymap.set("n", "S", "<NOP>", { noremap = true })
+
+-- no matter the search direction we should navigate the same
+vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "N" or "n" end, { noremap = true, expr = true })
+vim.keymap.set({ "n", "x", "o" }, "N", function() return vim.v.searchforward == 0 and "n" or "N" end, { noremap = true, expr = true })
+
+-- clear search higlight on Esc
+vim.keymap.set("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true })
+
+-- navigate between windows
+vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", { noremap = true, silent = true })
+
+-- delete without yanking
+vim.keymap.set("n", "dd", "\"_dd", { noremap = true })
+vim.keymap.set("n", "dw", "\"_diw", { noremap = true })
+vim.keymap.set("v", "d", "\"_d", { noremap = true })
+vim.keymap.set("n", "D", "\"_dd", { noremap = true })
+vim.keymap.set("n", "x", "\"_x", { noremap = true })
+
+-- just better yanking
+vim.keymap.set("n", "cw", "\"_ciw", { noremap = true })
+vim.keymap.set("n", "cl", "\"_ddO", { noremap = true })
+vim.keymap.set("n", "yw", "yiw", { noremap = true })
+vim.keymap.set("n", "vw", "viw", { noremap = true })
+
+-- move faster vertically
+vim.keymap.set({ "n", "v" }, ")", "15j", { noremap = true })
+vim.keymap.set({ "n", "v" }, "(", "15k", { noremap = true })
+
+-- move faster horizontally 
+vim.keymap.set({ "n", "v" }, "L", "15l", { noremap = true })
+vim.keymap.set({ "n", "v" }, "H", "15h", { noremap = true })
+
+-- jump to line end
+vim.keymap.set("", "9", "$", { noremap = true })
+vim.keymap.set("v", "9", "$h", { noremap = true })
+
+-- jump to match pair
+vim.keymap.set("", "8", "%", { noremap = true })
+
+-- move selected lines horizontally
+vim.keymap.set("v", "<", "<gv", { noremap = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true })
+
+-- move selected lines vertically
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
+
+-- join lines
+vim.keymap.set("n", "J", "mzJ`z", { noremap = true })
+
+-- allow to paste into command line
+vim.keymap.set("c", "<C-v>", "<C-r>+", { noremap = true })
+
+-- better seach word under cursor in current buffer
+vim.keymap.set("n", "*", ":let @/= '\\<' . expand('<cword>') . '\\>' | set hls<CR>", { noremap = true, silent = true })
+
+-- paste and format
+vim.keymap.set("n", "p", "pV=", { noremap = true })
+
+-- search and replace
+vim.keymap.set("n", "sr", ":%s///g<Left><Left><Left>", { noremap = true })
+vim.keymap.set("v", "sr", ":<C-u>'<,'>s///g<Left><Left><Left>", { noremap = true })
+
+vim.api.nvim_create_user_command("CF", function() vim.cmd("e " .. vim.env.MYVIMRC) end, {})
+
+-- function for sizing float windows
+local function floatWinConfig(width_ration, height_ration)
+	return function()
+		return {
+			style = "minimal",
+			border = "rounded",
+			relative = "editor",
+			width = math.floor(vim.opt.columns:get() * width_ration),
+			height = math.floor((vim.opt.lines:get() - vim.opt.cmdheight:get()) * height_ration),
+			row = ((vim.opt.lines:get() - ((vim.opt.lines:get() - vim.opt.cmdheight:get()) * height_ration)) / 2) - vim.opt.cmdheight:get(),
+			col = (vim.opt.columns:get() - (vim.opt.columns:get() * width_ration)) / 2,
+		}
+	end
+end
+
+-- check if mapping exists
+function is_map_exists(mode, lhs)
+  local maps = vim.api.nvim_get_keymap(mode)
+  for _, map in ipairs(maps) do if map.lhs == lhs then return true end end
+  return false
+end
+
+-- install lazy.nvim plugin manager if not installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- install and configure plugins
+require("lazy").setup({
+	{ "nvim-lua/plenary.nvim" },
+	{ "nvim-tree/nvim-web-devicons" },
+	{
+		"jiangmiao/auto-pairs",
+		config = function()
+			vim.g.AutoPairsMultilineClose = 0
+		end
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				auto_install = true,
+				highlight = { enable = true }
+			})
+		end,
+	},
+	{
+		"nvim-treesitter/playground",
+		init = function()
+			vim.api.nvim_create_user_command("H", function() vim.cmd("TSHighlightCapturesUnderCursor") end, {})
+		end
+	},
+
+	{
+		"lewis6991/satellite.nvim",
+		config = function()
+			require("satellite").setup({
+				current_only = false,
+				winblend = 0,
+				handlers = {
+					cursor = { enable = false },
+					marks = { enable = false },
+					diagnostic = { enable = false },
+					gitsigns = { enable = false },
+					search = { enable = true },
+				},
+			})
+		end,
+	},
+
+	{
+		"tpope/vim-commentary",
+		config = function()
+			vim.keymap.set("v", "<C-c>", "<Plug>Commentary", { silent = true })
+			vim.keymap.set("n", "<C-c>", "<Plug>CommentaryLine", { silent = true })
+		end,
+	},
+
+	{
+		"f-person/git-blame.nvim",
+		init = function()
+			vim.api.nvim_create_user_command("BL", function() vim.cmd("GitBlameToggle") end, {})
+		end,
+		config = function()
+			require("gitblame").setup({ enabled = false })
+		end,
+		lazy = true, cmd = { "GitBlameToggle" },
+	},
+
+	{
+		"kyazdani42/nvim-tree.lua",
+		init = function()
+			vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<CR>", { silent = true, noremap = true })
+		end,
+		config = function()
+			require("nvim-tree").setup({
+				on_attach = function(bufnr)
+					local function opts(desc)
+						return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+					end
+					require("nvim-tree.api").config.mappings.default_on_attach(bufnr)
+					vim.keymap.set("n", "<ESC>", require("nvim-tree.api").tree.close, opts("close"))
+				end,
+				git = { enable = false },
+				view = {
+					float = { enable = true, open_win_config = floatWinConfig(0.5, 0.9) },
+					width = function() return math.floor(vim.opt.columns:get() * 0.5) end,
+				},
+				renderer = {
+					icons = {
+						git_placement = "after",
+						glyphs = {
+							git = { unstaged = "M", staged = "M", renamed = "U", unmerged = "?", untracked = "U", deleted = "D", ignored = "I" },
+							folder = { arrow_closed = "", arrow_open = "" }
+						}
+					}
+				},
+				filters = { custom = { ".DS_Store" } }
+			})
+		end,
+		lazy = true, cmd = { "NvimTreeFindFileToggle" },
+	},
+
+	{
+		"stevearc/aerial.nvim",
+		init = function()
+			vim.keymap.set("n", "<C-t>", ":AerialToggle<CR>", { silent = true, noremap = true })
+		end,
+		config = function()
+			require("aerial").setup({
+				backends = { "treesitter" },
+				lsp = { diagnostics_trigger_update = false },
+				close_on_select = true,
+				close_automatic_events = { "unfocus", "switch_buffer", "unsupported" },
+				highlight_on_hover = true,
+				attach_mode = "global",
+				show_guides = true,
+				layout = { width = 50, min_width = 30, max_width = 50, default_direction = "float" },
+				float = { override = floatWinConfig(0.4, 0.8), },
+				guides = { mid_item = "├─ ", last_item = "└─ ", nested_top = "│ ", whitespace = "  " },
+				filter_kind = {
+					"Array", "Class", "Constructor", "Enum", "EnumMember", "Event", "Field", "Function",
+					"Interface", "Method", "Module", "Object", "Package", "Property", "Collapsed"
+				},
+				keymaps = {
+					["<CR>"] = "actions.jump",
+					["o"] = "actions.jump",
+					["p"] = "actions.scroll",
+					["j"] = "actions.down_and_scroll",
+					["k"] = "actions.up_and_scroll",
+					["<ESC>"] = "actions.close",
+					["<c-h>"] = "actions.close",
+					["<c-l>"] = "actions.close",
+					["<c-n>"] = "actions.close",
+				},
+			})
+		end,
+		lazy = true, cmd = { "AerialToggle" },
+	},
+
+	{
+		"norflin321/tsc.nvim",
+		init = function()
+			vim.keymap.set("n", "<c-e>", ":TSC<CR>", { silent = true })
+		end,
+		config = function()
+			require("tsc").setup({ pretty_error = false })
+		end,
+		lazy = true, cmd = { "TSC" },
+	},
+
+	{
+		"ThePrimeagen/refactoring.nvim",
+		init = function()
+			vim.keymap.set("n", "fi", ":Refactor inline_var<CR>", { silent = true })
+		end,
+		config = function()
+			require("refactoring").setup({})
+		end,
+		lazy = true, cmd = { "Refactor" },
+	},
+})
+
+-- colors
+vim.o.termguicolors = true
+vim.cmd([[runtime colors.vim]])
+
+-- statusline
+vim.opt.statusline = "%f%{&modified?' [+] ':''}%r%=%#StatusLineErrors#%#StatusLine# %-5.(%l,%c%) %L"

@@ -10,8 +10,8 @@ export ANDROID_HOME=~/Library/Android/sdk
 export SDKROOT=$(xcrun --show-sdk-path)
 
 # cd
+alias rm="trash"
 alias ls="ls -la"
-alias rm="rm -rf"
 alias cp="cp -R"
 alias code="cd /Users/norflin/main/code"
 alias pets="cd /Users/norflin/main/code/rockstone/mergicpets_client"
