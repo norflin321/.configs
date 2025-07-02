@@ -1,0 +1,95 @@
+{
+	"list.height": 5,
+	"list.maxPreviewHeight": 50,
+	"list.floatPreview": true,
+	"list.alignColumns": true,
+
+	"outline.previewBorder": true,
+	"outline.previewBorderRounded": true,
+
+	"notification.border": true,
+	"notification.timeout": 1000,
+
+	"coc.preferences.enableMessageDialog": true,
+	"coc.preferences.renameFillCurrent": true,
+	"coc.preferences.maxFileSize": "100MB",
+
+	"diagnostic.level": "warning",
+	"diagnostic.refreshOnInsertMode": false,
+	"diagnostic.floatConfig": { "border": false, "rounded": false },
+	"diagnostic.checkCurrentLine": false,
+	"diagnostic.errorSign": "",
+	"diagnostic.warningSign": "",
+	"diagnostic.infoSign": "",
+	"diagnostic.hintSign": "",
+	"diagnostic.virtualText": false,
+
+	"suggest.floatConfig": { "border": false, "rounded": false },
+	"hover.floatConfig": { "border": false, "rounded": false },
+
+	"suggest.autoTrigger": "always",
+	"suggest.noselect": false,
+	"suggest.defaultSortMethod": "alphabetical",
+	"suggest.snippetsSupport": false,
+	"suggest.labelMaxLength": 50,
+	"coc.preferences.useQuickfixForLocations": false,
+
+	"suggest.snippetIndicator": "",
+
+	"signature.preferShownAbove": true,
+
+	"javascript.suggestionActions.enabled": false,
+	"typescript.suggest.completeFunctionCalls": true,
+	"typescript.preferences.quoteStyle": "double",
+	"typescript.format.placeOpenBraceOnNewLineForFunctions": true,
+	"typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+	"typescript.format.semicolons": "insert",
+	"typescript.workspaceSymbols.scope": "currentProject",
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"tsserver.trace.server": "off",
+	"typescript.suggest.classMemberSnippets.enabled": false,
+	"javascript.suggest.classMemberSnippets.enabled": false,
+	"javascript.suggest.objectLiteralMethodSnippets.enabled": false,
+	"typescript.suggest.objectLiteralMethodSnippets.enabled": false,
+
+	"codeLens.enable": false,
+	"codeLens.position": "eol",
+	"typescript.referencesCodeLens.enabled": true,
+	"javascript.referencesCodeLens.enabled": true,
+	"typescript.implementationsCodeLens.enabled": true,
+	"javascript.implementationsCodeLens.enabled": true,
+
+	"Lua.diagnostics.globals": ["vim"],
+
+	"inlayHint.enable": false,
+
+	"eslint.autoFixOnSave": false,
+
+	"languageserver": {
+		"go": {
+			"command": "gopls",
+			"rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
+			"filetypes": ["go"],
+			"initializationOptions": { "usePlaceholders": false },
+			"disableSnippetCompletion": true,
+		},
+		"rust": {
+			"command": "rust-analyzer",
+			"filetypes": ["rust"],
+			"disableSnippetCompletion": true,
+			"initializationOptions": { "usePlaceholders": false },
+		}
+	},
+
+	"[go]": {
+		"coc.preferences.formatOnSave": false,
+	},
+
+	"rust-analyzer.completion.callable.snippets": "none",
+
+	"clangd.arguments": ["--compile-commands-dir=build", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never"]
+}

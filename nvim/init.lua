@@ -1,3 +1,7 @@
+-- colors
+vim.o.termguicolors = true
+vim.cmd([[runtime colors.vim]])
+
 -- settings
 vim.cmd("syntax enable")
 vim.cmd("filetype indent plugin on")
@@ -172,18 +176,38 @@ vim.keymap.set("n", "sr", ":%s///g<Left><Left><Left>", { noremap = true })
 vim.keymap.set("v", "sr", ":<C-u>'<,'>s///g<Left><Left><Left>", { noremap = true })
 
 vim.api.nvim_create_user_command("CF", function() vim.cmd("e " .. vim.env.MYVIMRC) end, {})
+vim.api.nvim_create_user_command("CC", function() vim.cmd("!rm -rf ~/.cache/ctrlp") end, {})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter" }, { pattern = "*", callback = function() vim.opt_local.number = true end })
+
+-- make sure some filetypes has tab size 2
+local ft_opts = { tabstop = 2, shiftwidth = 2, softtabstop = 2, expandtab = false }
+for _, ft in ipairs({ "rust", "go", "python", "swift" }) do
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = ft,
+    callback = function()
+      vim.opt_local.tabstop = ft_opts.tabstop
+      vim.opt_local.shiftwidth = ft_opts.shiftwidth
+      vim.opt_local.softtabstop = ft_opts.softtabstop
+      vim.opt_local.expandtab = ft_opts.expandtab
+    end,
+  })
+end
 
 -- function for sizing float windows
-local function floatWinConfig(width_ration, height_ration)
+local function floatWinConfig(width_ratio, height_ratio)
 	return function()
+		local columns = vim.o.columns
+		local lines = vim.o.lines
+		local cmdheight = vim.o.cmdheight
 		return {
 			style = "minimal",
 			border = "rounded",
 			relative = "editor",
-			width = math.floor(vim.opt.columns:get() * width_ration),
-			height = math.floor((vim.opt.lines:get() - vim.opt.cmdheight:get()) * height_ration),
-			row = ((vim.opt.lines:get() - ((vim.opt.lines:get() - vim.opt.cmdheight:get()) * height_ration)) / 2) - vim.opt.cmdheight:get(),
-			col = (vim.opt.columns:get() - (vim.opt.columns:get() * width_ration)) / 2,
+			width = math.floor(columns * width_ratio),
+			height = math.floor((lines - cmdheight) * height_ratio),
+			row = ((lines - ((lines - cmdheight) * height_ratio)) / 2) - cmdheight,
+			col = (columns - (columns * width_ratio)) / 2,
 		}
 	end
 end
@@ -300,6 +324,41 @@ require("lazy").setup({
 	},
 
 	{
+		"ctrlpvim/ctrlp.vim",
+		config = function()
+			vim.g.ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
+			vim.g.ctrlp_working_path_mode = ""
+			vim.g.ctrlp_prompt_mappings = {
+				["AcceptSelection('h')"] = { "<c-h>" },
+				["AcceptSelection('v')"] = { "<c-v>" },
+				["AcceptSelection('e')"] = { "<c-o>", "<cr>" },
+			}
+			vim.g.ctrlp_show_hidden = 1
+
+			vim.keymap.set("n", "<C-m>", ":CtrlPMRUFiles<CR>", { silent = true })
+		end,
+	},
+
+	{
+		"eugen0329/vim-esearch",
+		config = function()
+			vim.cmd([[
+				let g:esearch = {}
+				let g:esearch.prefill = ["last"]
+				let g:esearch.regex = 1
+				let g:esearch.textobj = 0
+				let g:esearch.case = "smart"
+				let g:esearch.default_mappings = 0
+				let g:esearch.name = " [esearch]"
+				let g:esearch.win_map = [ ["n", "o", "<plug>(esearch-win-open)"] ]
+			]])
+
+			vim.keymap.set("n", "<C-f>", "<Plug>(esearch)", { silent = true })
+			vim.keymap.set("v", "<C-f>", "<Plug>(operator-esearch-prefill)", { silent = true })
+		end,
+	},
+
+	{
 		"stevearc/aerial.nvim",
 		init = function()
 			vim.keymap.set("n", "<C-t>", ":AerialToggle<CR>", { silent = true, noremap = true })
@@ -357,11 +416,88 @@ require("lazy").setup({
 		end,
 		lazy = true, cmd = { "Refactor" },
 	},
+
+	{
+    "neoclide/coc.nvim",
+    branch = "release",
+		config = function()
+			-- Try to disable built-in LSP
+			vim.lsp.start_client = function() return {} end
+			if is_map_exists("n", "gri") then vim.keymap.del("n", "gri") end
+			if is_map_exists("n", "grr") then vim.keymap.del("n", "grr") end
+			if is_map_exists("n", "gra") then vim.keymap.del("n", "gra") end
+			if is_map_exists("x", "gra") then vim.keymap.del("x", "gra") end
+			if is_map_exists("n", "grn") then vim.keymap.del("n", "grn") end
+
+			vim.g.coc_list_preview_filetype = 1
+			vim.g.coc_global_extensions = {
+				"coc-tsserver",
+				"coc-go",
+				"coc-lua",
+				"coc-eslint",
+				"coc-rust-analyzer",
+				"coc-phpls",
+			}
+
+			local function show_documentation()
+				local ft = vim.bo.filetype
+				if ft == "vim" or ft == "help" then
+					vim.cmd("h " .. vim.fn.expand("<cword>"))
+				else
+					vim.fn.CocActionAsync("doHover")
+				end
+			end
+
+			local function check_back_space()
+				local col = vim.fn.col(".") - 1
+				if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+					return true
+				end
+				return false
+			end
+
+			vim.keymap.set("n", "<C-LeftMouse>", "<Plug>(coc-definition)", {})
+			vim.keymap.set("n", "K", show_documentation, { silent = true })
+			vim.keymap.set("n", "gd", "<Plug>(coc-definition)", { silent = true })
+			vim.keymap.set("n", "gi", "<Plug>(coc-implementation)", { silent = true })
+			vim.keymap.set("n", "gr", "<Plug>(coc-references)", { silent = true })
+			vim.keymap.set("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
+			vim.keymap.set("n", "gn", "<Plug>(coc-rename)", { silent = true })
+			vim.keymap.set("n", "gf", "<Plug>(coc-fix-current)", { silent = true })
+			vim.keymap.set("n", "<C-d>", "<Plug>(coc-diagnostic-next-error)", { silent = true })
+
+			vim.cmd [[
+				imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+				imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+				imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+			]]
+
+			vim.api.nvim_create_autocmd("CursorHold", { pattern = "*", callback = function() vim.fn.CocActionAsync("highlight") end })
+			vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.go", callback = function() vim.fn.CocAction("runCommand", "editor.action.organizeImport") end })
+		end,
+  },
 })
 
--- colors
-vim.o.termguicolors = true
-vim.cmd([[runtime colors.vim]])
-
 -- statusline
-vim.opt.statusline = "%f%{&modified?' [+] ':''}%r%=%#StatusLineErrors#%#StatusLine# %-5.(%l,%c%) %L"
+vim.cmd([[
+	function! GetCocErrors() abort
+		if !get(g:, "coc_service_initialized", 0) || !exists("*coc#rpc#ready")
+			return ""
+		endif
+
+		let l:info = get(b:, "coc_diagnostic_info", {})
+		if empty(l:info)
+			return ""
+		endif
+
+		let l:errors = get(l:info, "error", 0)
+
+		if l:errors == 0
+			return ""
+		endif
+
+		return "E:" . l:errors . " "
+	endfunction
+
+	set statusline=%f%{&modified?'\ [+]\ ':''}%r%=%#StatusLineErrors#%{GetCocErrors()}%#StatusLine#\ %-5.(%l,%c%)\ %L
+]])
