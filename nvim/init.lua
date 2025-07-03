@@ -6,6 +6,7 @@ vim.cmd([[runtime colors.vim]])
 vim.cmd("syntax enable")
 vim.cmd("filetype indent plugin on")
 vim.cmd("scriptencoding utf-8")
+vim.cmd("packadd cfilter")
 vim.opt.fixeol = false
 vim.opt.encoding = "UTF-8"
 vim.opt.fileencoding = "utf-8"
@@ -176,9 +177,16 @@ vim.keymap.set("n", "sr", ":%s///g<Left><Left><Left>", { noremap = true })
 vim.keymap.set("v", "sr", ":<C-u>'<,'>s///g<Left><Left><Left>", { noremap = true })
 
 vim.api.nvim_create_user_command("CF", function() vim.cmd("e " .. vim.env.MYVIMRC) end, {})
-vim.api.nvim_create_user_command("CC", function() vim.cmd("!rm -rf ~/.cache/ctrlp") end, {})
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter" }, { pattern = "*", callback = function() vim.opt_local.number = true end })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true })
+		vim.keymap.set("n", "<C-o>", "<CR>", { buffer = true })
+		vim.keymap.set("n", "o", "<CR>", { buffer = true })
+		vim.opt_local.cursorline = true
+	end,
+})
 
 -- make sure some filetypes has tab size 2
 local ft_opts = { tabstop = 2, shiftwidth = 2, softtabstop = 2, expandtab = false }
@@ -228,7 +236,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- install and configure plugins
 require("lazy").setup({
-	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-tree/nvim-web-devicons" },
 	{
 		"jiangmiao/auto-pairs",
@@ -241,7 +248,7 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				auto_install = true,
+				auto_install = false,
 				highlight = { enable = true }
 			})
 		end,
@@ -250,7 +257,8 @@ require("lazy").setup({
 		"nvim-treesitter/playground",
 		init = function()
 			vim.api.nvim_create_user_command("H", function() vim.cmd("TSHighlightCapturesUnderCursor") end, {})
-		end
+		end,
+		lazy = true, cmd = { "TSHighlightCapturesUnderCursor" }
 	},
 
 	{
@@ -335,27 +343,37 @@ require("lazy").setup({
 			}
 			vim.g.ctrlp_show_hidden = 1
 
+			vim.g.ctrlp_custom_ignore = {
+				dir  = [[\v[\/](\.git|hg|svn|node_modules)$]],
+				file = [[\v\.(exe|so|dll)$]],
+			}
+
 			vim.keymap.set("n", "<C-m>", ":CtrlPMRUFiles<CR>", { silent = true })
+
+			vim.api.nvim_create_user_command("CC", function() vim.cmd("!rm -rf ~/.cache/ctrlp") end, {})
 		end,
 	},
 
 	{
-		"eugen0329/vim-esearch",
+		"mangelozzi/nvim-rgflow.lua",
 		config = function()
-			vim.cmd([[
-				let g:esearch = {}
-				let g:esearch.prefill = ["last"]
-				let g:esearch.regex = 1
-				let g:esearch.textobj = 0
-				let g:esearch.case = "smart"
-				let g:esearch.default_mappings = 0
-				let g:esearch.name = " [esearch]"
-				let g:esearch.win_map = [ ["n", "o", "<plug>(esearch-win-open)"] ]
-			]])
+			require("rgflow").setup({
+				cmd_flags = "--smart-case --fixed-strings --ignore --max-columns 200",
+				default_trigger_mappings = false,
+				default_ui_mappings = true,
+				default_quickfix_mappings = true,
+				ui_top_line_char = "━",
+				quickfix = {
+					max_height_lines = 20,
+				}
+			})
 
-			vim.keymap.set("n", "<C-f>", "<Plug>(esearch)", { silent = true })
-			vim.keymap.set("v", "<C-f>", "<Plug>(operator-esearch-prefill)", { silent = true })
-		end,
+			vim.keymap.set("n", "<C-f>", require("rgflow").open, { noremap = true, silent = true })
+			vim.keymap.set("v", "<C-f>", function()
+				require("rgflow").open_visual()
+				-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
+			end, { noremap = true, silent = true })
+		end
 	},
 
 	{
@@ -431,6 +449,7 @@ require("lazy").setup({
 
 			vim.g.coc_list_preview_filetype = 1
 			vim.g.coc_global_extensions = {
+				"coc-json",
 				"coc-tsserver",
 				"coc-go",
 				"coc-lua",
@@ -448,14 +467,6 @@ require("lazy").setup({
 				end
 			end
 
-			local function check_back_space()
-				local col = vim.fn.col(".") - 1
-				if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-					return true
-				end
-				return false
-			end
-
 			vim.keymap.set("n", "<C-LeftMouse>", "<Plug>(coc-definition)", {})
 			vim.keymap.set("n", "K", show_documentation, { silent = true })
 			vim.keymap.set("n", "gd", "<Plug>(coc-definition)", { silent = true })
@@ -467,6 +478,11 @@ require("lazy").setup({
 			vim.keymap.set("n", "<C-d>", "<Plug>(coc-diagnostic-next-error)", { silent = true })
 
 			vim.cmd [[
+				func! s:check_back_space() abort
+					let col = col(".") - 1
+					return !col || getline(".")[col - 1]  =~# "\s"
+				endfunc
+
 				imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 				imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 				imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()

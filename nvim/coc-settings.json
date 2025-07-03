@@ -8,7 +8,7 @@
 	"outline.previewBorderRounded": true,
 
 	"notification.border": true,
-	"notification.timeout": 1000,
+	"notification.timeout": 3000,
 
 	"coc.preferences.enableMessageDialog": true,
 	"coc.preferences.renameFillCurrent": true,
