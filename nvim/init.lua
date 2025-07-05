@@ -369,10 +369,10 @@ require("lazy").setup({
 			})
 
 			vim.keymap.set("n", "<C-f>", require("rgflow").open, { noremap = true, silent = true })
-			vim.keymap.set("v", "<C-f>", function()
-				require("rgflow").open_visual()
-				-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
-			end, { noremap = true, silent = true })
+			-- vim.keymap.set("v", "<C-f>", function()
+			-- 	require("rgflow").open_visual()
+			-- 	-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
+			-- end, { noremap = true, silent = true })
 		end
 	},
 
