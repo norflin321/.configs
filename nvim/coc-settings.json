@@ -1,7 +1,7 @@
 {
-	"list.height": 5,
-	"list.maxPreviewHeight": 50,
-	"list.floatPreview": true,
+	"list.floatPreview": false,
+	"list.height": 10,
+  "list.maxPreviewHeight": 50,
 	"list.alignColumns": true,
 
 	"outline.previewBorder": true,
@@ -90,6 +90,7 @@
 	},
 
 	"rust-analyzer.completion.callable.snippets": "none",
+	"zig.path": "~/main/zls",
 
 	"clangd.arguments": ["--compile-commands-dir=build", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never"]
 }

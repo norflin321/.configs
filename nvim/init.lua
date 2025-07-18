@@ -1,8 +1,5 @@
--- colors
-vim.o.termguicolors = true
-vim.cmd([[runtime colors.vim]])
-
 -- settings
+vim.o.termguicolors = true
 vim.cmd("syntax enable")
 vim.cmd("filetype indent plugin on")
 vim.cmd("scriptencoding utf-8")
@@ -10,9 +7,9 @@ vim.cmd("packadd cfilter")
 vim.opt.fixeol = false
 vim.opt.encoding = "UTF-8"
 vim.opt.fileencoding = "utf-8"
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -21,7 +18,7 @@ vim.opt.scrolloff = 2
 vim.opt.sidescrolloff = 10
 vim.opt.number = true
 vim.opt.signcolumn = "number"
-vim.opt.cursorline = false
+vim.opt.cursorline = false 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.ignorecase = true
@@ -177,20 +174,22 @@ vim.keymap.set("n", "sr", ":%s///g<Left><Left><Left>", { noremap = true })
 vim.keymap.set("v", "sr", ":<C-u>'<,'>s///g<Left><Left><Left>", { noremap = true })
 
 vim.api.nvim_create_user_command("CF", function() vim.cmd("e " .. vim.env.MYVIMRC) end, {})
+vim.api.nvim_create_user_command("BC", function() print(#vim.fn.getbufinfo({buflisted = 1})) end, {})
 
+-- improve quickfix window
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	callback = function()
 		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true })
-		vim.keymap.set("n", "<C-o>", "<CR>", { buffer = true })
+vim.keymap.set("n", "<C-o>", "<CR>", { buffer = true })
 		vim.keymap.set("n", "o", "<CR>", { buffer = true })
 		vim.opt_local.cursorline = true
 	end,
 })
 
 -- make sure some filetypes has tab size 2
-local ft_opts = { tabstop = 2, shiftwidth = 2, softtabstop = 2, expandtab = false }
-for _, ft in ipairs({ "rust", "go", "python", "swift" }) do
+local ft_opts = { tabstop = 4, shiftwidth = 4, softtabstop = 4, expandtab = false }
+for _, ft in ipairs({ "rust", "go", "python", "swift", "zig" }) do
   vim.api.nvim_create_autocmd("FileType", {
     pattern = ft,
     callback = function()
@@ -236,6 +235,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- install and configure plugins
 require("lazy").setup({
+	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-tree/nvim-web-devicons" },
 	{
 		"jiangmiao/auto-pairs",
@@ -363,17 +363,11 @@ require("lazy").setup({
 				default_ui_mappings = true,
 				default_quickfix_mappings = true,
 				ui_top_line_char = "━",
-				quickfix = {
-					max_height_lines = 20,
-				}
+				quickfix = { max_height_lines = 20 }
 			})
 
 			vim.keymap.set("n", "<C-f>", require("rgflow").open, { noremap = true, silent = true })
-			-- vim.keymap.set("v", "<C-f>", function()
-			-- 	require("rgflow").open_visual()
-			-- 	-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
-			-- end, { noremap = true, silent = true })
-		end
+		end,
 	},
 
 	{
@@ -436,8 +430,8 @@ require("lazy").setup({
 	},
 
 	{
-    "neoclide/coc.nvim",
-    branch = "release",
+		"neoclide/coc.nvim",
+		branch = "release",
 		config = function()
 			-- Try to disable built-in LSP
 			vim.lsp.start_client = function() return {} end
@@ -456,6 +450,7 @@ require("lazy").setup({
 				"coc-eslint",
 				"coc-rust-analyzer",
 				"coc-phpls",
+				"coc-zig"
 			}
 
 			local function show_documentation()
@@ -478,21 +473,60 @@ require("lazy").setup({
 			vim.keymap.set("n", "<C-d>", "<Plug>(coc-diagnostic-next-error)", { silent = true })
 
 			vim.cmd [[
-				func! s:check_back_space() abort
-					let col = col(".") - 1
-					return !col || getline(".")[col - 1]  =~# "\s"
-				endfunc
+			func! s:check_back_space() abort
+			let col = col(".") - 1
+			return !col || getline(".")[col - 1]  =~# "\s"
+			endfunc
 
-				imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
-				imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-				imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+			imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+			imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+			imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 			]]
 
 			vim.api.nvim_create_autocmd("CursorHold", { pattern = "*", callback = function() vim.fn.CocActionAsync("highlight") end })
 			vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.go", callback = function() vim.fn.CocAction("runCommand", "editor.action.organizeImport") end })
 		end,
-  },
+	},
+
+	{
+		"chrisgrieser/nvim-chainsaw",
+		config = function()
+			require("chainsaw").setup({
+				marker = "->",
+				logStatements = {
+					variableLog = {
+						go = 'Print("{{marker}} {{var}}:", {{var}});',
+					},
+				},
+
+				visuals = {
+					icon = "",
+					nvimSatelliteIntegration = { enabled = false },
+				},
+			})
+
+			vim.keymap.set("n", "fp", require("chainsaw").variableLog, { silent = true })
+		end
+	},
+
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		lazy = false,
+		config = function()
+			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2f3146", nocombine = true })
+
+			require("ibl").setup({
+				enabled = true,
+				indent = { char = "│" },
+				whitespace = { remove_blankline_trail = false },
+				scope = { enabled = false },
+			})
+		end,
+	},
 })
+
+vim.cmd([[runtime colors.vim]])
 
 -- statusline
 vim.cmd([[
