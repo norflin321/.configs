@@ -1,7 +1,7 @@
 font-family = JetBrains Mono
 font-size = 10.5
 adjust-cell-height = 8%
-font-family-bold = JetBrains Mono Bold
+font-family-bold = JetBrains Mono ExtraBold
 
 font-feature = -calt
 font-feature = -liga

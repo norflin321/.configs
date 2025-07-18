@@ -12,9 +12,9 @@ let s:bg_highlight_3 = "#3d405c"
 " Syntax colors
 let s:type           = "#ac8b83"
 let s:function       = "#929be5"
-let s:keyword        = "#b871b8"
+let s:keyword        = "#8087ac"
 let s:primitive      = "#73c1a9"
-let s:comment        = "#545c8c"
+let s:comment        = "#505886"
 let s:error          = "#b18181"
 
 " Highlight groups
@@ -198,5 +198,6 @@ exec "hi @function guifg=".s:function." gui=bold"
 exec "hi @function.method guifg=".s:function." gui=bold"
 exec "hi @function.call guifg=".s:function." gui=NONE"
 exec "hi @function.method.call guifg=".s:function." gui=NONE"
+exec "hi @function.macro guifg=".s:function." gui=NONE"
 exec "hi @function.builtin guifg=".s:function." gui=NONE"
 exec "hi @constructor guifg=".s:function." gui=NONE"

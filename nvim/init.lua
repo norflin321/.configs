@@ -514,7 +514,7 @@ require("lazy").setup({
 		main = "ibl",
 		lazy = false,
 		config = function()
-			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2f3146", nocombine = true })
+			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#353750", nocombine = true })
 
 			require("ibl").setup({
 				enabled = true,
