@@ -237,6 +237,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-tree/nvim-web-devicons" },
+
 	{
 		"jiangmiao/auto-pairs",
 		config = function()
@@ -515,10 +516,11 @@ require("lazy").setup({
 		lazy = false,
 		config = function()
 			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#353750", nocombine = true })
+			vim.notify(vim.inspect(vim.api.nvim_set_hl), nil, { title = "-> vim.api.nvim_set_hl", ft = "lua" })
 
 			require("ibl").setup({
 				enabled = true,
-				indent = { char = "│" },
+				indent = { char = "▏" },
 				whitespace = { remove_blankline_trail = false },
 				scope = { enabled = false },
 			})
