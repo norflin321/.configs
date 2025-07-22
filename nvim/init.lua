@@ -1,3 +1,5 @@
+vim.cmd([[runtime colors.vim]])
+
 -- settings
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -14,10 +16,10 @@ vim.opt.expandtab = false
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
-vim.opt.scrolloff = 2
-vim.opt.sidescrolloff = 10
-vim.opt.number = true
-vim.opt.signcolumn = "number"
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 5
+vim.opt.number = false
+vim.opt.signcolumn = "no"
 vim.opt.cursorline = false 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -249,11 +251,14 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
 				auto_install = false,
-				highlight = { enable = true }
+				highlight = { enable = true, additional_vim_regex_highlighting = false },
+				indent = { enable = true }
 			})
 		end,
 	},
+
 	{
 		"nvim-treesitter/playground",
 		init = function()
@@ -263,18 +268,34 @@ require("lazy").setup({
 	},
 
 	{
-		"lewis6991/satellite.nvim",
+		"petertriho/nvim-scrollbar",
+		lazy = false,
+		dependencies = { "kevinhwang91/nvim-hlslens" },
 		config = function()
-			require("satellite").setup({
-				current_only = false,
-				winblend = 0,
-				handlers = {
-					cursor = { enable = false },
-					marks = { enable = false },
-					diagnostic = { enable = false },
-					gitsigns = { enable = false },
-					search = { enable = true },
+			require("scrollbar.handlers.search").setup({ override_lens = function() end })
+
+			require("scrollbar").setup({
+				-- throttle_ms = 50,
+				handle = {
+					blend = 50, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
+					highlight = "CocHighlightText",
 				},
+				handlers = {
+					cursor = false,
+					diagnostic = false,
+					search = false,
+				},
+				marks = {
+					Search = {
+						text = { "-", "=" },
+						priority = 1,
+						gui = nil,
+						color = nil,
+						cterm = nil,
+						color_nr = nil, -- cterm
+						highlight = "Search",
+					},
+				}
 			})
 		end,
 	},
@@ -515,11 +536,9 @@ require("lazy").setup({
 		main = "ibl",
 		lazy = false,
 		config = function()
-			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#353750", nocombine = true })
-			vim.notify(vim.inspect(vim.api.nvim_set_hl), nil, { title = "-> vim.api.nvim_set_hl", ft = "lua" })
-
 			require("ibl").setup({
 				enabled = true,
+				-- debounce = 100,
 				indent = { char = "▏" },
 				whitespace = { remove_blankline_trail = false },
 				scope = { enabled = false },
@@ -527,8 +546,6 @@ require("lazy").setup({
 		end,
 	},
 })
-
-vim.cmd([[runtime colors.vim]])
 
 -- statusline
 vim.cmd([[

@@ -14,6 +14,7 @@ window-vsync = true
 mouse-hide-while-typing = true
 window-save-state = always
 unfocused-split-opacity = 1
+window-padding-color = extend
 
 keybind = super+one=previous_tab
 keybind = super+two=next_tab
@@ -26,3 +27,4 @@ shell-integration-features = no-cursor
 cursor-style = block
 cursor-color = #a3a8c2
 cursor-text = #000000
+cursor-style-blink = false

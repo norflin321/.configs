@@ -167,6 +167,8 @@ exec "hi SignColumn guifg=".s:bg_light." guibg=".s:bg_light
 exec "hi AerialLine guifg=NONE guibg=".s:bg_light
 exec "hi AerialNormal guifg=".s:function." gui=bold"
 
+exec "hi IblIndent guifg=#393b56"
+
 " Tree-sitter groups
 exec "hi @string guifg=".s:primitive
 exec "hi @number guifg=".s:primitive

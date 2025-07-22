@@ -1,7 +1,7 @@
 {
 	"list.floatPreview": false,
 	"list.height": 10,
-  "list.maxPreviewHeight": 50,
+	"list.maxPreviewHeight": 50,
 	"list.alignColumns": true,
 
 	"outline.previewBorder": true,
@@ -26,6 +26,7 @@
 
 	"suggest.floatConfig": { "border": false, "rounded": false },
 	"hover.floatConfig": { "border": false, "rounded": false },
+	"hover.target": "float",
 
 	"suggest.autoTrigger": "always",
 	"suggest.noselect": false,
