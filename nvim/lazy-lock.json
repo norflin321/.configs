@@ -8,7 +8,7 @@
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "nvim-chainsaw": { "branch": "main", "commit": "d6ecca54413db4ac5490168c5151cb3539b273f2" },
   "nvim-hlslens": { "branch": "main", "commit": "95ced18ebaf19c1bdb64982a614ee8a9d7ee8e51" },
-  "nvim-rgflow.lua": { "branch": "master", "commit": "6669918ff4fd18db5468110caf884cb74604445e" },
+  "nvim-rg": { "branch": "main", "commit": "38b221cefbfb57547c0c6952a1e049d840b2fdfb" },
   "nvim-scrollbar": { "branch": "main", "commit": "5b103ef0fd2e8b9b4be3878ed38d224522192c6c" },
   "nvim-tree.lua": { "branch": "master", "commit": "543ed3cac212dc3993ef9f042f6c0812e34ddd43" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },

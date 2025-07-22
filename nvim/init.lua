@@ -377,19 +377,11 @@ require("lazy").setup({
 	},
 
 	{
-		"mangelozzi/nvim-rgflow.lua",
+		"duane9/nvim-rg",
 		config = function()
-			require("rgflow").setup({
-				cmd_flags = "--smart-case --fixed-strings --ignore --max-columns 200",
-				default_trigger_mappings = false,
-				default_ui_mappings = true,
-				default_quickfix_mappings = true,
-				ui_top_line_char = "━",
-				quickfix = { max_height_lines = 20 }
-			})
-
-			vim.keymap.set("n", "<C-f>", require("rgflow").open, { noremap = true, silent = true })
-		end,
+			vim.g.rg_command = "rg --vimgrep --smart-case --fixed-strings --ignore"
+			vim.keymap.set("n", "<C-f>", function() vim.api.nvim_feedkeys(":Rg ", "n", false) end, { noremap = true })
+		end
 	},
 
 	{
@@ -538,7 +530,7 @@ require("lazy").setup({
 		config = function()
 			require("ibl").setup({
 				enabled = true,
-				-- debounce = 100,
+				debounce = 100,
 				indent = { char = "▏" },
 				whitespace = { remove_blankline_trail = false },
 				scope = { enabled = false },
