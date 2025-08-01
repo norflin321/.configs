@@ -1,7 +1,12 @@
-font-family = JetBrains Mono
+#font-family = JetBrains Mono
+#font-size = 10.5
+#adjust-cell-height = 8%
+#font-family-bold = JetBrains Mono Bold
+
+font-family = Fira Code
 font-size = 10.5
-adjust-cell-height = 8%
-font-family-bold = JetBrains Mono ExtraBold
+adjust-cell-height = 14%
+font-family-bold = Fira Code Bold
 
 font-feature = -calt
 font-feature = -liga

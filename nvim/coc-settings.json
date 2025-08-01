@@ -28,7 +28,7 @@
 	"hover.floatConfig": { "border": false, "rounded": false },
 	"hover.target": "float",
 
-	"suggest.autoTrigger": "always",
+	"suggest.autoTrigger": "none",
 	"suggest.noselect": false,
 	"suggest.defaultSortMethod": "alphabetical",
 	"suggest.snippetsSupport": false,
@@ -37,10 +37,11 @@
 
 	"suggest.snippetIndicator": "",
 
-	"signature.preferShownAbove": true,
+	"signature.enable": false,
 
 	"javascript.suggestionActions.enabled": false,
-	"typescript.suggest.completeFunctionCalls": true,
+	"typescript.suggest.completeFunctionCalls": false,
+	"javascript.suggest.completeFunctionCalls": false,
 	"typescript.preferences.quoteStyle": "double",
 	"typescript.format.placeOpenBraceOnNewLineForFunctions": true,
 	"typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
@@ -56,6 +57,7 @@
 	"javascript.suggest.classMemberSnippets.enabled": false,
 	"javascript.suggest.objectLiteralMethodSnippets.enabled": false,
 	"typescript.suggest.objectLiteralMethodSnippets.enabled": false,
+	"typescript.suggest.includeCompletionsWithSnippetText": false,
 
 	"codeLens.enable": false,
 	"codeLens.position": "eol",

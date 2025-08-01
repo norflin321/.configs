@@ -52,16 +52,17 @@ vim.opt.smoothscroll = true
 vim.opt.guicursor = "a:block"
 vim.opt.wildignore:append({
 	".DS_Store",
-  "*.swp",
-  "*.zip",
-  "*.exe",
-  "**/.git/**",
-  "**/node_modules/**",
-  "**/dist/**",
-  "**/build/**",
+	"*.swp",
+	"*.zip",
+	"*.exe",
+	"**/.git/**",
+	"**/node_modules/**",
+	"**/.vite/**",
+	"**/dist/**",
+	"**/build/**",
 	"**/target/**",
-  "**/android/**",
-  "**/ios/**",
+	"**/android/**",
+	"**/ios/**",
 })
 
 -- this default mappings we want to disable forever
@@ -366,9 +367,10 @@ require("lazy").setup({
 			vim.g.ctrlp_show_hidden = 1
 
 			vim.g.ctrlp_custom_ignore = {
-				dir  = [[\v[\/](\.git|hg|svn|node_modules)$]],
+				dir  = [[\v[\/](\.git|hg|svn|node_modules|.vite)$]],
 				file = [[\v\.(exe|so|dll)$]],
 			}
+			vim.g.ctrlp_mruf_exclude = "/tmp/.*\\|/temp/.*\\|node_modules/.*\\|\\.vite/.*\\|\\.git/.*"
 
 			vim.keymap.set("n", "<C-m>", ":CtrlPMRUFiles<CR>", { silent = true })
 
@@ -521,21 +523,6 @@ require("lazy").setup({
 
 			vim.keymap.set("n", "fp", require("chainsaw").variableLog, { silent = true })
 		end
-	},
-
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		lazy = false,
-		config = function()
-			require("ibl").setup({
-				enabled = true,
-				debounce = 100,
-				indent = { char = "▏" },
-				whitespace = { remove_blankline_trail = false },
-				scope = { enabled = false },
-			})
-		end,
 	},
 })
 
