@@ -1,5 +1,3 @@
-vim.cmd([[runtime colors.vim]])
-
 -- settings
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -555,3 +553,5 @@ vim.cmd([[
 
 	set statusline=%f%{&modified?'\ [+]\ ':''}%r%=%#StatusLineErrors#%{GetCocErrors()}%#StatusLine#\ %-5.(%l,%c%)\ %L
 ]])
+
+vim.cmd([[runtime colors.vim]])

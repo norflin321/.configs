@@ -65,9 +65,6 @@ exec "hi PmenuSel guifg=".s:fg_normal." guibg=".s:bg_highlight_3
 exec "hi PmenuSbar guibg=".s:bg_light
 exec "hi PmenuThumb guibg=".s:function
 exec "hi Visual guibg=".s:bg_highlight_1." gui=NONE"
-exec "hi Search guifg=".s:bg_normal." guibg=".s:bg_highlight_2
-exec "hi IncSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2
-exec "hi CurSearch guifg=".s:bg_normal." guibg="."#ffff00"
 exec "hi Question guifg=".s:primitive." gui=bold"
 exec "hi WildMenu guifg=".s:bg_normal." guibg=".s:function
 exec "hi SpellBad guifg=".s:error." gui=underline"
@@ -147,10 +144,14 @@ exec "hi FloatTitle guifg=".s:function." guibg=".s:bg_normal." gui=NONE"
 exec "hi link CocCodeLens Comment"
 exec "hi CocFadeOut guifg=NONE guibg=".s:comment
 exec "hi TreesitterContext guibg=".s:bg_highlight_1
+
 exec "hi CocHighlightText guibg=".s:bg_highlight_3
+
+exec "highlight Search guifg=NONE gui=NONE guibg=".s:bg_highlight_3
+exec "highlight IncSearch guifg=NONE gui=NONE guibg=".s:bg_highlight_3
+exec "highlight CurSearch guifg=NONE gui=NONE guibg=".s:bg_highlight_3
+
 exec "hi link CocFloating Pmenu"
-exec "hi HlSearchLensNear guifg=".s:comment." guibg=NONE"
-exec "hi HlSearchNear guifg=".s:bg_normal." guibg=".s:fg_normal
 
 exec "hi SatelliteBar guibg=".s:bg_highlight_3
 exec "hi LineNr guifg=".s:comment." guibg=NONE"
