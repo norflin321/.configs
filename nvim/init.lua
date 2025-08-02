@@ -104,6 +104,8 @@ vim.keymap.set("", "2", "<NOP>", { noremap = true })
 vim.keymap.set("", "1", "<NOP>", { noremap = true })
 vim.keymap.set({ "n", "v" }, "m", "<NOP>", { noremap = true })
 vim.keymap.set({ "n", "v" }, "M", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "f", "<NOP>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "F", "<NOP>", { noremap = true })
 vim.keymap.set("", "ga", "<NOP>", { noremap = true })
 vim.keymap.set("v", "K", "<NOP>", { noremap = true })
 vim.keymap.set("n", "<C-z>", "<NOP>", { noremap = true })
@@ -142,8 +144,8 @@ vim.keymap.set({ "n", "v" }, ")", "15j", { noremap = true })
 vim.keymap.set({ "n", "v" }, "(", "15k", { noremap = true })
 
 -- move faster horizontally 
-vim.keymap.set({ "n", "v" }, "L", "15l", { noremap = true })
-vim.keymap.set({ "n", "v" }, "H", "15h", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "L", "15l", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "H", "15h", { noremap = true })
 
 -- jump to line end
 vim.keymap.set("", "9", "$", { noremap = true })
@@ -478,29 +480,33 @@ require("lazy").setup({
 				end
 			end
 
+			vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() vim.fn.CocActionAsync("highlight") end) return "<LeftMouse>" end, { expr = true })
 			vim.keymap.set("n", "<C-LeftMouse>", "<Plug>(coc-definition)", {})
 			vim.keymap.set("n", "K", show_documentation, { silent = true })
+			vim.keymap.set("n", "H", function() vim.fn.CocActionAsync("highlight") end, { silent = true })
+			vim.keymap.set("n", "F", "<Plug>(coc-fix-current)", { silent = true })
+			vim.keymap.set("n", "gf", "<NOP>", { silent = true })
 			vim.keymap.set("n", "gd", "<Plug>(coc-definition)", { silent = true })
 			vim.keymap.set("n", "gi", "<Plug>(coc-implementation)", { silent = true })
 			vim.keymap.set("n", "gr", "<Plug>(coc-references)", { silent = true })
 			vim.keymap.set("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
 			vim.keymap.set("n", "gn", "<Plug>(coc-rename)", { silent = true })
-			vim.keymap.set("n", "gf", "<Plug>(coc-fix-current)", { silent = true })
 			vim.keymap.set("n", "<C-d>", "<Plug>(coc-diagnostic-next-error)", { silent = true })
 
 			vim.cmd [[
-			func! s:check_back_space() abort
-			let col = col(".") - 1
-			return !col || getline(".")[col - 1]  =~# "\s"
-			endfunc
+				func! s:check_back_space() abort
+				let col = col(".") - 1
+				return !col || getline(".")[col - 1]  =~# "\s"
+				endfunc
 
-			imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
-			imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-			imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+				imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+				imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+				imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 			]]
 
-			vim.api.nvim_create_autocmd("CursorHold", { pattern = "*", callback = function() vim.fn.CocActionAsync("highlight") end })
+			-- vim.api.nvim_create_autocmd("CursorHold", { pattern = "*", callback = function() vim.fn.CocActionAsync("highlight") end })
 			vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.go", callback = function() vim.fn.CocAction("runCommand", "editor.action.organizeImport") end })
+			vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.ts", callback = function() vim.fn.CocAction("runCommand", "editor.action.organizeImport") end })
 		end,
 	},
 
