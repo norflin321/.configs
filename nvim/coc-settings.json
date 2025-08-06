@@ -1,5 +1,5 @@
 {
-	"list.floatPreview": false,
+	"list.floatPreview": true,
 	"list.height": 10,
 	"list.maxPreviewHeight": 50,
 	"list.alignColumns": true,

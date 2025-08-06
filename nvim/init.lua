@@ -179,12 +179,18 @@ vim.keymap.set("v", "sr", ":<C-u>'<,'>s///g<Left><Left><Left>", { noremap = true
 vim.api.nvim_create_user_command("CF", function() vim.cmd("e " .. vim.env.MYVIMRC) end, {})
 vim.api.nvim_create_user_command("BC", function() print(#vim.fn.getbufinfo({buflisted = 1})) end, {})
 
+vim.api.nvim_create_autocmd("WinEnter", {
+  callback = function()
+	  vim.wo.number = false
+  end,
+})
+
 -- improve quickfix window
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	callback = function()
 		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true })
-vim.keymap.set("n", "<C-o>", "<CR>", { buffer = true })
+		vim.keymap.set("n", "<C-o>", "<CR>", { buffer = true })
 		vim.keymap.set("n", "o", "<CR>", { buffer = true })
 		vim.opt_local.cursorline = true
 	end,
@@ -254,7 +260,7 @@ require("lazy").setup({
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
 				auto_install = false,
-				highlight = { enable = true, additional_vim_regex_highlighting = false },
+				highlight = { enable = true, additional_vim_regex_highlighting = false, max_file_lines = 0 },
 				indent = { enable = true }
 			})
 		end,
