@@ -272,7 +272,7 @@ require("lazy").setup({
 		priority = 100,
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "typescript", "tsx", "html", "javascript", "go" },
 				auto_install = false,
 				highlight = { enable = true, additional_vim_regex_highlighting = false, max_file_lines = 0 },
 				indent = { enable = true }
@@ -283,9 +283,9 @@ require("lazy").setup({
 	{
 		"petertriho/nvim-scrollbar",
 		lazy = false,
-		dependencies = { "kevinhwang91/nvim-hlslens" },
+		-- dependencies = { "kevinhwang91/nvim-hlslens" },
 		config = function()
-			require("scrollbar.handlers.search").setup({ override_lens = function() end })
+			-- require("scrollbar.handlers.search").setup({ override_lens = function() end })
 
 			require("scrollbar").setup({
 				-- throttle_ms = 50,
@@ -298,6 +298,7 @@ require("lazy").setup({
 					diagnostic = false,
 					search = false,
 				},
+				excluded_buftypes = { "terminal", "nofile" },
 				marks = {
 					Search = {
 						text = { "-", "=" },
@@ -442,69 +443,6 @@ require("lazy").setup({
 	},
 
 	{
-		"neoclide/coc.nvim",
-		branch = "release",
-		config = function()
-			-- Try to disable built-in LSP
-			vim.lsp.start_client = function() return {} end
-			if is_map_exists("n", "gri") then vim.keymap.del("n", "gri") end
-			if is_map_exists("n", "grr") then vim.keymap.del("n", "grr") end
-			if is_map_exists("n", "gra") then vim.keymap.del("n", "gra") end
-			if is_map_exists("x", "gra") then vim.keymap.del("x", "gra") end
-			if is_map_exists("n", "grn") then vim.keymap.del("n", "grn") end
-
-			vim.g.coc_list_preview_filetype = 1
-			vim.g.coc_global_extensions = {
-				"coc-json",
-				"coc-tsserver",
-				"coc-go",
-				"coc-lua",
-				"coc-eslint",
-				"coc-rust-analyzer",
-				"coc-phpls",
-				"coc-zig"
-			}
-
-			local function show_documentation()
-				local ft = vim.bo.filetype
-				if ft == "vim" or ft == "help" then
-					vim.cmd("h " .. vim.fn.expand("<cword>"))
-				else
-					vim.fn.CocActionAsync("doHover")
-				end
-			end
-
-			vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() vim.fn.CocActionAsync("highlight") end) return "<LeftMouse>" end, { expr = true })
-			vim.keymap.set("n", "<C-LeftMouse>", "<Plug>(coc-definition)", {})
-			vim.keymap.set("n", "K", show_documentation, { silent = true })
-			vim.keymap.set("n", "H", function() vim.fn.CocActionAsync("highlight") end, { silent = true })
-			vim.keymap.set("n", "F", "<Plug>(coc-fix-current)", { silent = true })
-			vim.keymap.set("n", "gf", "<NOP>", { silent = true })
-			vim.keymap.set("n", "gd", "<Plug>(coc-definition)", { silent = true })
-			vim.keymap.set("n", "gi", "<Plug>(coc-implementation)", { silent = true })
-			vim.keymap.set("n", "gr", "<Plug>(coc-references)", { silent = true })
-			vim.keymap.set("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
-			vim.keymap.set("n", "gn", "<Plug>(coc-rename)", { silent = true })
-			vim.keymap.set("n", "<C-d>", "<Plug>(coc-diagnostic-next-error)", { silent = true })
-
-			vim.cmd [[
-				func! s:check_back_space() abort
-				let col = col(".") - 1
-				return !col || getline(".")[col - 1]  =~# "\s"
-				endfunc
-
-				imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
-				imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-				imap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-			]]
-
-			-- vim.api.nvim_create_autocmd("CursorHold", { pattern = "*", callback = function() vim.fn.CocActionAsync("highlight") end })
-			vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.go", callback = function() vim.fn.CocAction("runCommand", "editor.action.organizeImport") end })
-			vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*.ts", callback = function() vim.fn.CocAction("runCommand", "editor.action.organizeImport") end })
-		end,
-	},
-
-	{
 		"chrisgrieser/nvim-chainsaw",
 		config = function()
 			require("chainsaw").setup({
@@ -524,28 +462,66 @@ require("lazy").setup({
 			vim.keymap.set("n", "fp", require("chainsaw").variableLog, { silent = true })
 		end
 	},
-})
 
--- statusline
-vim.cmd([[
-	function! GetCocErrors() abort
-		if !get(g:, "coc_service_initialized", 0) || !exists("*coc#rpc#ready")
-			return ""
-		endif
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		priority = 100,
+		config = function()
+			local lspconfig = require("lspconfig")
 
-		let l:info = get(b:, "coc_diagnostic_info", {})
-		if empty(l:info)
-			return ""
-		endif
+			-- Try to disable built-in LSP
+			vim.lsp.start_client = function() return {} end
+			if is_map_exists("n", "gri") then vim.keymap.del("n", "gri") end
+			if is_map_exists("n", "grr") then vim.keymap.del("n", "grr") end
+			if is_map_exists("n", "gra") then vim.keymap.del("n", "gra") end
+			if is_map_exists("x", "gra") then vim.keymap.del("x", "gra") end
+			if is_map_exists("n", "grn") then vim.keymap.del("n", "grn") end
 
-		let l:errors = get(l:info, "error", 0)
+			-- Configure diagnostics to show virtual text in red for errors
+			vim.diagnostic.config({
+				virtual_text = {
+					severity = { min = vim.diagnostic.severity.ERROR }, -- Show virtual text only for errors (severity = 1)
+					format = function(diagnostic) return string.format("%s", diagnostic.message) end, -- Customize the format of the virtual text
+					prefix = "●", -- Prefix to make it clear it's an error
+					spacing = 1, -- Spacing between code and virtual text
+					source = "if_many", -- Source can be shown if desired
+				},
+				float = false,
+				signs = false, -- Show signs in the gutter
+				underline = true, -- Underline errors
+				update_in_insert = false, -- Don't update diagnostics in insert mode
+				severity_sort = true, -- Sort by severity (errors first)
+			})
 
-		if l:errors == 0
-			return ""
-		endif
+			-- Define a shared on_attach function to set keybindings when LSP attaches to a buffer
+			local function on_attach(client, bufnr)
+				client.server_capabilities.semanticTokensProvider = nil -- Disable LSP semantic highlighting
 
-		return "E:" . l:errors . " "
-	endfunction
+				local opts = { buffer = bufnr, noremap = true, silent = true }
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+				vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
+				vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
+				vim.keymap.set("n", "F", vim.lsp.buf.code_action, opts)
+				vim.keymap.set("n", "<C-d>", function() vim.diagnostic.goto_next({ float = false, severity = vim.diagnostic.severity.ERROR }) end, opts)
 
-	set statusline=%f%{&modified?'\ [+]\ ':''}%r%=%#StatusLineErrors#%{GetCocErrors()}%#StatusLine#\ %-5.(%l,%c%)\ %L
-]])
+				-- Enable highlighting word under cursor
+				vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() vim.lsp.buf.document_highlight() end) return "<LeftMouse>" end, { expr = true })
+				-- vim.keymap.set("n", "H", vim.lsp.buf.document_highlight, opts)
+				if client.server_capabilities.documentHighlightProvider then
+					vim.api.nvim_create_autocmd("CursorHold", { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+					vim.api.nvim_create_autocmd("CursorMoved", { buffer = bufnr, callback = vim.lsp.buf.clear_references })
+				end
+
+				vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "solid", max_width = 120, max_height = 35 }) end, opts)
+			end
+
+			-- npm install -g typescript-language-server
+			lspconfig.ts_ls.setup({ on_attach = on_attach })
+		end,
+	}
+}, { lockfile = "~/.vim/lazy-lock.json" })
+
+vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-5.(%l,%c%)\ %L ]])
