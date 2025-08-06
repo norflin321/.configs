@@ -504,7 +504,14 @@ require("lazy").setup({
 				local opts = { buffer = bufnr, noremap = true, silent = true }
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+				vim.keymap.set("n", "gr", function()
+					vim.lsp.buf.references(nil, {
+						on_list = function(options)
+							vim.fn.setloclist(0, {}, " ", options)
+							vim.cmd("lopen")
+						end,
+					})
+				end, opts)
 				vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "F", vim.lsp.buf.code_action, opts)
