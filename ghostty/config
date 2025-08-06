@@ -1,11 +1,10 @@
-#font-family = JetBrains Mono
-#font-size = 10.5
-#adjust-cell-height = 8%
-#font-family-bold = JetBrains Mono Bold
-
-font-family = Fira Code Retina
+font-family = JetBrains Mono
 font-size = 10.5
-adjust-cell-height = 14%
+adjust-cell-height = 8%
+
+#font-family = Fira Code Retina
+#font-size = 10.5
+#adjust-cell-height = 14%
 
 #font-family = Fira Code Retina
 #font-size = 11

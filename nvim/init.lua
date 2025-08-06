@@ -1,3 +1,5 @@
+vim.cmd([[runtime colors.vim]])
+
 -- settings
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -179,12 +181,6 @@ vim.keymap.set("v", "sr", ":<C-u>'<,'>s///g<Left><Left><Left>", { noremap = true
 vim.api.nvim_create_user_command("CF", function() vim.cmd("e " .. vim.env.MYVIMRC) end, {})
 vim.api.nvim_create_user_command("BC", function() print(#vim.fn.getbufinfo({buflisted = 1})) end, {})
 
-vim.api.nvim_create_autocmd("WinEnter", {
-  callback = function()
-	  vim.wo.number = false
-  end,
-})
-
 -- improve quickfix window
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
@@ -255,7 +251,25 @@ require("lazy").setup({
 	},
 
 	{
+		"tpope/vim-commentary",
+		config = function()
+			vim.keymap.set("v", "<C-c>", "<Plug>Commentary", { silent = true })
+			vim.keymap.set("n", "<C-c>", "<Plug>CommentaryLine", { silent = true })
+		end,
+	},
+
+	{
+		"duane9/nvim-rg",
+		config = function()
+			vim.g.rg_command = "rg --vimgrep --smart-case --fixed-strings --ignore"
+			vim.keymap.set("n", "<C-f>", function() vim.api.nvim_feedkeys(":Rg ", "n", false) end, { noremap = true })
+		end
+	},
+
+	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		priority = 100,
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
@@ -264,14 +278,6 @@ require("lazy").setup({
 				indent = { enable = true }
 			})
 		end,
-	},
-
-	{
-		"nvim-treesitter/playground",
-		init = function()
-			vim.api.nvim_create_user_command("H", function() vim.cmd("TSHighlightCapturesUnderCursor") end, {})
-		end,
-		lazy = true, cmd = { "TSHighlightCapturesUnderCursor" }
 	},
 
 	{
@@ -284,8 +290,8 @@ require("lazy").setup({
 			require("scrollbar").setup({
 				-- throttle_ms = 50,
 				handle = {
-					blend = 50, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-					highlight = "CocHighlightText",
+					blend = 20, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
+					highlight = "StatusLine",
 				},
 				handlers = {
 					cursor = false,
@@ -304,14 +310,6 @@ require("lazy").setup({
 					},
 				}
 			})
-		end,
-	},
-
-	{
-		"tpope/vim-commentary",
-		config = function()
-			vim.keymap.set("v", "<C-c>", "<Plug>Commentary", { silent = true })
-			vim.keymap.set("n", "<C-c>", "<Plug>CommentaryLine", { silent = true })
 		end,
 	},
 
@@ -382,14 +380,6 @@ require("lazy").setup({
 
 			vim.api.nvim_create_user_command("CC", function() vim.cmd("!rm -rf ~/.cache/ctrlp") end, {})
 		end,
-	},
-
-	{
-		"duane9/nvim-rg",
-		config = function()
-			vim.g.rg_command = "rg --vimgrep --smart-case --fixed-strings --ignore"
-			vim.keymap.set("n", "<C-f>", function() vim.api.nvim_feedkeys(":Rg ", "n", false) end, { noremap = true })
-		end
 	},
 
 	{
@@ -559,5 +549,3 @@ vim.cmd([[
 
 	set statusline=%f%{&modified?'\ [+]\ ':''}%r%=%#StatusLineErrors#%{GetCocErrors()}%#StatusLine#\ %-5.(%l,%c%)\ %L
 ]])
-
-vim.cmd([[runtime colors.vim]])
