@@ -135,23 +135,13 @@ exec "hi GitGutterChange guifg=".s:type
 exec "hi GitGutterDelete guifg=".s:keyword
 exec "hi GitGutterChangeDelete guifg=".s:primitive
 exec "hi NullLsInfoBorder guifg=".s:comment." guibg=".s:bg_normal." gui=NONE"
-exec "hi CocErrorSign guibg=".s:bg_light." guifg=".s:error." gui=bold"
-exec "hi CocListFgerror guifg=".s:error
-exec "hi CocWarningSign guifg=".s:type." gui=bold"
-exec "hi CocInfoSign guifg=".s:fg_normal." gui=bold"
-exec "hi CocHintSign guifg=".s:fg_normal." gui=bold"
-exec "hi FloatTitle guifg=".s:function." guibg=".s:bg_normal." gui=NONE"
-exec "hi link CocCodeLens Comment"
-exec "hi CocFadeOut guifg=NONE guibg=".s:comment
-exec "hi TreesitterContext guibg=".s:bg_highlight_1
 
-exec "hi CocHighlightText guibg=".s:bg_highlight_3
+exec "hi FloatTitle guifg=".s:function." guibg=".s:bg_normal." gui=NONE"
+exec "hi TreesitterContext guibg=".s:bg_highlight_1
 
 exec "highlight Search guifg=NONE gui=NONE guibg=".s:bg_highlight_3
 exec "highlight IncSearch guifg=NONE gui=NONE guibg=".s:bg_highlight_3
 exec "highlight CurSearch guifg=NONE gui=NONE guibg=".s:bg_highlight_3
-
-exec "hi link CocFloating Pmenu"
 
 exec "hi SatelliteBar guibg=".s:bg_highlight_3
 exec "hi LineNr guifg=".s:comment." guibg=NONE"
@@ -169,6 +159,17 @@ exec "hi AerialLine guifg=NONE guibg=".s:bg_light
 exec "hi AerialNormal guifg=".s:function." gui=bold"
 
 exec "hi IblIndent guifg=#393b56"
+
+" COC
+exec "hi CocErrorSign guibg=".s:bg_light." guifg=".s:error." gui=bold"
+exec "hi CocListFgerror guifg=".s:error
+exec "hi CocWarningSign guifg=".s:type." gui=bold"
+exec "hi CocInfoSign guifg=".s:fg_normal." gui=bold"
+exec "hi CocHintSign guifg=".s:fg_normal." gui=bold"
+exec "hi CocFadeOut guifg=NONE guibg=".s:comment
+exec "hi CocHighlightText guibg=".s:bg_highlight_3
+exec "hi link CocCodeLens Comment"
+exec "hi link CocFloating Pmenu"
 
 " Tree-sitter groups
 exec "hi @string guifg=".s:primitive
