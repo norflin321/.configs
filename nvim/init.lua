@@ -159,8 +159,8 @@ vim.keymap.set("v", "<", "<gv", { noremap = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true })
 
 -- move selected lines vertically
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
+-- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
+-- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
 
 -- join lines
 vim.keymap.set("n", "J", "mzJ`z", { noremap = true })
@@ -206,6 +206,13 @@ for _, ft in ipairs({ "rust", "go", "python", "swift", "zig" }) do
   })
 end
 
+local is_empty_before_cursor = function()
+    local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local current_line = vim.api.nvim_get_current_line()
+    local before_cursor = current_line:sub(1, col)
+    return before_cursor:match("^%s*$") ~= nil
+end
+
 -- function for sizing float windows
 local function floatWinConfig(width_ratio, height_ratio)
 	return function()
@@ -241,7 +248,6 @@ vim.opt.rtp:prepend(lazypath)
 -- install and configure plugins
 require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
-	{ "nvim-tree/nvim-web-devicons" },
 
 	{
 		"jiangmiao/auto-pairs",
@@ -290,14 +296,10 @@ require("lazy").setup({
 			require("scrollbar").setup({
 				-- throttle_ms = 50,
 				handle = {
-					blend = 20, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-					highlight = "StatusLine",
+					blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
+					highlight = "#494e6e",
 				},
-				handlers = {
-					cursor = false,
-					diagnostic = false,
-					search = false,
-				},
+				handlers = { cursor = false, diagnostic = false, search = false },
 				excluded_buftypes = { "terminal", "nofile" },
 				marks = {
 					Search = {
@@ -306,7 +308,7 @@ require("lazy").setup({
 						gui = nil,
 						color = nil,
 						cterm = nil,
-						color_nr = nil, -- cterm
+						color_nr = nil,
 						highlight = "Search",
 					},
 				}
@@ -327,6 +329,7 @@ require("lazy").setup({
 
 	{
 		"kyazdani42/nvim-tree.lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		init = function()
 			vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<CR>", { silent = true, noremap = true })
 		end,
@@ -341,7 +344,7 @@ require("lazy").setup({
 				end,
 				git = { enable = false },
 				view = {
-					float = { enable = true, open_win_config = floatWinConfig(0.5, 0.9) },
+					float = { enable = true, open_win_config = floatWinConfig(0.4, 0.85) },
 					width = function() return math.floor(vim.opt.columns:get() * 0.5) end,
 				},
 				renderer = {
@@ -519,9 +522,52 @@ require("lazy").setup({
 			end
 
 			-- npm install -g typescript-language-server
-			lspconfig.ts_ls.setup({ on_attach = on_attach })
+			lspconfig.ts_ls.setup({ on_attach = on_attach, capabilities = require('blink.cmp').get_lsp_capabilities() })
 		end,
-	}
+	},
+
+	{
+		"saghen/blink.cmp",
+		version = "1.*",
+		opts = {
+			keymap = {
+				preset = "default",
+				["<C-k>"] = { "select_prev", "fallback" },
+				["<C-j>"] = { "select_next", "fallback" },
+				["<Tab>"] = {
+					function(cmp)
+						if cmp.is_menu_visible() then
+							cmp.accept()
+							return true
+						elseif is_empty_before_cursor() then
+							vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
+							return true
+						else
+							return false
+						end
+					end,
+					"show"
+				},
+			},
+
+			completion = {
+				menu = {
+					min_width = 30,
+					max_height = 20,
+					draw = { treesitter = { "lsp" } }
+				},
+				trigger = { show_on_keyword = false, show_on_trigger_character = false, show_on_insert_on_trigger_character = false, },
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 0,
+					window = { max_width = 120, max_height = 35 }
+				},
+			},
+			signature = { enabled = false },
+			fuzzy = { implementation = "lua" },
+		},
+		opts_extend = { "sources.default" }
+	},
 }, { lockfile = "~/.vim/lazy-lock.json" })
 
 vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-5.(%l,%c%)\ %L ]])

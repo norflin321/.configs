@@ -6,8 +6,8 @@ let s:bg_normal      = "#252737"
 let s:bg_dark        = "#1f202e"
 let s:bg_light       = "#2a2c3f"
 let s:bg_highlight_1 = "#33364d"
-let s:bg_highlight_2 = "#8085a6"
-let s:bg_highlight_3 = "#373a53"
+let s:bg_highlight_2 = "#787ca1"
+let s:bg_highlight_3 = "#393c56"
 let s:type           = "#ac8b83"
 let s:function       = "#929be5"
 let s:keyword        = "#8087ac"
@@ -57,7 +57,6 @@ exec "hi MoreMsg guifg=".s:primitive
 exec "hi Todo guifg=".s:type." guibg=NONE gui=bold"
 exec "hi Visual guibg=".s:bg_highlight_1." gui=NONE"
 exec "hi Question guifg=".s:primitive." gui=bold"
-exec "hi WildMenu guifg=".s:bg_normal." guibg=".s:function
 exec "hi SpellBad guifg=".s:error." gui=underline"
 exec "hi SpellCap gui=underline"
 exec "hi SpellLocal guifg=".s:error." gui=underline"
@@ -91,6 +90,8 @@ exec "hi DiagnosticVirtualTextHint guifg=".s:comment." gui=bold"
 exec "hi DiagnosticUnderlineHint gui=underline"
 
 " nvim-tree and aerial
+exec "hi NvimTreeNormal guifg=NONE guibg=".s:bg_highlight_1
+exec "hi NvimTreeCursorLine guifg=NONE guibg=#3b3e59"
 exec "hi NvimTreeFolderName guifg=".s:function." gui=NONE"
 exec "hi NvimTreeRootFolder guifg=".s:function." gui=bold"
 exec "hi NvimTreeFolderIcon guifg=".s:function." gui=NONE"
@@ -98,13 +99,10 @@ exec "hi NvimTreeFileIcon guifg=".s:function." gui=NONE"
 exec "hi NvimTreeEmptyFolderName guifg=".s:comment." gui=NONE"
 exec "hi NvimTreeOpenedFolderName guifg=".s:function." gui=NONE"
 exec "hi NvimTreeOpenedFile guifg=".s:bg_highlight_2." gui=NONE"
-exec "hi AerialLine guifg=NONE guibg=".s:bg_light
-exec "hi AerialNormal guifg=".s:function." gui=bold"
+exec "hi AerialLine guifg=NONE guibg=#3b3e59"
+exec "hi AerialNormal guifg=".s:function." gui=NONE"
 
 " search
-" exec "highlight Search guifg=NONE gui=NONE guibg=".s:bg_highlight_3
-" exec "highlight IncSearch guifg=NONE gui=NONE guibg=".s:bg_highlight_3
-" exec "highlight CurSearch guifg=NONE gui=NONE guibg=".s:bg_highlight_3
 exec "hi Search guifg=".s:bg_normal." guibg=".s:bg_highlight_2
 exec "hi IncSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2
 exec "hi CurSearch guifg=".s:bg_normal." guibg="."#ffff00"
@@ -113,17 +111,18 @@ exec "hi LspReferenceRead guifg=NONE guibg=".s:bg_highlight_3
 exec "hi LspReferenceWrite guifg=NONE guibg=".s:bg_highlight_3
 
 " popups
-exec "hi Pmenu guifg=".s:fg_normal." guibg=".s:bg_highlight_1
-exec "hi PmenuSel guifg=".s:fg_normal." guibg=".s:bg_highlight_3
-exec "hi PmenuSbar guibg=".s:bg_light
-exec "hi PmenuThumb guibg=".s:bg_dark
-exec "hi FloatTitle guifg=".s:function." guibg=".s:bg_normal." gui=NONE"
+exec "hi Pmenu guifg=NONE guibg=".s:bg_highlight_1
+exec "hi PmenuSel guifg=NONE guibg=#3b3e59 gui=NONE"
+exec "hi PmenuSbar guifg=".s:bg_highlight_1." guibg=".s:bg_highlight_1
+exec "hi PmenuThumb guifg=".s:bg_highlight_1." guibg=#434765"
+
 exec "hi Float guifg=".s:primitive
 exec "hi FloatTitle guifg=".s:function." guibg=".s:bg_normal." gui=NONE"
 exec "hi FloatBorder guifg=".s:bg_highlight_1." guibg=".s:bg_highlight_1." gui=NONE"
-exec "hi NormalFloat guibg=".s:bg_highlight_1." gui=NONE"
-exec "hi FloatThumb guifg=".s:bg_highlight_1." guibg=".s:bg_highlight_1." gui=NONE"
+exec "hi FloatThumb guifg=".s:bg_highlight_1." guibg=#434765 gui=NONE"
 exec "hi FloatScroll guifg=".s:bg_highlight_1." guibg=".s:bg_highlight_1." gui=NONE"
+exec "hi NormalFloat guibg=".s:bg_highlight_1." gui=NONE"
+exec "hi WildMenu guifg=".s:bg_normal." guibg=".s:bg_light
 
 " statusline and gutter
 exec "hi StatusLine guifg=".s:comment." guibg=".s:bg_dark." gui=NONE"
