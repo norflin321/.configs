@@ -144,8 +144,8 @@ vim.keymap.set({ "n", "v" }, ")", "15j", { noremap = true })
 vim.keymap.set({ "n", "v" }, "(", "15k", { noremap = true })
 
 -- move faster horizontally 
--- vim.keymap.set({ "n", "v" }, "L", "15l", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "H", "15h", { noremap = true })
+vim.keymap.set({ "n", "v" }, "L", "15l", { noremap = true })
+vim.keymap.set({ "n", "v" }, "H", "15h", { noremap = true })
 
 -- jump to line end
 vim.keymap.set("", "9", "$", { noremap = true })
@@ -515,7 +515,7 @@ require("lazy").setup({
 				vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "F", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "<C-d>", function() vim.diagnostic.goto_next({ float = false, severity = vim.diagnostic.severity.ERROR }) end, opts)
+				vim.keymap.set("n", "<C-d>", function() vim.diagnostic.goto_next({ float = true, severity = vim.diagnostic.severity.ERROR }) end, opts)
 
 				-- Enable highlighting word under cursor
 				vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() vim.lsp.buf.document_highlight() end) return "<LeftMouse>" end, { expr = true })

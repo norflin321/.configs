@@ -2,9 +2,9 @@
 #font-size = 10.5
 #adjust-cell-height = 8%
 
-font-family = Fira Code Retina
-font-size = 10.5
-adjust-cell-height = 14%
+#font-family = Fira Code Retina
+#font-size = 10.5
+#adjust-cell-height = 14%
 
 #font-family = Input Mono
 #font-size = 10.5
@@ -13,6 +13,10 @@ adjust-cell-height = 14%
 #font-family = Input Mono
 #font-size = 10
 #adjust-cell-height = 16%
+
+font-family = Maple Mono
+font-size = 10.5
+adjust-cell-height = 8%
 
 font-feature = -calt
 font-feature = -liga
@@ -34,7 +38,7 @@ keybind = super+two=next_tab
 #keybind = super+one=goto_split:left
 #keybind = super+two=goto_split:right
 
-theme = light:SleepyHollow,dark:SleepyHollow
+theme = light:Ciapre,dark:Ciapre
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-color = #a3a8c2
