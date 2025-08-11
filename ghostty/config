@@ -1,22 +1,18 @@
-#font-family = JetBrains Mono
-#font-size = 10.5
-#adjust-cell-height = 8%
+font-family = JetBrains Mono
+font-size = 10.5
+adjust-cell-height = 8%
 
 #font-family = Fira Code Retina
 #font-size = 10.5
 #adjust-cell-height = 14%
 
-#font-family = Input Mono
+#font-family = Maple Mono
 #font-size = 10.5
-#adjust-cell-height = 14%
+#adjust-cell-height = 8%
 
-#font-family = Input Mono
-#font-size = 10
-#adjust-cell-height = 16%
-
-font-family = Maple Mono
-font-size = 10.5
-adjust-cell-height = 8%
+#font-family = SF Mono
+#font-size = 10.5
+#adjust-cell-height = 8%
 
 font-feature = -calt
 font-feature = -liga

@@ -474,7 +474,6 @@ require("lazy").setup({
 			local lspconfig = require("lspconfig")
 
 			-- Try to disable built-in LSP
-			vim.lsp.start_client = function() return {} end
 			if is_map_exists("n", "gri") then vim.keymap.del("n", "gri") end
 			if is_map_exists("n", "grr") then vim.keymap.del("n", "grr") end
 			if is_map_exists("n", "gra") then vim.keymap.del("n", "gra") end
@@ -515,7 +514,7 @@ require("lazy").setup({
 				vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "F", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "<C-d>", function() vim.diagnostic.goto_next({ float = true, severity = vim.diagnostic.severity.ERROR }) end, opts)
+				vim.keymap.set("n", "<C-d>", function() vim.diagnostic.goto_next({ float = { border = "solid" }, severity = vim.diagnostic.severity.ERROR }) end, opts)
 
 				-- Enable highlighting word under cursor
 				vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() vim.lsp.buf.document_highlight() end) return "<LeftMouse>" end, { expr = true })
@@ -528,8 +527,15 @@ require("lazy").setup({
 				vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "solid", max_width = 120, max_height = 35 }) end, opts)
 			end
 
-			-- npm install -g typescript-language-server
-			lspconfig.ts_ls.setup({ on_attach = on_attach, capabilities = require('blink.cmp').get_lsp_capabilities() })
+			-- npm install -g typescript typescript-language-server
+			-- make sure to not open js/ts files inside large diractory, because lsp at the start searches for package.json in cwd
+			lspconfig.ts_ls.setup({ on_attach = on_attach })
+
+			-- npm i -g vscode-langservers-extracted
+			lspconfig.eslint.setup({ cmd = { "vscode-eslint-language-server", "--stdio" } })
+
+			-- go install golang.org/x/tools/gopls@latest
+			lspconfig.gopls.setup({ on_attach = on_attach })
 		end,
 	},
 
@@ -544,6 +550,7 @@ require("lazy").setup({
 				["<Tab>"] = {
 					function(cmp)
 						if cmp.is_menu_visible() then
+							-- print(vim.inspect(cmp))
 							cmp.accept()
 							return true
 						elseif is_empty_before_cursor() then
