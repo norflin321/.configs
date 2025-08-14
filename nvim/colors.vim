@@ -74,6 +74,7 @@ exec "hi jsonQuote guifg=".s:bg_highlight_2
 exec "hi NullLsInfoBorder guifg=".s:comment." guibg=".s:bg_normal." gui=NONE"
 exec "hi typecriptImport guifg=".s:fg_normal
 exec "hi typecriptDocRef guifg=".s:comment." gui=underline"
+exec "hi BlinkCmpLabelMatch gui=bold"
 
 " diagnostics
 exec "hi DiagnosticError guifg=".s:error
