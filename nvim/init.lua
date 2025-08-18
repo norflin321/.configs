@@ -297,7 +297,7 @@ require("lazy").setup({
 				-- throttle_ms = 50,
 				handle = {
 					blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-					highlight = "#494e6e",
+					color = "#313449",
 				},
 				handlers = { cursor = false, diagnostic = false, search = false },
 				excluded_buftypes = { "terminal", "nofile" },
@@ -514,7 +514,13 @@ require("lazy").setup({
 				vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "F", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "<C-d>", function() vim.diagnostic.goto_next({ float = { border = "solid" }, severity = vim.diagnostic.severity.ERROR }) end, opts)
+				vim.keymap.set("n", "<C-d>", function()
+					vim.diagnostic.jump({
+						count = 1,
+						float = { border = "solid", max_width = 120, max_height = 35 },
+						severity = vim.diagnostic.severity.ERROR,
+					})
+				end, opts)
 
 				-- Enable highlighting word under cursor
 				vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() vim.lsp.buf.document_highlight() end) return "<LeftMouse>" end, { expr = true })
@@ -570,7 +576,7 @@ require("lazy").setup({
 					max_height = 20,
 					draw = { treesitter = { "lsp" } }
 				},
-				trigger = { show_on_keyword = false, show_on_trigger_character = false, show_on_insert_on_trigger_character = false, },
+				-- trigger = { show_on_keyword = false, show_on_trigger_character = false, show_on_insert_on_trigger_character = false },
 				documentation = {
 					auto_show = true,
 					auto_show_delay_ms = 0,
@@ -582,6 +588,13 @@ require("lazy").setup({
 		},
 		opts_extend = { "sources.default" }
 	},
+
+	{
+		"dmmulroy/ts-error-translator.nvim",
+		config = function()
+			require("ts-error-translator").setup()
+		end
+	}
 }, { lockfile = "~/.vim/lazy-lock.json" })
 
 vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-5.(%l,%c%)\ %L ]])

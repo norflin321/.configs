@@ -55,7 +55,7 @@ exec "hi ErrorMsg guifg=".s:error." guibg=NONE gui=bold"
 exec "hi WarningMsg guifg=".s:type." gui=bold"
 exec "hi MoreMsg guifg=".s:primitive
 exec "hi Todo guifg=".s:type." guibg=NONE gui=bold"
-exec "hi Visual guibg=".s:bg_highlight_1." gui=NONE"
+exec "hi Visual guibg=#373a53 gui=NONE"
 exec "hi Question guifg=".s:primitive." gui=bold"
 exec "hi SpellBad guifg=".s:error." gui=underline"
 exec "hi SpellCap gui=underline"
