@@ -1,19 +1,12 @@
-#font-family = JetBrains Mono
-#font-size = 10.5
-#adjust-cell-height = 8%
-
 font-family = Fira Code Retina
 font-size = 11
 adjust-cell-height = 8%
 
-#font-family = Maple Mono
-#font-size = 11
-#adjust-cell-height = 12%
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
 font-thicken = true
-font-thicken-strength = 70
+font-thicken-strength = 50
 
 macos-titlebar-style = tabs
 confirm-close-surface = false
@@ -25,9 +18,6 @@ window-padding-color = extend
 
 keybind = super+one=previous_tab
 keybind = super+two=next_tab
-
-#keybind = super+one=goto_split:left
-#keybind = super+two=goto_split:right
 
 theme = light:Ciapre,dark:Ciapre
 shell-integration-features = no-cursor
