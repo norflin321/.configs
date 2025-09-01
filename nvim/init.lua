@@ -1,5 +1,9 @@
 vim.cmd([[runtime colors.vim]])
 
+-- @TODO:
+-- [x] scrollbar should show search results
+-- [x] search should fire from visual mode when i press c-f, and search selected text
+
 -- settings
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -268,7 +272,18 @@ require("lazy").setup({
 		"duane9/nvim-rg",
 		config = function()
 			vim.g.rg_command = "rg --vimgrep --smart-case --fixed-strings --ignore"
-			vim.keymap.set("n", "<C-f>", function() vim.api.nvim_feedkeys(":Rg ", "n", false) end, { noremap = true })
+
+			vim.keymap.set("n", "<c-f>", function()
+				local search_term = vim.fn.input("Search: ")
+				if search_term ~= "" then
+					vim.cmd("Rg " .. vim.fn.shellescape(search_term))
+				end
+			end, { noremap = true })
+
+			vim.keymap.set("v", "<c-f>", function()
+				vim.cmd('normal! "xy')
+				vim.cmd("Rg " .. vim.fn.shellescape(vim.fn.getreg("x")))
+			end, { noremap = true })
 		end
 	},
 
@@ -289,28 +304,21 @@ require("lazy").setup({
 	{
 		"petertriho/nvim-scrollbar",
 		lazy = false,
-		-- dependencies = { "kevinhwang91/nvim-hlslens" },
+		dependencies = { "kevinhwang91/nvim-hlslens" },
 		config = function()
-			-- require("scrollbar.handlers.search").setup({ override_lens = function() end })
+			require("scrollbar.handlers.search").setup({ override_lens = function() end })
 
 			require("scrollbar").setup({
 				-- throttle_ms = 50,
 				handle = {
 					blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-					color = "#313449",
+					color = "#373a53",
 				},
-				handlers = { cursor = false, diagnostic = false, search = false },
+				handlers = { cursor = false, diagnostic = true, search = true },
 				excluded_buftypes = { "terminal", "nofile" },
 				marks = {
-					Search = {
-						text = { "-", "=" },
-						priority = 1,
-						gui = nil,
-						color = nil,
-						cterm = nil,
-						color_nr = nil,
-						highlight = "Search",
-					},
+					Search = { text = { "-", "=" }, priority = 1, highlight = "#373a53" },
+					Error = { text = { "●" }, priority = 1, highlight = "Error" },
 				}
 			})
 		end,
