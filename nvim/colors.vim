@@ -106,7 +106,8 @@ exec "hi AerialNormal guifg=".s:function." gui=NONE"
 " search
 exec "hi Search guifg=".s:bg_normal." guibg=".s:bg_highlight_2
 exec "hi IncSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2
-exec "hi CurSearch guifg=".s:bg_normal." guibg="."#ffff00"
+exec "hi CurSearch guifg=".s:bg_normal." guibg="."#dbbc96"
+exec "hi ScrollbarMarkSearch guifg=".s:bg_highlight_2
 exec "hi LspReferenceText guifg=NONE guibg=".s:bg_highlight_3
 exec "hi LspReferenceRead guifg=NONE guibg=".s:bg_highlight_3
 exec "hi LspReferenceWrite guifg=NONE guibg=".s:bg_highlight_3

@@ -3,6 +3,7 @@ vim.cmd([[runtime colors.vim]])
 -- @TODO:
 -- [x] scrollbar should show search results
 -- [x] search should fire from visual mode when i press c-f, and search selected text
+-- [x] search should highlight searched text (like /text)
 
 -- settings
 vim.o.termguicolors = true
@@ -317,7 +318,7 @@ require("lazy").setup({
 				handlers = { cursor = false, diagnostic = true, search = true },
 				excluded_buftypes = { "terminal", "nofile" },
 				marks = {
-					Search = { text = { "-", "=" }, priority = 1, highlight = "#373a53" },
+					Search = { text = { "━", "━" }, priority = 1, highlight = "ScrollbarMarkSearch" },
 					Error = { text = { "●" }, priority = 1, highlight = "Error" },
 				}
 			})
