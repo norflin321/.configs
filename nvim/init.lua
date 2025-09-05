@@ -1,10 +1,5 @@
 vim.cmd([[runtime colors.vim]])
 
--- @TODO:
--- [x] scrollbar should show search results
--- [x] search should fire from visual mode when i press c-f, and search selected text
--- [x] search should highlight searched text (like /text)
-
 -- settings
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -117,6 +112,9 @@ vim.keymap.set("n", "<C-z>", "<NOP>", { noremap = true })
 vim.keymap.set("n", "<C-t>", "<NOP>", { noremap = true })
 vim.keymap.set("n", "s", "<NOP>", { noremap = true })
 vim.keymap.set("n", "S", "<NOP>", { noremap = true })
+vim.keymap.set("n", "dj", "<NOP>", { noremap = true })
+vim.keymap.set("n", "dk", "<NOP>", { noremap = true })
+vim.keymap.set("n", "J", "<NOP>", { noremap = true })
 
 -- no matter the search direction we should navigate the same
 vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "N" or "n" end, { noremap = true, expr = true })
@@ -162,13 +160,6 @@ vim.keymap.set("", "8", "%", { noremap = true })
 -- move selected lines horizontally
 vim.keymap.set("v", "<", "<gv", { noremap = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true })
-
--- move selected lines vertically
--- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
--- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
-
--- join lines
-vim.keymap.set("n", "J", "mzJ`z", { noremap = true })
 
 -- allow to paste into command line
 vim.keymap.set("c", "<C-v>", "<C-r>+", { noremap = true })
@@ -275,7 +266,7 @@ require("lazy").setup({
 			vim.g.rg_command = "rg --vimgrep --smart-case --fixed-strings --ignore"
 
 			vim.keymap.set("n", "<c-f>", function()
-				local search_term = vim.fn.input("Search: ")
+				local search_term = vim.fn.input("Find: ")
 				if search_term ~= "" then
 					vim.cmd("Rg " .. vim.fn.shellescape(search_term))
 				end
@@ -308,6 +299,7 @@ require("lazy").setup({
 		dependencies = { "kevinhwang91/nvim-hlslens" },
 		config = function()
 			require("scrollbar.handlers.search").setup({ override_lens = function() end })
+			vim.api.nvim_set_hl(0, "HlSearchNear", { link = "None" })
 
 			require("scrollbar").setup({
 				-- throttle_ms = 50,
@@ -320,6 +312,10 @@ require("lazy").setup({
 				marks = {
 					Search = { text = { "━", "━" }, priority = 1, highlight = "ScrollbarMarkSearch" },
 					Error = { text = { "●" }, priority = 1, highlight = "Error" },
+					Warn = { text = { "" }, priority = 1, highlight = "None" },
+					Info = { text = { "" }, priority = 1, highlight = "None" },
+					Hint = { text = { "" }, priority = 1, highlight = "None" },
+					Misc = { text = { "" }, priority = 1, highlight = "None" },
 				}
 			})
 		end,
@@ -384,7 +380,7 @@ require("lazy").setup({
 			vim.g.ctrlp_show_hidden = 1
 
 			vim.g.ctrlp_custom_ignore = {
-				dir  = [[\v[\/](\.git|hg|svn|node_modules|.vite)$]],
+				dir = [[\v[\/](\.git|hg|svn|node_modules|.vite)$]],
 				file = [[\v\.(exe|so|dll)$]],
 			}
 			vim.g.ctrlp_mruf_exclude = "/tmp/.*\\|/temp/.*\\|node_modules/.*\\|\\.vite/.*\\|\\.git/.*"
