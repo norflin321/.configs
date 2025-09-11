@@ -576,7 +576,9 @@ require("lazy").setup({
 				end, opts)
 				vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
-				vim.keymap.set("n", "F", vim.lsp.buf.code_action, opts)
+				vim.keymap.set("n", "gf", function()
+					vim.lsp.buf.code_action({ apply = true })
+				end, opts)
 				vim.keymap.set("n", "<C-d>", function()
 					vim.diagnostic.jump({
 						count = 1,
@@ -606,7 +608,13 @@ require("lazy").setup({
 
 			-- npm install -g typescript typescript-language-server
 			-- make sure to not open js/ts files inside large diractory, because lsp at the start searches for package.json in cwd
-			lspconfig.ts_ls.setup({ on_attach = on_attach })
+			lspconfig.ts_ls.setup({
+				on_attach = on_attach,
+				init_options = {
+					hostInfo = "neovim",
+					preferences = { importModuleSpecifierPreference = "non-relative" }
+				},
+			})
 
 			-- npm i -g vscode-langservers-extracted
 			lspconfig.eslint.setup({ cmd = { "vscode-eslint-language-server", "--stdio" } })
@@ -669,7 +677,7 @@ require("lazy").setup({
 
 			require("ibl").setup({
 				enabled = true,
-				debounce = 60,
+				debounce = 100,
 				indent = { char = "▏" },
 				whitespace = { remove_blankline_trail = false },
 				scope = { enabled = false },
