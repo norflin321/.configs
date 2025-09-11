@@ -46,6 +46,7 @@ vim.opt.showtabline = 0
 vim.opt.cmdheight = 1
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
+vim.opt.lazyredraw = true
 vim.opt.updatetime = 50
 vim.opt.pumheight = 15
 vim.opt.smoothscroll = true
@@ -114,14 +115,19 @@ vim.keymap.set("n", "s", "<NOP>", { noremap = true })
 vim.keymap.set("n", "S", "<NOP>", { noremap = true })
 vim.keymap.set("n", "dj", "<NOP>", { noremap = true })
 vim.keymap.set("n", "dk", "<NOP>", { noremap = true })
+vim.keymap.set("n", "cj", "<NOP>", { noremap = true })
+vim.keymap.set("n", "ck", "<NOP>", { noremap = true })
 vim.keymap.set("n", "J", "<NOP>", { noremap = true })
+
+-- disable extra fast scrolling while holding Shift
+vim.keymap.set("", "<S-ScrollWheelUp>", "<NOP>", { silent = true })
+vim.keymap.set("", "<S-ScrollWheelDown>", "<NOP>", { silent = true })
+vim.keymap.set("", "<S-ScrollWheelLeft>", "<NOP>", { silent = true })
+vim.keymap.set("", "<S-ScrollWheelRight>", "<NOP>", { silent = true })
 
 -- no matter the search direction we should navigate the same
 vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "N" or "n" end, { noremap = true, expr = true })
 vim.keymap.set({ "n", "x", "o" }, "N", function() return vim.v.searchforward == 0 and "n" or "N" end, { noremap = true, expr = true })
-
--- clear search higlight on Esc
-vim.keymap.set("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true })
 
 -- navigate between windows
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent = true })
@@ -191,16 +197,63 @@ vim.api.nvim_create_autocmd("FileType", {
 -- make sure some filetypes has tab size 2
 local ft_opts = { tabstop = 4, shiftwidth = 4, softtabstop = 4, expandtab = false }
 for _, ft in ipairs({ "rust", "go", "python", "swift", "zig" }) do
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = ft,
-    callback = function()
-      vim.opt_local.tabstop = ft_opts.tabstop
-      vim.opt_local.shiftwidth = ft_opts.shiftwidth
-      vim.opt_local.softtabstop = ft_opts.softtabstop
-      vim.opt_local.expandtab = ft_opts.expandtab
-    end,
-  })
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = ft,
+		callback = function()
+			vim.opt_local.tabstop = ft_opts.tabstop
+			vim.opt_local.shiftwidth = ft_opts.shiftwidth
+			vim.opt_local.softtabstop = ft_opts.softtabstop
+			vim.opt_local.expandtab = ft_opts.expandtab
+		end,
+	})
 end
+
+local hide_cursor = function()
+	io.write("\27[?25l")
+	io.flush()
+end
+local show_cursor = function()
+	io.write("\27[?25h")
+	io.flush()
+end
+
+local better_scroll = function(dir)
+	hide_cursor()
+
+	local cur_row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+
+	vim.api.nvim_feedkeys("0", "n", false)
+
+	if dir == 0 then
+		local top_row = vim.fn.line("w0") + vim.opt.scrolloff:get()
+		local until_top_row = cur_row - top_row
+
+		if until_top_row > 0 then
+			vim.api.nvim_feedkeys(until_top_row .. "k", "n", false)
+		end
+
+		vim.api.nvim_feedkeys("k", "n", false)
+	else
+		local bot_row = vim.fn.line("w$") - vim.opt.scrolloff:get()
+		local until_bot_row = bot_row - cur_row
+
+		if until_bot_row > 0 then
+			vim.api.nvim_feedkeys(until_bot_row .. "j", "n", false)
+		end
+
+		vim.api.nvim_feedkeys("j", "n", false)
+	end
+end
+vim.keymap.set("n", "<ScrollWheelUp>", function() better_scroll(0) end, { expr = true })
+vim.keymap.set("n", "<ScrollWheelDown>", function() better_scroll(1) end, { expr = true })
+vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() show_cursor() end) return "<LeftMouse>" end, { expr = true })
+vim.keymap.set("", "<RightMouse>", function() vim.schedule(function() show_cursor() end) return "<RightMouse>" end, { expr = true })
+
+-- handle Esc press
+vim.keymap.set("n", "<Esc>", function()
+	show_cursor()
+	vim.api.nvim_command("noh")
+end, { noremap = true, silent = true })
 
 local is_empty_before_cursor = function()
     local _, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -264,17 +317,22 @@ require("lazy").setup({
 		"duane9/nvim-rg",
 		config = function()
 			vim.g.rg_command = "rg --vimgrep --smart-case --fixed-strings --ignore"
+			vim.g.rg_run_async = 0
 
 			vim.keymap.set("n", "<c-f>", function()
-				local search_term = vim.fn.input("Find: ")
-				if search_term ~= "" then
-					vim.cmd("Rg " .. vim.fn.shellescape(search_term))
-				end
+				local input = vim.fn.input("Find: ")
+				if input == "" then return end
+
+				vim.cmd("Rg " .. vim.fn.shellescape(input))
+				vim.cmd("silent /" .. input)
 			end, { noremap = true })
 
 			vim.keymap.set("v", "<c-f>", function()
 				vim.cmd('normal! "xy')
-				vim.cmd("Rg " .. vim.fn.shellescape(vim.fn.getreg("x")))
+				local input = vim.fn.getreg("x")
+
+				vim.cmd("Rg " .. vim.fn.shellescape(input))
+				vim.cmd("silent /" .. input)
 			end, { noremap = true })
 		end
 	},
@@ -527,8 +585,16 @@ require("lazy").setup({
 					})
 				end, opts)
 
-				-- Enable highlighting word under cursor
-				vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() vim.lsp.buf.document_highlight() end) return "<LeftMouse>" end, { expr = true })
+				-- enable highlighting word under cursor
+				vim.keymap.set("", "<LeftMouse>", function()
+					vim.schedule(function()
+						show_cursor()
+						vim.lsp.buf.document_highlight()
+					end)
+
+					return "<LeftMouse>"
+				end, { expr = true })
+
 				-- vim.keymap.set("n", "H", vim.lsp.buf.document_highlight, opts)
 				if client.server_capabilities.documentHighlightProvider then
 					vim.api.nvim_create_autocmd("CursorHold", { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
@@ -592,6 +658,23 @@ require("lazy").setup({
 			fuzzy = { implementation = "lua" },
 		},
 		opts_extend = { "sources.default" }
+	},
+
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		lazy = false,
+		config = function()
+			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#3b3d59", nocombine = true })
+
+			require("ibl").setup({
+				enabled = true,
+				debounce = 60,
+				indent = { char = "▏" },
+				whitespace = { remove_blankline_trail = false },
+				scope = { enabled = false },
+			})
+		end,
 	},
 
 	{
