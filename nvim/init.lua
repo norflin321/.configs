@@ -174,7 +174,8 @@ vim.keymap.set("c", "<C-v>", "<C-r>+", { noremap = true })
 vim.keymap.set("n", "*", ":let @/= '\\<' . expand('<cword>') . '\\>' | set hls<CR>", { noremap = true, silent = true })
 
 -- paste and format
-vim.keymap.set("n", "p", "pV=", { noremap = true })
+-- vim.keymap.set("n", "p", "pV=", { noremap = true })
+vim.keymap.set("n", "p", "p`[V`]=", { noremap = true })
 
 -- search and replace
 vim.keymap.set("n", "sr", ":%s///g<Left><Left><Left>", { noremap = true })
@@ -191,6 +192,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<C-o>", "<CR>", { buffer = true })
 		vim.keymap.set("n", "o", "<CR>", { buffer = true })
 		vim.opt_local.cursorline = true
+		vim.opt_local.scrolloff = 0
+		vim.opt_local.sidescrolloff = 0
 	end,
 })
 
@@ -217,8 +220,13 @@ local show_cursor = function()
 	io.flush()
 end
 
+local is_scrolling = false
 local better_scroll = function(dir)
-	hide_cursor()
+	if is_scrolling == false then
+		hide_cursor()
+		require("ibl").update({ debounce = 200 })
+	end
+	is_scrolling = true
 
 	local cur_row, _ = unpack(vim.api.nvim_win_get_cursor(0))
 
@@ -244,14 +252,23 @@ local better_scroll = function(dir)
 		vim.api.nvim_feedkeys("j", "n", false)
 	end
 end
+local better_scroll_cleanup = function()
+	vim.schedule(function()
+		is_scrolling = false
+		require("ibl").update({ debounce = 10 })
+
+		show_cursor()
+	end)
+end
+
 vim.keymap.set("n", "<ScrollWheelUp>", function() better_scroll(0) end, { expr = true })
 vim.keymap.set("n", "<ScrollWheelDown>", function() better_scroll(1) end, { expr = true })
-vim.keymap.set("", "<LeftMouse>", function() vim.schedule(function() show_cursor() end) return "<LeftMouse>" end, { expr = true })
-vim.keymap.set("", "<RightMouse>", function() vim.schedule(function() show_cursor() end) return "<RightMouse>" end, { expr = true })
+vim.keymap.set("", "<LeftMouse>", function() better_scroll_cleanup() return "<LeftMouse>" end, { expr = true })
+vim.keymap.set("", "<RightMouse>", function() better_scroll_cleanup() return "<RightMouse>" end, { expr = true })
 
 -- handle Esc press
 vim.keymap.set("n", "<Esc>", function()
-	show_cursor()
+	better_scroll_cleanup()
 	vim.api.nvim_command("noh")
 end, { noremap = true, silent = true })
 
@@ -263,19 +280,31 @@ local is_empty_before_cursor = function()
 end
 
 -- function for sizing float windows
-local function floatWinConfig(width_ratio, height_ratio)
+local function floatWinConfig(width_ratio, height_ratio, row_ratio, col_ratio)
 	return function()
-		local columns = vim.o.columns
-		local lines = vim.o.lines
-		local cmdheight = vim.o.cmdheight
+		local row = 0
+		local col = 0
+
+		if row_ratio ~= nil then
+			row = math.floor(vim.o.lines * row_ratio)
+		else
+			row = ((vim.o.lines - ((vim.o.lines - vim.o.cmdheight) * height_ratio)) / 2) - vim.o.cmdheight -- centralize
+		end
+
+		if col_ratio ~= nil then
+			col = math.floor(vim.o.columns * col_ratio)
+		else 
+			col = (vim.o.columns - (vim.o.columns * width_ratio)) / 2 -- centralize
+		end
+
 		return {
 			style = "minimal",
 			border = "rounded",
 			relative = "editor",
-			width = math.floor(columns * width_ratio),
-			height = math.floor((lines - cmdheight) * height_ratio),
-			row = ((lines - ((lines - cmdheight) * height_ratio)) / 2) - cmdheight,
-			col = (columns - (columns * width_ratio)) / 2,
+			width = math.floor(vim.o.columns * width_ratio),
+			height = math.floor((vim.o.lines - vim.o.cmdheight) * height_ratio),
+			row = row,
+			col = col,
 		}
 	end
 end
@@ -407,7 +436,7 @@ require("lazy").setup({
 				end,
 				git = { enable = false },
 				view = {
-					float = { enable = true, open_win_config = floatWinConfig(0.4, 0.85) },
+					float = { enable = true, open_win_config = floatWinConfig(0.25, 0.9, nil, 0.72) },
 					width = function() return math.floor(vim.opt.columns:get() * 0.5) end,
 				},
 				renderer = {
@@ -464,12 +493,8 @@ require("lazy").setup({
 				attach_mode = "global",
 				show_guides = true,
 				layout = { width = 50, min_width = 30, max_width = 50, default_direction = "float" },
-				float = { override = floatWinConfig(0.4, 0.8), },
+				float = { override = floatWinConfig(0.20, 0.9, nil, 0.77) },
 				guides = { mid_item = "├─ ", last_item = "└─ ", nested_top = "│ ", whitespace = "  " },
-				filter_kind = {
-					"Array", "Class", "Constructor", "Enum", "EnumMember", "Event", "Field", "Function",
-					"Interface", "Method", "Module", "Object", "Package", "Property", "Collapsed"
-				},
 				keymaps = {
 					["<CR>"] = "actions.jump",
 					["o"] = "actions.jump",
@@ -481,7 +506,11 @@ require("lazy").setup({
 					["<c-l>"] = "actions.close",
 					["<c-n>"] = "actions.close",
 				},
+				highlight_on_jump = 10,
+				post_jump_cmd = "normal! zt",
 			})
+
+			-- vim.api.nvim_set_hl(0, "AerialLine", { link = "Cursorline" })
 		end,
 		lazy = true, cmd = { "AerialToggle" },
 	},
@@ -590,7 +619,7 @@ require("lazy").setup({
 				-- enable highlighting word under cursor
 				vim.keymap.set("", "<LeftMouse>", function()
 					vim.schedule(function()
-						show_cursor()
+						better_scroll_cleanup()
 						vim.lsp.buf.document_highlight()
 					end)
 
@@ -677,7 +706,7 @@ require("lazy").setup({
 
 			require("ibl").setup({
 				enabled = true,
-				debounce = 100,
+				debounce = 10,
 				indent = { char = "▏" },
 				whitespace = { remove_blankline_trail = false },
 				scope = { enabled = false },
