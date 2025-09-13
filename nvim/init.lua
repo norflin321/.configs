@@ -664,7 +664,6 @@ require("lazy").setup({
 				["<Tab>"] = {
 					function(cmp)
 						if cmp.is_menu_visible() then
-							-- print(vim.inspect(cmp))
 							cmp.accept()
 							return true
 						elseif is_empty_before_cursor() then
