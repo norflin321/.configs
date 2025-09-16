@@ -224,7 +224,7 @@ local is_scrolling = false
 local better_scroll = function(dir)
 	if is_scrolling == false then
 		hide_cursor()
-		require("ibl").update({ debounce = 200 })
+		require("ibl").update({ debounce = 500 })
 	end
 	is_scrolling = true
 
@@ -717,6 +717,12 @@ require("lazy").setup({
 		"dmmulroy/ts-error-translator.nvim",
 		config = function()
 			require("ts-error-translator").setup()
+		end
+	},
+
+	{
+		"tpope/vim-fugitive",
+		config = function()
 		end
 	}
 }, { lockfile = "~/.vim/lazy-lock.json" })
