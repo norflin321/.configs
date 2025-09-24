@@ -126,8 +126,8 @@ vim.keymap.set("", "<S-ScrollWheelLeft>", "<NOP>", { silent = true })
 vim.keymap.set("", "<S-ScrollWheelRight>", "<NOP>", { silent = true })
 
 -- no matter the search direction we should navigate the same
-vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "N" or "n" end, { noremap = true, expr = true })
-vim.keymap.set({ "n", "x", "o" }, "N", function() return vim.v.searchforward == 0 and "n" or "N" end, { noremap = true, expr = true })
+vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "Nzz" or "nzz" end, { noremap = true, expr = true })
+vim.keymap.set({ "n", "x", "o" }, "N", function() return vim.v.searchforward == 0 and "nzz" or "Nzz" end, { noremap = true, expr = true })
 
 -- navigate between windows
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent = true })
@@ -194,6 +194,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.cursorline = true
 		vim.opt_local.scrolloff = 0
 		vim.opt_local.sidescrolloff = 0
+		vim.opt_local.list = false
 	end,
 })
 
@@ -560,6 +561,7 @@ require("lazy").setup({
 
 	{
 		"neovim/nvim-lspconfig",
+		version = "v2.4.0",
 		lazy = false,
 		priority = 100,
 		config = function()
@@ -650,6 +652,15 @@ require("lazy").setup({
 
 			-- go install golang.org/x/tools/gopls@latest
 			lspconfig.gopls.setup({ on_attach = on_attach })
+
+			-- https://zigtools.org/zls/install
+			lspconfig.zls.setup({
+				cmd = { "/Users/norflin/main/zls" },
+				filetypes = { "zig", "zir" },
+				root_dir = lspconfig.util.root_pattern("build.zig", ".git") or vim.loop.cwd,
+				single_file_support = true,
+				on_attach = on_attach
+			})
 		end,
 	},
 
@@ -713,18 +724,17 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"dmmulroy/ts-error-translator.nvim",
-		config = function()
-			require("ts-error-translator").setup()
-		end
-	},
 
 	{
-		"tpope/vim-fugitive",
+		"ruifm/gitlinker.nvim",
 		config = function()
+			require("gitlinker").setup({
+				mappings = nil
+			})
+
+			vim.api.nvim_create_user_command("GL", function() require("gitlinker").get_buf_range_url("n") end, {})
 		end
-	}
+	},
 }, { lockfile = "~/.vim/lazy-lock.json" })
 
 vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-5.(%l,%c%)\ %L ]])

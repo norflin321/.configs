@@ -1,0 +1,19 @@
+os:
+  edit: "/Users/norflin/main/nvim-macos-arm64/bin/nvim {{filename}}"
+  editAtLine: "/Users/norflin/main/nvim-macos-arm64/bin/nvim --line={{line}} {{filename}}"
+  editAtLineAndWait: "/Users/norflin/main/nvim-macos-arm64/bin/nvim --block --line={{line}} {{filename}}"
+  editInTerminal: true
+  openDirInEditor: "/Users/norflin/main/nvim-macos-arm64/bin/nvim {{dir}}"
+gui:
+  scrollHeight: 1
+  scrollPastBottom: false
+  sidePanelWidth: 0.25
+  showRandomTip: false
+  commitHashLength: 0
+  commandLogSize: 3
+  switchTabsWithPanelJumpKeys: true
+  theme:
+    activeBorderColor:
+      - magenta 
+      - bold
+disableStartupPopups: true

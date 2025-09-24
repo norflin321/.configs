@@ -8,6 +8,7 @@ export PATH="$HOME/Library/Android/sdk:$PATH"
 
 export ANDROID_HOME=~/Library/Android/sdk
 export SDKROOT=$(xcrun --show-sdk-path)
+export XDG_CONFIG_HOME="$HOME/.config"
 
 alias rm="trash"
 alias ls="ls -la"
@@ -17,8 +18,9 @@ alias pets="cd /Users/norflin/main/rockstone/mergicpets_client"
 alias clear1="clear"
 alias clear="clear && printf '\e[3J'"
 
-alias nvim="~/main/nvim-macos-arm64/bin/nvim"
+alias nvim="/Users/norflin/main/nvim-macos-arm64/bin/nvim"
 alias vi="nvim"
+alias vim="nvim"
 alias studio="open -a /Applications/Android\ Studio.app"
 alias clang_cpp="/opt/homebrew/Cellar/llvm/19.1.1/bin/clang++"
 alias ts-ru="trans -brief -to ru"

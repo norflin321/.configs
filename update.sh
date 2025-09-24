@@ -6,6 +6,9 @@ cp -R ~/.config/ghostty ./
 git rm --ignore-unmatch -rf ./nvim
 cp -R ~/.config/nvim ./
 
+git rm --ignore-unmatch -rf ./lazygit
+cp -R ~/.config/lazygit ./
+
 git rm --ignore-unmatch .zshrc
 cp ~/.zshrc ./
 

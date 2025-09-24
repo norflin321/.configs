@@ -1,7 +1,3 @@
-#font-family = Fira Code Retina
-#font-size = 11
-#adjust-cell-height = 8%
-
 font-family = JetBrains Mono
 font-size = 11
 adjust-cell-height = 12%
@@ -25,7 +21,6 @@ keybind = super+Digit2=next_tab
 
 theme = light:Ciapre,dark:Ciapre
 shell-integration-features = no-cursor
-cursor-style = block
 cursor-color = #a3a8c2
 cursor-text = #000000
 cursor-style-blink = false
