@@ -15,7 +15,7 @@ gui:
   switchTabsWithPanelJumpKeys: true
   theme:
     inactiveBorderColor:
-      - "#474d6b"
+      - "#3d425c"
     activeBorderColor:
       - "#666b99"
     selectedLineBgColor:
