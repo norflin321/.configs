@@ -1,3 +1,4 @@
+disableStartupPopups: true
 os:
   edit: "/Users/norflin/main/nvim-macos-arm64/bin/nvim {{filename}}"
   editAtLine: "/Users/norflin/main/nvim-macos-arm64/bin/nvim --line={{line}} {{filename}}"
@@ -13,7 +14,14 @@ gui:
   commandLogSize: 3
   switchTabsWithPanelJumpKeys: true
   theme:
+    inactiveBorderColor:
+      - "#474d6b"
     activeBorderColor:
-      - magenta 
-      - bold
-disableStartupPopups: true
+      - "#666b99"
+    selectedLineBgColor:
+      - "#33374d"
+    defaultFgColor:
+      - "#9ea3c0"
+git:
+  paging:
+    # pager: "diff-so-fancy"
