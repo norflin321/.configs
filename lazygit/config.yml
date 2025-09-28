@@ -1,4 +1,5 @@
 disableStartupPopups: true
+promptToReturnFromSubprocess: false
 os:
   edit: "/Users/norflin/main/nvim-macos-arm64/bin/nvim {{filename}}"
   editAtLine: "/Users/norflin/main/nvim-macos-arm64/bin/nvim --line={{line}} {{filename}}"
@@ -12,7 +13,11 @@ gui:
   showRandomTip: false
   commitHashLength: 0
   commandLogSize: 3
-  switchTabsWithPanelJumpKeys: true
+  switchTabsWithPanelJumpKeys: false
+  showListFooter: false
+  showRootItemInFileTree: false
+  showNumstatInFilesView: true
+  showCommandLog: false
   theme:
     inactiveBorderColor:
       - "#3d425c"
@@ -22,3 +27,7 @@ gui:
       - "#33374d"
     defaultFgColor:
       - "#9ea3c0"
+git:
+  paging:
+    colorArg: always
+    pager: diff-so-fancy

@@ -6,7 +6,7 @@ let s:bg_normal      = "#252737"
 let s:bg_dark        = "#1f202e"
 let s:bg_light       = "#2a2c3f"
 let s:bg_highlight_1 = "#33364d"
-let s:bg_highlight_2 = "#787ca1"
+let s:bg_highlight_2 = "#6f739b"
 let s:bg_highlight_3 = "#393c56"
 let s:type           = "#ac8b83"
 let s:function       = "#929be5"
@@ -55,7 +55,7 @@ exec "hi ErrorMsg guifg=".s:error." guibg=NONE gui=bold"
 exec "hi WarningMsg guifg=".s:type." gui=bold"
 exec "hi MoreMsg guifg=".s:primitive
 exec "hi Todo guifg=".s:type." guibg=NONE gui=bold"
-exec "hi Visual guibg=#373a53 gui=NONE"
+exec "hi Visual guibg=#3d405c gui=NONE"
 exec "hi Question guifg=".s:primitive." gui=bold"
 exec "hi SpellBad guifg=".s:error." gui=underline"
 exec "hi SpellCap gui=underline"
@@ -104,9 +104,9 @@ exec "hi AerialLine guifg=NONE guibg=#3b3e59"
 exec "hi AerialNormal guifg=".s:function." gui=NONE"
 
 " search
-exec "hi Search guifg=".s:bg_normal." guibg=".s:bg_highlight_2
-exec "hi IncSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2
-exec "hi CurSearch guifg=".s:bg_normal." guibg="."#dbbc96"
+exec "hi Search guifg=".s:bg_normal." guibg=".s:bg_highlight_2." gui=NONE"
+exec "hi IncSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2." gui=NONE"
+exec "hi CurSearch guifg=".s:bg_normal." guibg=".s:bg_highlight_2." gui=NONE"
 exec "hi ScrollbarMarkSearch guifg=".s:bg_highlight_2
 exec "hi LspReferenceText guifg=NONE guibg=".s:bg_highlight_3
 exec "hi LspReferenceRead guifg=NONE guibg=".s:bg_highlight_3
@@ -127,8 +127,8 @@ exec "hi NormalFloat guibg=".s:bg_highlight_1." gui=NONE"
 exec "hi WildMenu guifg=".s:bg_normal." guibg=".s:bg_light
 
 " statusline and gutter
-exec "hi StatusLine guifg=".s:comment." guibg=".s:bg_dark." gui=NONE"
-exec "hi StatusLineNC guifg=".s:comment." guibg=".s:bg_dark." gui=NONE"
+exec "hi StatusLine guifg=#666fa3 guibg=".s:bg_dark." gui=NONE"
+exec "hi StatusLineNC guifg=#666fa3 guibg=".s:bg_dark." gui=NONE"
 exec "hi SignColumn guifg=".s:bg_light." guibg=".s:bg_light
 exec "hi LineNr guifg=".s:comment." guibg=NONE"
 exec "hi VertSplit guifg=".s:bg_dark." guibg=".s:bg_dark." gui=NONE"
