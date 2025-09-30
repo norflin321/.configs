@@ -212,6 +212,16 @@ for _, ft in ipairs({ "rust", "go", "python", "swift", "zig" }) do
 	})
 end
 
+vim.api.nvim_create_user_command("FMT", function()
+	local ext = vim.fn.expand("%:e")
+	if ext == "ts" or ext == "json" or ext == "jsonc" then
+		vim.cmd("silent! !dprint fmt %")
+		vim.cmd("edit!")
+	else
+		print("not found")
+	end
+end, {})
+
 local hide_cursor = function()
 	io.write("\27[?25l")
 	io.flush()
@@ -545,7 +555,7 @@ require("lazy").setup({
 				marker = "->",
 				logStatements = {
 					variableLog = {
-						go = 'Print("{{marker}} {{var}}:", {{var}});',
+						go = 'println("{{marker}} {{var}}:", {{var}});',
 					},
 				},
 

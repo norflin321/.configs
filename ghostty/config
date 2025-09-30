@@ -21,8 +21,8 @@ keybind = super+Digit1=previous_tab
 keybind = super+Digit2=next_tab
 
 theme = Ciapre
-palette = 1=#733d22
-palette = 2=#234d86
+palette = 1=#9d542f
+palette = 2=#51ac06
 palette = 13=#9ea3c0
 cursor-color = #a3a8c2
 cursor-text = #000000
