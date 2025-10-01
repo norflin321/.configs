@@ -215,7 +215,7 @@ end
 vim.api.nvim_create_user_command("FMT", function()
 	local ext = vim.fn.expand("%:e")
 	if ext == "ts" or ext == "json" or ext == "jsonc" then
-		vim.cmd("silent! !dprint fmt %")
+		vim.cmd("silent! !npx dprint fmt %")
 		vim.cmd("edit!")
 	else
 		print("not found")
