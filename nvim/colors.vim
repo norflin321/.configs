@@ -4,10 +4,10 @@ let g:colors_name = "colors"
 let s:fg_normal      = "#9ea3c0"
 let s:bg_normal      = "#252737"
 let s:bg_dark        = "#1f202e"
-let s:bg_light       = "#2a2c3f"
+let s:bg_light       = "#33364d"
 let s:bg_highlight_1 = "#33364d"
 let s:bg_highlight_2 = "#6f739b"
-let s:bg_highlight_3 = "#393c56"
+let s:bg_highlight_3 = "#3b3e59"
 let s:type           = "#ac8b83"
 let s:function       = "#929be5"
 let s:keyword        = "#8087ac"
@@ -65,7 +65,7 @@ exec "hi DiffAdd guibg=".s:primitive." gui=bold"
 exec "hi DiffChange guibg=".s:function." gui=bold"
 exec "hi DiffDelete guifg=".s:fg_normal." guibg=".s:keyword." gui=bold"
 exec "hi DiffText guibg=".s:primitive." gui=NONE"
-exec "hi QuickFixLine guifg=NONE"." guibg=".s:bg_light
+exec "hi QuickFixLine guibg=".s:bg_light." guifg=NONE"
 exec "hi htmlTag guifg=".s:bg_highlight_2
 exec "hi htmlEndTag guifg=".s:bg_highlight_2
 exec "hi htmlSpecialTagName guifg=".s:type

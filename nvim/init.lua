@@ -191,10 +191,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true })
 		vim.keymap.set("n", "<C-o>", "<CR>", { buffer = true })
 		vim.keymap.set("n", "o", "<CR>", { buffer = true })
-		vim.opt_local.cursorline = true
 		vim.opt_local.scrolloff = 0
 		vim.opt_local.sidescrolloff = 0
 		vim.opt_local.list = false
+		vim.opt_local.number = true
 	end,
 })
 
@@ -403,7 +403,7 @@ require("lazy").setup({
 				-- throttle_ms = 50,
 				handle = {
 					blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-					color = "#373a53",
+					color = "#3d405c",
 				},
 				handlers = { cursor = false, diagnostic = true, search = true },
 				excluded_buftypes = { "terminal", "nofile" },
@@ -468,7 +468,7 @@ require("lazy").setup({
 	{
 		"ctrlpvim/ctrlp.vim",
 		config = function()
-			vim.g.ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:50"
+			vim.g.ctrlp_match_window = "bottom,order:btt,min:1,max:15,results:15"
 			vim.g.ctrlp_working_path_mode = ""
 			vim.g.ctrlp_prompt_mappings = {
 				["AcceptSelection('h')"] = { "<c-h>" },
@@ -476,6 +476,9 @@ require("lazy").setup({
 				["AcceptSelection('e')"] = { "<c-o>", "<cr>" },
 			}
 			vim.g.ctrlp_show_hidden = 1
+			vim.g.ctrlp_lazy_update = 50
+			vim.g.ctrlp_line_prefix = " "
+			vim.g.ctrlp_mruf_max = 15
 
 			vim.g.ctrlp_custom_ignore = {
 				dir = [[\v[\/](\.git|hg|svn|node_modules|.vite)$]],
