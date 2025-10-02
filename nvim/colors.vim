@@ -127,8 +127,8 @@ exec "hi NormalFloat guibg=".s:bg_highlight_1." gui=NONE"
 exec "hi WildMenu guifg=".s:bg_normal." guibg=".s:bg_light
 
 " statusline and gutter
-exec "hi StatusLine guifg=#666fa3 guibg=".s:bg_dark." gui=NONE"
-exec "hi StatusLineNC guifg=#666fa3 guibg=".s:bg_dark." gui=NONE"
+exec "hi StatusLine guifg=#7078a9 guibg=#2f3146 gui=NONE"
+exec "hi StatusLineNC guifg=#7078a9 guibg=#2f3146 gui=NONE"
 exec "hi SignColumn guifg=".s:bg_light." guibg=".s:bg_light
 exec "hi LineNr guifg=".s:comment." guibg=NONE"
 exec "hi VertSplit guifg=".s:bg_dark." guibg=".s:bg_dark." gui=NONE"

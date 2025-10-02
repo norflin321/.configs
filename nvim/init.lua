@@ -383,7 +383,7 @@ require("lazy").setup({
 		priority = 100,
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "typescript", "tsx", "html", "javascript", "go" },
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "typescript", "tsx", "html", "javascript", "go", "rust" },
 				auto_install = false,
 				highlight = { enable = true, additional_vim_regex_highlighting = false, max_file_lines = 0 },
 				indent = { enable = true }
@@ -674,6 +674,9 @@ require("lazy").setup({
 				single_file_support = true,
 				on_attach = on_attach
 			})
+
+			-- rustup component add rust-analyzer
+			lspconfig.rust_analyzer.setup({ on_attach = on_attach })
 		end,
 	},
 
