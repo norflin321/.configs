@@ -6,13 +6,13 @@ let s:bg_normal      = "#252737"
 let s:bg_dark        = "#1f202e"
 let s:bg_light       = "#33364d"
 let s:bg_highlight_1 = "#33364d"
-let s:bg_highlight_2 = "#6f739b"
+let s:bg_highlight_2 = "#696c96"
 let s:bg_highlight_3 = "#3b3e59"
 let s:type           = "#ac8b83"
 let s:function       = "#929be5"
 let s:keyword        = "#8087ac"
 let s:primitive      = "#73c1a9"
-let s:comment        = "#505886"
+let s:comment        = "#545d8c"
 let s:error          = "#b18181"
 
 " syntax
@@ -74,7 +74,9 @@ exec "hi jsonQuote guifg=".s:bg_highlight_2
 exec "hi NullLsInfoBorder guifg=".s:comment." guibg=".s:bg_normal." gui=NONE"
 exec "hi typecriptImport guifg=".s:fg_normal
 exec "hi typecriptDocRef guifg=".s:comment." gui=underline"
-exec "hi BlinkCmpLabelMatch gui=bold"
+exec "hi BlinkCmpLabelMatch gui=underline"
+exec "hi ModeMsg guifg=".s:fg_normal." guibg=".s:bg_normal." gui=bold"
+exec "hi CtrlPMatch guifg=".s:fg_normal." guibg=NONE gui=underline"
 
 " diagnostics
 exec "hi DiagnosticError guifg=".s:error
@@ -133,6 +135,9 @@ exec "hi SignColumn guifg=".s:bg_light." guibg=".s:bg_light
 exec "hi LineNr guifg=".s:comment." guibg=NONE"
 exec "hi VertSplit guifg=".s:bg_dark." guibg=".s:bg_dark." gui=NONE"
 exec "hi WinSeparator guifg=".s:bg_dark." guibg=NONE gui=NONE"
+
+exec "hi IblIndent guifg=#3d3f5c"
+exec "hi ScrollbarHandle guifg=#3d405c"
 
 " tree-sitter
 exec "hi @string guifg=".s:primitive

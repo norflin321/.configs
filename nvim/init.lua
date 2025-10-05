@@ -40,7 +40,7 @@ vim.opt.hidden = true
 vim.opt.shortmess:append("c")
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.laststatus = 2
-vim.opt.showmode = false
+vim.opt.showmode = true
 vim.opt.showcmd = false
 vim.opt.showtabline = 0
 vim.opt.cmdheight = 1
@@ -126,8 +126,8 @@ vim.keymap.set("", "<S-ScrollWheelLeft>", "<NOP>", { silent = true })
 vim.keymap.set("", "<S-ScrollWheelRight>", "<NOP>", { silent = true })
 
 -- no matter the search direction we should navigate the same
-vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "Nzz" or "nzz" end, { noremap = true, expr = true })
-vim.keymap.set({ "n", "x", "o" }, "N", function() return vim.v.searchforward == 0 and "nzz" or "Nzz" end, { noremap = true, expr = true })
+vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "N" or "n" end, { noremap = true, expr = true })
+vim.keymap.set({ "n", "x", "o" }, "N", function() return vim.v.searchforward == 0 and "n" or "N" end, { noremap = true, expr = true })
 
 -- navigate between windows
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent = true })
@@ -403,7 +403,6 @@ require("lazy").setup({
 				-- throttle_ms = 50,
 				handle = {
 					blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-					color = "#3d405c",
 				},
 				handlers = { cursor = false, diagnostic = true, search = true },
 				excluded_buftypes = { "terminal", "nofile" },
@@ -727,8 +726,6 @@ require("lazy").setup({
 		main = "ibl",
 		lazy = false,
 		config = function()
-			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#3b3d59", nocombine = true })
-
 			require("ibl").setup({
 				enabled = true,
 				debounce = 10,
