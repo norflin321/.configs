@@ -1,4 +1,4 @@
-vim.cmd([[runtime colors.vim]])
+vim.cmd("source " .. vim.fn.stdpath("config") .. "/colors.lua")
 
 -- settings
 vim.o.termguicolors = true
@@ -475,7 +475,7 @@ require("lazy").setup({
 				["AcceptSelection('e')"] = { "<c-o>", "<cr>" },
 			}
 			vim.g.ctrlp_show_hidden = 1
-			vim.g.ctrlp_lazy_update = 50
+			vim.g.ctrlp_lazy_update = 10 
 			vim.g.ctrlp_line_prefix = " "
 			vim.g.ctrlp_mruf_max = 15
 
@@ -747,6 +747,11 @@ require("lazy").setup({
 			vim.api.nvim_create_user_command("GL", function() require("gitlinker").get_buf_range_url("n") end, {})
 		end
 	},
+
+	{
+		-- ColorizerToggle
+		"norcalli/nvim-colorizer.lua",
+	}
 }, { lockfile = "~/.vim/lazy-lock.json" })
 
 vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-5.(%l:%c%)\ %L ]])
