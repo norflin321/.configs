@@ -1,5 +1,7 @@
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/colors.lua")
 
+-- @TODO: можно ли выполнять комманды для установки плагина (brew install ripgrep)
+
 -- settings
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -41,7 +43,7 @@ vim.opt.shortmess:append("c")
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.laststatus = 2
 vim.opt.showmode = true
-vim.opt.showcmd = false
+vim.opt.showcmd = true
 vim.opt.showtabline = 0
 vim.opt.cmdheight = 1
 vim.opt.termguicolors = true
@@ -356,6 +358,8 @@ require("lazy").setup({
 	{
 		"duane9/nvim-rg",
 		config = function()
+			-- brew install ripgrep
+
 			vim.g.rg_command = "rg --vimgrep --smart-case --fixed-strings --ignore"
 			vim.g.rg_run_async = 0
 
@@ -407,8 +411,8 @@ require("lazy").setup({
 				handlers = { cursor = false, diagnostic = true, search = true },
 				excluded_buftypes = { "terminal", "nofile" },
 				marks = {
-					Search = { text = { "━", "━" }, priority = 1, highlight = "ScrollbarMarkSearch" },
-					Error = { text = { "●" }, priority = 1, highlight = "Error" },
+					Search = { text = { "━" }, priority = 1, highlight = "ScrollbarMarkSearch" },
+					Error = { text = { "━" }, priority = 1, highlight = "Error" },
 					Warn = { text = { "" }, priority = 1, highlight = "None" },
 					Info = { text = { "" }, priority = 1, highlight = "None" },
 					Hint = { text = { "" }, priority = 1, highlight = "None" },
@@ -585,14 +589,15 @@ require("lazy").setup({
 			if is_map_exists("n", "gra") then vim.keymap.del("n", "gra") end
 			if is_map_exists("x", "gra") then vim.keymap.del("x", "gra") end
 			if is_map_exists("n", "grn") then vim.keymap.del("n", "grn") end
+			if is_map_exists("n", "grt") then vim.keymap.del("n", "grt") end
 
 			-- Configure diagnostics to show virtual text in red for errors
 			vim.diagnostic.config({
 				virtual_text = {
 					severity = { min = vim.diagnostic.severity.ERROR }, -- Show virtual text only for errors (severity = 1)
 					format = function(diagnostic) return string.format("%s", diagnostic.message) end, -- Customize the format of the virtual text
-					prefix = "●", -- Prefix to make it clear it's an error
-					spacing = 1, -- Spacing between code and virtual text
+					prefix = "", -- Prefix to make it clear it's an error
+					spacing = 0, -- Spacing between code and virtual text
 					source = "if_many", -- Source can be shown if desired
 				},
 				float = false,
@@ -640,7 +645,6 @@ require("lazy").setup({
 					return "<LeftMouse>"
 				end, { expr = true })
 
-				-- vim.keymap.set("n", "H", vim.lsp.buf.document_highlight, opts)
 				if client.server_capabilities.documentHighlightProvider then
 					vim.api.nvim_create_autocmd("CursorHold", { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
 					vim.api.nvim_create_autocmd("CursorMoved", { buffer = bufnr, callback = vim.lsp.buf.clear_references })
@@ -665,17 +669,17 @@ require("lazy").setup({
 			-- go install golang.org/x/tools/gopls@latest
 			lspconfig.gopls.setup({ on_attach = on_attach })
 
-			-- https://zigtools.org/zls/install
-			lspconfig.zls.setup({
-				cmd = { "/Users/norflin/main/zls" },
-				filetypes = { "zig", "zir" },
-				root_dir = lspconfig.util.root_pattern("build.zig", ".git") or vim.loop.cwd,
-				single_file_support = true,
-				on_attach = on_attach
-			})
-
 			-- rustup component add rust-analyzer
 			lspconfig.rust_analyzer.setup({ on_attach = on_attach })
+
+			-- https://zigtools.org/zls/install
+			-- lspconfig.zls.setup({
+			-- 	cmd = { "/Users/norflin/main/zls" },
+			-- 	filetypes = { "zig", "zir" },
+			-- 	root_dir = lspconfig.util.root_pattern("build.zig", ".git") or vim.loop.cwd,
+			-- 	single_file_support = true,
+			-- 	on_attach = on_attach
+			-- })
 		end,
 	},
 
@@ -740,10 +744,7 @@ require("lazy").setup({
 	{
 		"ruifm/gitlinker.nvim",
 		config = function()
-			require("gitlinker").setup({
-				mappings = nil
-			})
-
+			require("gitlinker").setup({ mappings = nil })
 			vim.api.nvim_create_user_command("GL", function() require("gitlinker").get_buf_range_url("n") end, {})
 		end
 	},

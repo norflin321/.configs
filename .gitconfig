@@ -7,4 +7,4 @@
 	name = Anton Kurtin
 	email = norflin321@gmail.com
 [core]
-	editor = /Users/norflin/main/nvim-macos-arm64/bin/nvim
+	editor = ~/main/nvim-macos-arm64/bin/nvim
