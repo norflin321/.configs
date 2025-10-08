@@ -43,7 +43,7 @@ vim.opt.shortmess:append("c")
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.laststatus = 2
 vim.opt.showmode = true
-vim.opt.showcmd = true
+vim.opt.showcmd = false
 vim.opt.showtabline = 0
 vim.opt.cmdheight = 1
 vim.opt.termguicolors = true
@@ -126,6 +126,12 @@ vim.keymap.set("", "<S-ScrollWheelUp>", "<NOP>", { silent = true })
 vim.keymap.set("", "<S-ScrollWheelDown>", "<NOP>", { silent = true })
 vim.keymap.set("", "<S-ScrollWheelLeft>", "<NOP>", { silent = true })
 vim.keymap.set("", "<S-ScrollWheelRight>", "<NOP>", { silent = true })
+vim.keymap.set("", "<2-LeftMouse>", "<Nop>", { silent = true })
+vim.keymap.set("", "<2-RightMouse>", "<Nop>", { silent = true })
+vim.keymap.set("", "<3-LeftMouse>", "<Nop>", { silent = true })
+vim.keymap.set("", "<3-RightMouse>", "<Nop>", { silent = true })
+vim.keymap.set("", "<4-LeftMouse>", "<Nop>", { silent = true })
+vim.keymap.set("", "<4-RightMouse>", "<Nop>", { silent = true })
 
 -- no matter the search direction we should navigate the same
 vim.keymap.set({ "n", "x", "o" }, "n", function() return vim.v.searchforward == 0 and "N" or "n" end, { noremap = true, expr = true })
@@ -404,7 +410,7 @@ require("lazy").setup({
 			vim.api.nvim_set_hl(0, "HlSearchNear", { link = "None" })
 
 			require("scrollbar").setup({
-				-- throttle_ms = 50,
+				throttle_ms = 50,
 				handle = {
 					blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
 				},
@@ -644,6 +650,14 @@ require("lazy").setup({
 
 					return "<LeftMouse>"
 				end, { expr = true })
+
+				vim.keymap.set("", "<RightMouse>", function()
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<LeftMouse>", true, true, true), "n", true)
+					vim.schedule(function()
+						better_scroll_cleanup()
+						vim.lsp.buf.hover({ border = "solid", max_width = 120, max_height = 35 })
+					end)
+				end, { silent = true })
 
 				if client.server_capabilities.documentHighlightProvider then
 					vim.api.nvim_create_autocmd("CursorHold", { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
