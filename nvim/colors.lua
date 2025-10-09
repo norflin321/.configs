@@ -68,6 +68,7 @@ local bg_1 = hex_add_lightness(bg, 7)
 local bg_2 = hex_add_lightness(bg, 11)
 local bg_3 = hex_add_lightness(bg, 15)
 local bg_4 = hex_add_lightness(bg, 32)
+local bg_5 = hex_add_lightness(bg, 38)
 local err = "#b18181"
 local type = "#ac8b83"
 local func = "#929be5"
@@ -184,15 +185,15 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg_1 })
 vim.api.nvim_set_hl(0, "WildMenu", { fg = bg, bg = bg_1 })
 
 -- statusline and gutter
-vim.api.nvim_set_hl(0, "StatusLine", { fg = bg_4, bg = bg_1 })
-vim.api.nvim_set_hl(0, "StatusLineNC", { fg = bg_4, bg = bg_1 })
+vim.api.nvim_set_hl(0, "StatusLine", { fg = bg_5, bg = bg_1 })
+vim.api.nvim_set_hl(0, "StatusLineNC", { fg = bg_5, bg = bg_1 })
 vim.api.nvim_set_hl(0, "SignColumn", { fg = bg_1, bg = bg_1 })
-vim.api.nvim_set_hl(0, "LineNr", { fg = comment })
+vim.api.nvim_set_hl(0, "LineNr", { fg = bg_3 })
 vim.api.nvim_set_hl(0, "VertSplit", { fg = bg_1, bg = bg_1 })
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = bg_1 })
 
 vim.api.nvim_set_hl(0, "IblIndent", { fg = bg_2 })
-vim.api.nvim_set_hl(0, "ScrollbarHandle", { fg = bg_2 })
+vim.api.nvim_set_hl(0, "ScrollbarHandle", { bg = bg_2 })
 vim.api.nvim_set_hl(0, "ScrollbarMarkSearch", { fg = bg_4 })
 
 -- tree-sitter

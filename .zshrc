@@ -12,7 +12,7 @@ alias pets="cd ~/main/rockstone/mergicpets_client"
 alias clear1="clear"
 alias clear="clear && printf '\e[3J'"
 
-alias nvim="~/main/nvim-macos-arm64/bin/nvim"
+alias nvim="~/nvim-macos-arm64/bin/nvim"
 alias vim="nvim"
 alias vi="nvim"
 alias gh="github ."

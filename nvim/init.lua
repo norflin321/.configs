@@ -1,7 +1,5 @@
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/colors.lua")
 
--- @TODO: можно ли выполнять комманды для установки плагина (brew install ripgrep)
-
 -- settings
 vim.o.termguicolors = true
 vim.cmd("syntax enable")
@@ -393,7 +391,7 @@ require("lazy").setup({
 		priority = 100,
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "typescript", "tsx", "html", "javascript", "go", "rust" },
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "typescript", "tsx", "html", "javascript", "go", "rust", "bash" },
 				auto_install = false,
 				highlight = { enable = true, additional_vim_regex_highlighting = false, max_file_lines = 0 },
 				indent = { enable = true }
@@ -410,9 +408,10 @@ require("lazy").setup({
 			vim.api.nvim_set_hl(0, "HlSearchNear", { link = "None" })
 
 			require("scrollbar").setup({
-				throttle_ms = 50,
+				throttle_ms = 200,
 				handle = {
 					blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
+					highlight = "ScrollbarHandle"
 				},
 				handlers = { cursor = false, diagnostic = true, search = true },
 				excluded_buftypes = { "terminal", "nofile" },
@@ -685,15 +684,6 @@ require("lazy").setup({
 
 			-- rustup component add rust-analyzer
 			lspconfig.rust_analyzer.setup({ on_attach = on_attach })
-
-			-- https://zigtools.org/zls/install
-			-- lspconfig.zls.setup({
-			-- 	cmd = { "/Users/norflin/main/zls" },
-			-- 	filetypes = { "zig", "zir" },
-			-- 	root_dir = lspconfig.util.root_pattern("build.zig", ".git") or vim.loop.cwd,
-			-- 	single_file_support = true,
-			-- 	on_attach = on_attach
-			-- })
 		end,
 	},
 
@@ -766,7 +756,7 @@ require("lazy").setup({
 	{
 		-- ColorizerToggle
 		"norcalli/nvim-colorizer.lua",
-	}
+	},
 }, { lockfile = "~/.vim/lazy-lock.json" })
 
-vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-5.(%l:%c%)\ %L ]])
+vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-7.(%l:%c%)\ %L ]])
