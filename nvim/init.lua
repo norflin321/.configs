@@ -759,4 +759,4 @@ require("lazy").setup({
 	},
 }, { lockfile = "~/.vim/lazy-lock.json" })
 
-vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-7.(%l:%c%)\ %L ]])
+vim.cmd([[ set statusline=%f%{&modified?'\ [+]\ ':''}%r%=\ %-5.(%l:%c%)\ %L ]])
