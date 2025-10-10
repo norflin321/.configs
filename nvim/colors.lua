@@ -64,10 +64,10 @@ end
 
 local fg = "#9ea3c0"
 local bg = "#252737"
-local bg_1 = hex_add_lightness(bg, 7)
-local bg_2 = hex_add_lightness(bg, 11)
-local bg_3 = hex_add_lightness(bg, 15)
-local bg_4 = hex_add_lightness(bg, 32)
+local bg_1 = hex_add_lightness(bg, 7) -- #33364d
+local bg_2 = hex_add_lightness(bg, 11) -- #3b3f59
+local bg_3 = hex_add_lightness(bg, 15) -- #434865
+local bg_4 = hex_add_lightness(bg, 32) -- #666c99
 local err = "#b18181"
 local type = "#ac8b83"
 local func = "#929be5"
