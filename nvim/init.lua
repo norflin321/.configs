@@ -484,7 +484,7 @@ require("lazy").setup({
 				["AcceptSelection('e')"] = { "<c-o>", "<cr>" },
 			}
 			vim.g.ctrlp_show_hidden = 1
-			vim.g.ctrlp_lazy_update = 10 
+			-- vim.g.ctrlp_lazy_update = 10 
 			vim.g.ctrlp_line_prefix = " "
 			vim.g.ctrlp_mruf_max = 15
 
@@ -736,7 +736,7 @@ require("lazy").setup({
 		config = function()
 			require("ibl").setup({
 				enabled = true,
-				debounce = 10,
+				debounce = 100,
 				indent = { char = "▏" },
 				whitespace = { remove_blankline_trail = false },
 				scope = { enabled = false },
