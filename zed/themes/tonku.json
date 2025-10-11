@@ -73,9 +73,9 @@
 
 				"editor.document_highlight.bracket_background": "#33364d",
 
-				"editor.line_number": "#3b3f59",
-				"editor.active_line_number": "#3b3f59",
-				"editor.hover_line_number": "#3b3f59",
+				"editor.line_number": "#414662",
+				"editor.active_line_number": "#414662",
+				"editor.hover_line_number": "#414662",
 
 				"editor.indent_guide": "#3b3f59",
 				"editor.indent_guide_active": "#3b3f59",
@@ -83,8 +83,8 @@
 				"editor.wrap_guide": "#252737",
 				"editor.active_wrap_guide": "#252737",
 
-				"editor.document_highlight.read_background": "#3b3f59E6",
-				"editor.document_highlight.write_background": "#3b3f59E6",
+				"editor.document_highlight.read_background": "#3b3f59CC",
+				"editor.document_highlight.write_background": "#3b3f59CC",
 
 				"players": [{ "cursor": "#a3a8c2", "selection": "#43486580" }],
 
@@ -119,9 +119,9 @@
 
 				"link_text.hover": "#00000000",
 
-				"info": "#6c729d",
+				"info": "#7278a1",
 				"info.background": "#33364d",
-				"warning": "#6c729d",
+				"warning": "#7278a1",
 				"warning.background": "#33364d",
 				"error": "#b18181",
 				"error.background": "#33364d",

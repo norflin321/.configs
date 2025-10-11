@@ -9,14 +9,12 @@
 			"ctrl-l": null,
 			"shift-l": null,
 			"cmd-t": null,
-			"cmd-j": null,
-
-			"d j": null
+			"cmd-j": null
 		}
 	},
 	{
 		"bindings": {
-			"cmd-n": "workspace::ToggleRightDock",
+			"cmd-n": "workspace::ToggleLeftDock",
 			"cmd-1": "pane::ActivatePreviousItem",
 			"cmd-2": "pane::ActivateNextItem",
 			"ctrl-j": "menu::SelectNext",
@@ -45,6 +43,7 @@
 			"shift-k": "editor::Hover",
 			"shift-d": "editor::DeleteLine",
 
+			"g a": "editor::Rename",
 			"g n": "editor::Rename",
 			"g f": "editor::ToggleCodeActions",
 			"g r": "editor::FindAllReferences",
@@ -60,7 +59,42 @@
 			"<": "editor::Outdent",
 			">": "editor::Indent",
 
-			"cmd-t": ["workspace::SendKeystrokes", "g s"]
+			"cmd-t": ["workspace::SendKeystrokes", "g s"],
+
+			"d": "editor::Delete",
+			// "c": "editor::Delete",
+
+			"space": null,
+			"Enter": null,
+
+			"ctrl-b": null,
+			"ctrl-e": null,
+			"ctrl-u": null,
+			"ctrl-v": null,
+			"ctrl-z": null,
+			"ctrl-t": null,
+			"ctrl-f":null,
+
+			"#": null,
+			"-": null,
+			"m": null,
+			"M": null,
+			"f": null,
+			"F": null,
+			"s": null,
+			"S": null,
+			"J": null,
+
+			"1": null,
+			"2": null,
+			"3": null,
+			"4": null,
+			"5": null,
+			"6": null,
+			"7": null,
+
+			"H":null,
+			"L":null,
 		}
 	},
 	{
@@ -78,7 +112,11 @@
 			")": ["editor::SelectDownByLines", { "lines": 15 }],
 
 			"<": "editor::Outdent",
-			">": "editor::Indent"
+			">": "editor::Indent",
+
+			"ctrl-f":null,
+			"H":null,
+			"L":null,
 		}
 	},
 	{

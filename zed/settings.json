@@ -103,7 +103,7 @@
 
 	"minimap": { "show": "never", "current_line_highlight": "all" },
 	"preview_tabs": { "enabled": true, "enable_preview_from_code_navigation": true, "enable_preview_from_file_finder": true },
-	"excerpt_context_lines": 3,
+	"excerpt_context_lines": 5,
 	"vertical_scroll_margin": 5,
 	"expand_excerpt_lines": 10,
 	"minimum_contrast_for_highlights": 0,
