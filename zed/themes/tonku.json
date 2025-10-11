@@ -19,13 +19,11 @@
 				"element.hover": "#3b3f59",
 				"element.active": "#414662",
 				"element.selected": "#414662",
-				// "element.disabled": "#434865",
 
 				"ghost_element.background": "#00000000",
 				"ghost_element.hover": "#3b3f59",
 				"ghost_element.active": "#414662",
 				"ghost_element.selected": "#414662",
-				// "ghost_element.disabled": "#434865",
 
 				"text": "#9ea3c0",
 				"text.muted": "#9ea3c0",
@@ -33,11 +31,11 @@
 				"text.disabled": "#9ea3c0",
 				"text.accent": "#9ea3c0",
 
-				// "icon": "#33364d",
-				// "icon.muted": "#33364d",
-				// "icon.disabled": "#33364d",
-				// "icon.placeholder": "#33364d",
-				// "icon.accent": "#33364d",
+				"icon": "#33364d",
+				"icon.muted": "#33364d",
+				"icon.disabled": "#33364d",
+				"icon.placeholder": "#33364d",
+				"icon.accent": "#33364d",
 
 				"status_bar.background": "#313349",
 
@@ -81,8 +79,6 @@
 
 				"editor.indent_guide": "#3b3f59",
 				"editor.indent_guide_active": "#3b3f59",
-
-				// "editor.invisible": "#00000000",
 
 				"editor.wrap_guide": "#252737",
 				"editor.active_wrap_guide": "#252737",
