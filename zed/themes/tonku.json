@@ -119,11 +119,17 @@
 
 				"link_text.hover": "#00000000",
 
+				"hint": "#7278a1",
+				"hint.border": "#7278a1",
+				"hint.background": "#33364d",
 				"info": "#7278a1",
+				"info.border": "#7278a1",
 				"info.background": "#33364d",
 				"warning": "#7278a1",
+				"warning.border": "#7278a1",
 				"warning.background": "#33364d",
 				"error": "#b18181",
+				"error.border": "#b18181",
 				"error.background": "#33364d",
 
 				"syntax": {

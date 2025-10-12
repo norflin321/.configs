@@ -43,7 +43,7 @@
 			"shift-k": "editor::Hover",
 			"shift-d": "editor::DeleteLine",
 
-			"g a": "editor::Rename",
+			"g a": null,
 			"g n": "editor::Rename",
 			"g f": "editor::ToggleCodeActions",
 			"g r": "editor::FindAllReferences",
@@ -105,6 +105,12 @@
 			"8": "vim::Matching",
 			"d": "editor::Delete",
 			"x": "editor::Delete",
+
+			"g a": null,
+			"g n": null,
+			"g f": null,
+			"g r": null,
+			"g y": null,
 
 			"9": "editor::SelectToEndOfLine",
 
