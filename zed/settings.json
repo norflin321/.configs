@@ -17,7 +17,6 @@
 	// font
 	"buffer_font_family": "JetBrains Mono",
 	"buffer_font_size": 11,
-	// "buffer_line_height": { "custom":  1.5 },
 	"buffer_line_height": "comfortable",
 	"buffer_font_features": { "calt": false },
 
@@ -113,6 +112,7 @@
 
 	"scroll_beyond_last_line": "off",
 	"lsp_highlight_debounce": 0,
+
 	"status_bar": { "active_language_button": false, "experimental.show": false },
 
 	"minimap": { "show": "never", "current_line_highlight": "all" },
@@ -123,6 +123,14 @@
 	"minimum_contrast_for_highlights": 0,
 	"show_whitespaces": "none",
 
+	"languages": {
+		"TypeScript": {
+			"language_servers": ["!typescript-language-server", "!tailwindcss-language-server", "..."]
+		},
+		"TSX": {
+			"language_servers": ["!typescript-language-server", "!tailwindcss-language-server", "..."]
+		}
+	},
 	"lsp": {
 		"vtsls": { "settings": { "typescript": { "preferences": { "importModuleSpecifier": "non-relative" } } } }
 	}
